@@ -1,3 +1,5 @@
+package DepartPrac3;
+
 import java.util.*;
 import java.io.*;
 public class Test {                      // DEPARTMENTAL PRACTICE V3: Electricity Consumption and Billing Report
@@ -19,8 +21,8 @@ public class Test {                      // DEPARTMENTAL PRACTICE V3: Electricit
             for (int i = 0; i < house; i++) {
                 billAmount[i] = computeBill(consumption[i]);
                 fw.write("Household: " + householdNames[i] + "\n");
-                fw.write("Consumption: : "+consumption[i]+" kWh"+"\nCategory: "+getUsageCategory(consumption[i])+"\nOriginal Bill: ₱"+billAmount[i]+"\nDiscounted Bill: ₱"+applyDiscount(billAmount[i], getUsageCategory(consumption[i]))+"\n----------------------------------");
-               
+                fw.write(String.format("Household: %s%nConsumption: %.0f kWh%nCategory: %s%nOriginal Bill: ₱%.2f%nDiscounted Bill: ₱%.2f%n----------------------------------%n", householdNames[i], consumption[i], getUsageCategory(consumption[i]), billAmount[i], applyDiscount(billAmount[i], getUsageCategory(consumption[i]))));
+
             }
             
         } catch (Exception e) {

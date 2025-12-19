@@ -1,0 +1,7 @@
+Household: Travis
+Household: Travis
+Consumption: 180 kWh
+Category: Low Usage
+Original Bill: ₱1440.00
+Discounted Bill: ₱1296.00
+----------------------------------

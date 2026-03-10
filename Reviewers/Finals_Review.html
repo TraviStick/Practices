@@ -311,12 +311,79 @@ canvas { border: 1px solid #ddd; border-radius: 8px; background: #1a1a2e; displa
       <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
       <div class="ans-box">f(g(x)) = f(3x+1) = (3x+1)&sup2; &minus; 2 = 9x&sup2;+6x+1&minus;2 = <strong>9x&sup2; + 6x &minus; 1</strong></div>
     </li></ol>
-    <h3>Test II &mdash; Identify the Conic (5 pts)</h3>
-    <ol><li class="q-item">
-      <div class="q-text">Make a graph, express to standard form, then general equation, then identify the conic.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Steps: (1) Plot key points from the equation. (2) <strong>Standard form</strong> isolates the conic (e.g., (x-h)&sup2;/a&sup2; + (y-k)&sup2;/b&sup2; = 1). (3) <strong>General form</strong>: Ax&sup2;+Bxy+Cy&sup2;+Dx+Ey+F=0. (4) Identify by discriminant B&sup2;&minus;4AC: &lt;0=ellipse/circle, =0=parabola, &gt;0=hyperbola.</div>
-    </li></ol>
+    <h3>Test II &mdash; General Equation &rarr; Standard Form &amp; Identify the Conic</h3>
+    <p style="color:#555;margin-bottom:12px;">For each general equation below, convert it to standard form and identify the conic section.</p>
+    <ol>
+      <li class="q-item">
+        <div class="q-text"><strong>Parabola:</strong> &nbsp; x&sup2; &minus; 8y = 0</div>
+        <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
+        <div class="ans-box">
+          <strong>Conic: Parabola</strong><br><br>
+          <strong>Step 1 &mdash; Rearrange:</strong><br>
+          x&sup2; = 8y<br><br>
+          <strong>Step 2 &mdash; Standard Form:</strong><br>
+          x&sup2; = 4py &nbsp;&rArr;&nbsp; 4p = 8 &nbsp;&rArr;&nbsp; <strong>p = 2</strong><br>
+          &there4; Standard form: <code>x&sup2; = 8y</code><br><br>
+          <strong>Step 3 &mdash; Key Properties:</strong><br>
+          &bull; Vertex: (0, 0)<br>
+          &bull; Opens: upward<br>
+          &bull; Focus: (0, 2)<br>
+          &bull; Directrix: y = &minus;2<br>
+          &bull; Latus Rectum: |4p| = 8 units
+        </div>
+      </li>
+      <li class="q-item">
+        <div class="q-text"><strong>Circle:</strong> &nbsp; x&sup2; + y&sup2; &minus; 2x &minus; 2y &minus; 14 = 0</div>
+        <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
+        <div class="ans-box">
+          <strong>Conic: Circle</strong><br><br>
+          <strong>Step 1 &mdash; Group &amp; Complete the Square:</strong><br>
+          (x&sup2; &minus; 2x) + (y&sup2; &minus; 2y) = 14<br>
+          (x&sup2; &minus; 2x + 1) + (y&sup2; &minus; 2y + 1) = 14 + 1 + 1<br><br>
+          <strong>Step 2 &mdash; Standard Form:</strong><br>
+          <code>(x &minus; 1)&sup2; + (y &minus; 1)&sup2; = 16</code><br><br>
+          <strong>Step 3 &mdash; Key Properties:</strong><br>
+          &bull; Center: (1, 1)<br>
+          &bull; Radius: r = 4<br>
+          &bull; Latus Rectum (diameter): 8 units
+        </div>
+      </li>
+      <li class="q-item">
+        <div class="q-text"><strong>Ellipse:</strong> &nbsp; 9x&sup2; + 25y&sup2; &minus; 225 = 0</div>
+        <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
+        <div class="ans-box">
+          <strong>Conic: Ellipse</strong><br><br>
+          <strong>Step 1 &mdash; Rearrange:</strong><br>
+          9x&sup2; + 25y&sup2; = 225<br><br>
+          <strong>Step 2 &mdash; Divide by 225:</strong><br>
+          <code>x&sup2;/25 + y&sup2;/9 = 1</code><br><br>
+          <strong>Step 3 &mdash; Key Properties:</strong><br>
+          &bull; Center: (0, 0)<br>
+          &bull; Semi-major axis: a = 5 (along x-axis)<br>
+          &bull; Semi-minor axis: b = 3<br>
+          &bull; c = &radic;(25 &minus; 9) = 4 &nbsp;&rArr;&nbsp; Foci: (&plusmn;4, 0)<br>
+          &bull; Latus Rectum: 2b&sup2;/a = 18/5 = 3.6 units
+        </div>
+      </li>
+      <li class="q-item">
+        <div class="q-text"><strong>Hyperbola:</strong> &nbsp; 16x&sup2; &minus; 9y&sup2; &minus; 144 = 0</div>
+        <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
+        <div class="ans-box">
+          <strong>Conic: Hyperbola</strong><br><br>
+          <strong>Step 1 &mdash; Rearrange:</strong><br>
+          16x&sup2; &minus; 9y&sup2; = 144<br><br>
+          <strong>Step 2 &mdash; Divide by 144:</strong><br>
+          <code>x&sup2;/9 &minus; y&sup2;/16 = 1</code><br><br>
+          <strong>Step 3 &mdash; Key Properties:</strong><br>
+          &bull; Center: (0, 0)<br>
+          &bull; Vertices: (&plusmn;3, 0)<br>
+          &bull; a = 3, b = 4<br>
+          &bull; c = &radic;(9 + 16) = 5 &nbsp;&rArr;&nbsp; Foci: (&plusmn;5, 0)<br>
+          &bull; Asymptotes: y = &plusmn;(4/3)x<br>
+          &bull; Latus Rectum: 2b&sup2;/a = 32/3 &asymp; 10.67 units
+        </div>
+      </li>
+    </ol>
     <h3>Test III &mdash; Problem Solving (6 pts)</h3>
     <p style="margin-bottom:8px;">Variable cost = Php 250/unit, fixed costs = Php 800,000, selling price = Php 400.</p>
     <ol class="alpha-list"><li class="q-item"><div class="q-text">(a) Write total cost C as a function of units produced.</div>

@@ -1,3 +1,4 @@
+package Practices;
 import java.util.*;
 import java.io.*;
 

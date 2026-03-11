@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>One-Sided Limits</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Georgia', serif;
+  }
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .title {
+    color: #a0c4ff;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    font-style: italic;
+  }
+  .legend {
+    display: flex;
+    gap: 28px;
+    font-size: 12px;
+  }
+  .leg { display: flex; align-items: center; gap: 7px; color: #ccc; }
+  .dot-r { width: 10px; height: 10px; border-radius: 50%; background: #ff6b6b; }
+  .dot-b { width: 10px; height: 10px; border-radius: 50%; background: #4ecdc4; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="title">lim f(x) as h→5⁺ = 6 &nbsp;|&nbsp; lim f(x) as h→5⁻ = −4</div>
+  <canvas id="c" width="500" height="460"></canvas>
+  <div class="legend">
+    <div class="leg"><div class="dot-b"></div> approaching 5 from left → −4</div>
+    <div class="leg"><div class="dot-r"></div> approaching 5 from right → 6</div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const PAD = 55;
+
+const xMin = -1, xMax = 11, yMin = -7, yMax = 9;
+
+function toCanvas(wx, wy) {
+  const cx = PAD + (wx - xMin) / (xMax - xMin) * (W - 2*PAD);
+  const cy = H - PAD - (wy - yMin) / (yMax - yMin) * (H - 2*PAD);
+  return [cx, cy];
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#1a1a2e';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = '#2a2a4a';
+  ctx.lineWidth = 1;
+  for (let x = Math.ceil(xMin); x <= xMax; x++) {
+    const [cx] = toCanvas(x, 0);
+    ctx.beginPath(); ctx.moveTo(cx, PAD); ctx.lineTo(cx, H-PAD); ctx.stroke();
+  }
+  for (let y = Math.ceil(yMin); y <= yMax; y++) {
+    const [, cy] = toCanvas(0, y);
+    ctx.beginPath(); ctx.moveTo(PAD, cy); ctx.lineTo(W-PAD, cy); ctx.stroke();
+  }
+
+  const [ox, oy] = toCanvas(0, 0);
+
+  // Axes
+  ctx.strokeStyle = '#555577';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(PAD, oy); ctx.lineTo(W-PAD, oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox, PAD); ctx.lineTo(ox, H-PAD); ctx.stroke();
+
+  // Arrowheads
+  ctx.fillStyle = '#555577';
+  ctx.beginPath(); ctx.moveTo(W-PAD, oy); ctx.lineTo(W-PAD-8,oy-4); ctx.lineTo(W-PAD-8,oy+4); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(ox, PAD); ctx.lineTo(ox-4,PAD+8); ctx.lineTo(ox+4,PAD+8); ctx.closePath(); ctx.fill();
+
+  // Axis labels
+  ctx.fillStyle = '#778';
+  ctx.font = 'italic 13px Georgia';
+  ctx.textAlign = 'center';
+  ctx.fillText('x', W-PAD+14, oy+5);
+  ctx.fillText('y', ox, PAD-12);
+
+  // Tick labels
+  ctx.font = '11px Georgia';
+  ctx.fillStyle = '#556';
+  ctx.textAlign = 'center';
+  for (let x = Math.ceil(xMin); x <= xMax; x++) {
+    if (x === 0) continue;
+    const [cx] = toCanvas(x, 0);
+    ctx.fillText(x, cx, oy+16);
+    ctx.strokeStyle = '#445'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx, oy-3); ctx.lineTo(cx, oy+3); ctx.stroke();
+  }
+  ctx.textAlign = 'right';
+  for (let y = Math.ceil(yMin); y <= yMax; y++) {
+    if (y === 0) continue;
+    const [, cy] = toCanvas(0, y);
+    ctx.fillText(y, ox-7, cy+4);
+    ctx.strokeStyle = '#445'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(ox-3, cy); ctx.lineTo(ox+3, cy); ctx.stroke();
+  }
+
+  const [x5] = toCanvas(5, 0);
+
+  // Vertical dashed line at x = 5
+  ctx.setLineDash([4, 4]);
+  ctx.strokeStyle = '#444466';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(x5, PAD); ctx.lineTo(x5, H-PAD); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // LEFT side: flat line approaching x=5 from left at y = -4
+  const [lx0] = toCanvas(xMin, 0);
+  const [lx1, ly1] = toCanvas(5, -4);
+  ctx.strokeStyle = '#4ecdc4';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(PAD, toCanvas(xMin, -4)[1]);
+  ctx.lineTo(lx1, ly1);
+  ctx.stroke();
+
+  // RIGHT side: flat line from x=5 to right at y = 6
+  const [rx0, ry0] = toCanvas(5, 6);
+  ctx.strokeStyle = '#ff6b6b';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(rx0, ry0);
+  ctx.lineTo(W-PAD, toCanvas(xMax, 6)[1]);
+  ctx.stroke();
+
+  // Horizontal dashed lines
+  ctx.setLineDash([3, 4]);
+  ctx.lineWidth = 1;
+  // y = -4
+  ctx.strokeStyle = '#4ecdc488';
+  ctx.beginPath(); ctx.moveTo(PAD, toCanvas(0,-4)[1]); ctx.lineTo(x5, toCanvas(0,-4)[1]); ctx.stroke();
+  // y = 6
+  ctx.strokeStyle = '#ff6b6b88';
+  ctx.beginPath(); ctx.moveTo(x5, toCanvas(0,6)[1]); ctx.lineTo(W-PAD, toCanvas(0,6)[1]); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Open circles at x=5
+  // Left limit: open circle at (5, -4)
+  const [ocLx, ocLy] = toCanvas(5, -4);
+  ctx.beginPath(); ctx.arc(ocLx, ocLy, 7, 0, Math.PI*2);
+  ctx.fillStyle = '#1a1a2e'; ctx.fill();
+  ctx.strokeStyle = '#4ecdc4'; ctx.lineWidth = 2.2; ctx.stroke();
+
+  // Right limit: open circle at (5, 6)
+  const [ocRx, ocRy] = toCanvas(5, 6);
+  ctx.beginPath(); ctx.arc(ocRx, ocRy, 7, 0, Math.PI*2);
+  ctx.fillStyle = '#1a1a2e'; ctx.fill();
+  ctx.strokeStyle = '#ff6b6b'; ctx.lineWidth = 2.2; ctx.stroke();
+
+  // Labels
+  ctx.font = 'bold 12px Georgia';
+  ctx.fillStyle = '#4ecdc4';
+  ctx.textAlign = 'right';
+  ctx.fillText('f(x) → −4  (from left)', ocLx - 12, ocLy - 12);
+
+  ctx.fillStyle = '#ff6b6b';
+  ctx.textAlign = 'left';
+  ctx.fillText('f(x) → 6  (from right)', ocRx + 12, ocRy - 12);
+
+  // x=5 label
+  ctx.fillStyle = '#666688';
+  ctx.font = '12px Georgia';
+  ctx.textAlign = 'center';
+  ctx.fillText('x = 5', x5, H-PAD+18);
+}
+
+draw();
+</script>
+</body>
+</html>

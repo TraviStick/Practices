@@ -1,546 +1,858 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Finals Review — Pre-Calculus & Calculus</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Exam Practice Test</title>
 <style>
-:root {
-  --bg:#0b0a1a; --card:rgba(255,255,255,.04); --border:rgba(255,255,255,.09);
-  --purple:#7c3aed; --lavender:#a78bfa; --green:#10b981; --red:#ef4444;
-  --amber:#f59e0b; --pink:#ec4899; --teal:#14b8a6; --orange:#f97316;
-  --text:#e5e7eb; --muted:#9ca3af; --grid:#1e1a3a;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:linear-gradient(160deg,#0b0a1a 0%,#130f2e 50%,#0a1020 100%);min-height:100vh;font-family:'Source Serif 4',Georgia,serif;color:var(--text);}
-.screen{display:none;min-height:100vh;padding:1.5rem;}
-.screen.active{display:flex;flex-direction:column;align-items:center;}
-#home-screen.active,#results-screen.active{justify-content:center;}
-/* HOME */
-.home-inner{max-width:700px;width:100%;text-align:center;}
-.logo{font-size:3.5rem;margin-bottom:.4rem;}
-h1{font-family:'Playfair Display',serif;font-size:2.8rem;color:#fff;letter-spacing:-1px;line-height:1.1;}
-.subtitle{color:var(--lavender);font-size:1.05rem;margin:.5rem 0 1.8rem;}
-.filter-row{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.8rem;}
-.fbtn{padding:.4rem 1rem;border-radius:999px;border:2px solid #3d3078;background:transparent;color:#ccc;cursor:pointer;font-family:inherit;font-size:.85rem;transition:all .2s;}
-.fbtn.active{border-color:var(--lavender);background:var(--lavender);color:#fff;font-weight:600;}
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-bottom:2rem;}
-.stat-card{background:var(--card);border-radius:12px;padding:.9rem;border:1px solid rgba(167,139,250,.2);}
-.stat-val{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--lavender);}
-.stat-lbl{color:var(--muted);font-size:.78rem;margin-top:.15rem;}
-.home-btns{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;}
-/* BUTTONS */
-.btn-primary{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;border:none;border-radius:11px;padding:.85rem 2.2rem;font-size:1rem;cursor:pointer;font-family:inherit;font-weight:700;box-shadow:0 0 25px rgba(124,58,237,.35);transition:transform .15s;}
-.btn-primary:hover{transform:translateY(-2px);}
-.btn-ghost{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:11px;padding:.85rem 1.6rem;font-size:.95rem;cursor:pointer;font-family:inherit;transition:all .2s;}
-.btn-ghost:hover{background:rgba(255,255,255,.11);}
-.btn-sm{padding:.35rem .9rem;font-size:.82rem;border-radius:8px;}
-/* QUIZ */
-#quiz-screen{justify-content:flex-start;padding-top:1.2rem;}
-.quiz-wrap{max-width:740px;width:100%;}
-.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
-.qcount{font-size:1rem;color:#fff;}
-.qcount em{color:var(--lavender);font-style:normal;font-weight:700;font-size:1.15rem;}
-.progress-bar{width:100%;height:5px;background:rgba(255,255,255,.09);border-radius:5px;margin-bottom:1.4rem;}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--lavender));border-radius:5px;transition:width .4s ease;}
-.q-card{background:rgba(255,255,255,.035);border-radius:20px;padding:1.8rem;border:1px solid var(--border);margin-bottom:1.3rem;}
-.q-tags{display:flex;gap:.45rem;margin-bottom:.9rem;flex-wrap:wrap;}
-.tag{padding:.22rem .7rem;border-radius:999px;font-size:.75rem;}
-.q-text{color:#fff;font-size:1.08rem;line-height:1.75;margin-bottom:1.6rem;}
-.options{display:flex;flex-direction:column;gap:.65rem;}
-.opt-btn{display:flex;align-items:flex-start;gap:.7rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:.8rem 1.1rem;color:var(--text);cursor:pointer;text-align:left;font-size:.93rem;font-family:inherit;line-height:1.55;transition:all .15s;width:100%;}
-.opt-btn:hover:not([disabled]){background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.4);}
-.opt-btn.correct{background:rgba(16,185,129,.15);border-color:var(--green);color:var(--green);}
-.opt-btn.wrong{background:rgba(239,68,68,.15);border-color:var(--red);color:var(--red);}
-.opt-letter{min-width:24px;height:24px;border-radius:50%;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.72rem;opacity:.7;flex-shrink:0;margin-top:1px;}
-/* explanation */
-.explain-box{margin-top:1.2rem;display:none;}
-.explain-box.show{display:block;}
-.explain-toggle{background:none;border:1px solid var(--lavender);color:var(--lavender);border-radius:8px;padding:.38rem .9rem;cursor:pointer;font-size:.82rem;font-family:inherit;transition:all .2s;}
-.explain-toggle:hover{background:rgba(167,139,250,.12);}
-.explain-content{margin-top:.8rem;background:rgba(167,139,250,.07);border-radius:10px;padding:1rem 1.1rem;border:1px solid rgba(167,139,250,.2);color:#c4b5fd;font-size:.88rem;line-height:1.85;display:none;}
-.explain-content strong{color:#ddd6fe;}
-.step{margin-top:.5rem;padding:.5rem .8rem;border-left:2px solid rgba(167,139,250,.35);background:rgba(167,139,250,.05);border-radius:0 6px 6px 0;font-family:'Source Serif 4',monospace;font-size:.85rem;}
-/* nav */
-.quiz-nav{display:flex;justify-content:space-between;align-items:center;gap:.5rem;}
-.btn-nav{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--muted);border-radius:10px;padding:.65rem 1.3rem;cursor:pointer;font-family:inherit;font-size:.9rem;transition:all .2s;}
-.btn-nav:disabled{opacity:.3;cursor:not-allowed;}
-.btn-nav:hover:not([disabled]){background:rgba(255,255,255,.11);color:#fff;}
-.btn-finish{background:linear-gradient(135deg,var(--purple),#4f46e5);border:none;color:#fff;border-radius:10px;padding:.65rem 1.5rem;cursor:pointer;font-family:inherit;font-weight:700;font-size:.95rem;}
-/* GRAPHS */
-#graphs-screen{justify-content:flex-start;padding-top:1.2rem;}
-.graphs-wrap{max-width:880px;width:100%;}
-.graphs-hdr{display:flex;align-items:center;gap:.9rem;margin-bottom:1.3rem;}
-.graph-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.3rem;}
-.gtab{padding:.4rem .95rem;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#ccc;cursor:pointer;font-family:inherit;font-size:.83rem;transition:all .2s;}
-.gtab.active{background:var(--purple);border-color:var(--purple);color:#fff;}
-.gpanel{display:none;background:var(--card);border-radius:16px;padding:1.4rem;border:1px solid rgba(167,139,250,.15);}
-.gpanel.active{display:block;}
-.gtitle{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.3rem;}
-.gdesc{color:var(--muted);font-size:.85rem;margin-bottom:1.1rem;line-height:1.65;}
-/* RESULTS */
-.results-inner{max-width:700px;width:100%;text-align:center;}
-.score-big{font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;line-height:1;}
-.great{color:var(--green);}.okay{color:var(--amber);}.low{color:var(--red);}
-.review-list{display:flex;flex-direction:column;gap:.55rem;margin:1rem 0;max-height:340px;overflow-y:auto;text-align:left;padding-right:.3rem;}
-.ri{border-radius:10px;padding:.7rem .95rem;font-size:.82rem;}
-.ri.c{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);}
-.ri.w{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);}
-.ri-q{color:#fff;margin-bottom:.2rem;font-size:.84rem;}
-.topic-breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.6rem;margin:1rem 0;text-align:left;}
-.tb-item{background:var(--card);border-radius:10px;padding:.65rem .9rem;border:1px solid var(--border);}
-.tb-topic{font-size:.75rem;color:var(--muted);margin-bottom:.3rem;}
-.tb-bar-wrap{background:rgba(255,255,255,.08);border-radius:4px;height:6px;}
-.tb-bar{height:6px;border-radius:4px;}
-.tb-score{font-size:.78rem;margin-top:.25rem;}
-.review-list::-webkit-scrollbar{width:4px;}
-.review-list::-webkit-scrollbar-thumb{background:#4c3f8a;border-radius:4px;}
-@media(max-width:560px){h1{font-size:2rem;}.stat-grid{grid-template-columns:1fr 1fr;}.q-card{padding:1.1rem;}.score-big{font-size:3.5rem;}}
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Lora:ital,wght@0,600;1,400&display=swap');
+
+  :root {
+    --bg: #f8f8ff;
+    --ink: #12122a;
+    --red: #b91c1c;
+    --blue: #1d4ed8;
+    --green: #15803d;
+    --gold: #b45309;
+    --purple: #7c3aed;
+    --muted: #6b7280;
+    --border: #e2e8f0;
+    --card: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 40px 20px 80px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .test-header {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+  .test-header h1 { font-family: 'Lora', serif; font-size: 1.7rem; margin-bottom: 4px; }
+  .test-header .sub { font-size: 0.75rem; opacity: 0.55; margin-bottom: 16px; }
+  .meta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .meta-chip { background: rgba(255,255,255,0.1); border-radius: 6px; padding: 5px 12px; font-size: 0.7rem; color: #fff; }
+
+  .tip {
+    background: #fffbea; border: 1px solid #fcd34d;
+    border-radius: 8px; padding: 10px 16px;
+    font-size: 0.76rem; color: #78350f;
+    margin-bottom: 24px; line-height: 1.8;
+  }
+
+  /* SECTION BANNERS */
+  .section-banner {
+    border-radius: 10px;
+    padding: 16px 22px;
+    margin: 32px 0 16px;
+    color: #fff;
+  }
+  .section-banner h2 { font-family: 'Lora', serif; font-size: 1.2rem; margin-bottom: 2px; }
+  .section-banner p { font-size: 0.72rem; opacity: 0.8; }
+
+  /* QUESTION CARDS */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .q-top { display: flex; align-items: stretch; }
+  .q-num {
+    width: 50px; min-height: 64px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 600;
+    color: #fff; flex-shrink: 0; gap: 2px;
+  }
+  .q-num .qtag { font-size: 0.52rem; font-family: 'JetBrains Mono', monospace; font-weight: 400; opacity: 0.8; text-align: center; padding: 0 3px; line-height: 1.3; }
+  .q-body { padding: 14px 18px; flex: 1; }
+  .q-label { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 5px; }
+  .q-text { font-size: 0.86rem; line-height: 1.9; color: var(--ink); }
+  .q-choices { margin-top: 8px; padding-left: 10px; font-size: 0.83rem; line-height: 2.1; color: #1e293b; }
+
+  /* ANSWER AREA */
+  .answer-area {
+    border-top: 1px dashed var(--border);
+    padding: 10px 18px 14px;
+    background: #fafbff;
+  }
+  .answer-label { font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 7px; }
+  .answer-lines { display: flex; flex-direction: column; gap: 8px; }
+  .answer-line { border-bottom: 1.5px solid #cbd5e1; height: 26px; width: 100%; }
+
+  .reveal-btn {
+    background: none; border: 1.5px solid var(--border);
+    border-radius: 6px; padding: 5px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; cursor: pointer;
+    color: var(--muted); margin-top: 9px; transition: all 0.2s;
+  }
+  .reveal-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  .answer-reveal {
+    display: none; margin-top: 10px;
+    background: var(--ink); color: #e2e8f0;
+    border-radius: 8px; padding: 12px 16px;
+    font-size: 0.81rem; line-height: 2.1;
+  }
+  .answer-reveal .ans-label {
+    font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #94a3b8; display: block; margin-bottom: 5px;
+  }
+  .answer-reveal.shown { display: block; }
+
+  /* SCORE TABLE */
+  .score-box {
+    background: var(--card); border: 2px solid var(--border);
+    border-radius: 10px; padding: 20px 24px; margin-top: 36px;
+  }
+  .score-title { font-family: 'Lora', serif; font-size: 1.1rem; margin-bottom: 14px; }
+  table.score-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  table.score-table th { background: var(--ink); color: #fff; padding: 8px 12px; text-align: left; }
+  table.score-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  table.score-table tr:nth-child(even) td { background: #f8fafc; }
+  .total-row td { font-weight: 600; background: #f0f4ff !important; }
 </style>
 </head>
 <body>
 
-<!-- HOME -->
-<div id="home-screen" class="screen active">
-  <div class="home-inner">
-    <div class="logo">📐</div>
-    <h1>Finals Review</h1>
-    <p class="subtitle">Pre-Calculus &amp; Calculus · All Items Covered · No Time Limit</p>
-    <div class="filter-row">
-      <button class="fbtn active" data-f="All" onclick="setFilter(this)">All</button>
-      <button class="fbtn" data-f="1st Exam" onclick="setFilter(this)">1st Exam</button>
-      <button class="fbtn" data-f="2nd Exam" onclick="setFilter(this)">2nd Exam</button>
-      <button class="fbtn" data-f="3rd Exam" onclick="setFilter(this)">3rd Exam</button>
-      <button class="fbtn" data-f="4th Exam" onclick="setFilter(this)">4th Exam</button>
+<!-- HEADER -->
+<div class="test-header">
+  <h1>Final Exam — Practice Test</h1>
+  <div class="sub">Calculus & Pre-Calculus · Comprehensive Review</div>
+  <div class="meta-row">
+    <div class="meta-chip">📋 27 Items</div>
+    <div class="meta-chip">💯 80 Points</div>
+    <div class="meta-chip">⏱ ~90 minutes</div>
+    <div class="meta-chip">📖 Show all work</div>
+  </div>
+</div>
+
+<div class="tip">💡 Try answering on paper first. Click <strong>"Show Answer"</strong> only after writing your answer. Each section mirrors your actual final exam format!</div>
+
+<!-- ========================================================= -->
+<!--                     TEST I — SHORT RESPONSE               -->
+<!-- ========================================================= -->
+<div class="section-banner" style="background:#1d4ed8;">
+  <h2>Test I — Short Response</h2>
+  <p>15 items · 2 points each · 30 points total</p>
+</div>
+
+<!-- Q1 — Inequality -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">1<span class="qtag">Inequality</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Solve and graph on a number line: &nbsp;<strong>2x − 5 &lt; 7</strong></div>
     </div>
-    <div class="stat-grid">
-      <div class="stat-card"><div class="stat-val" id="q-count">50</div><div class="stat-lbl">Questions</div></div>
-      <div class="stat-card"><div class="stat-val">∞</div><div class="stat-lbl">Time Limit</div></div>
-      <div class="stat-card"><div class="stat-val">10</div><div class="stat-lbl">Topics</div></div>
-    </div>
-    <div class="home-btns">
-      <button class="btn-primary" onclick="startQuiz()">Start Quiz</button>
-      <button class="btn-ghost" onclick="gotoGraphs()">📊 View Graphs</button>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      2x − 5 &lt; 7<br>
+      2x &lt; 12<br>
+      x &lt; 6<br><br>
+      Answer: <strong>x &lt; 6</strong> or interval notation: <strong>(−∞, 6)</strong><br>
+      Number line: open circle at 6, shade everything to the left ←●
     </div>
   </div>
 </div>
 
-<!-- QUIZ -->
-<div id="quiz-screen" class="screen">
-  <div class="quiz-wrap">
-    <div class="quiz-top">
-      <button class="btn-ghost btn-sm" onclick="show('home-screen')">← Exit</button>
-      <div class="qcount">Q <em id="qnum">1</em> / <em id="qtotal">50</em></div>
-      <button class="btn-ghost btn-sm" onclick="gotoGraphs()">📊</button>
+<!-- Q2 — Absolute Value -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">2<span class="qtag">Absolute Value</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Solve: &nbsp;<strong>|3x − 6| = 12</strong></div>
     </div>
-    <div class="progress-bar"><div class="progress-fill" id="pfill" style="width:2%"></div></div>
-    <div class="q-card">
-      <div class="q-tags" id="qtags"></div>
-      <p class="q-text" id="qtext"></p>
-      <div class="options" id="qopts"></div>
-      <div class="explain-box" id="explain-box">
-        <button class="explain-toggle" id="exbtn" onclick="toggleExplain()">📖 Show Full Explanation</button>
-        <div class="explain-content" id="excontent"></div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Split into 2 equations:<br><br>
+      Case 1: 3x − 6 = 12 → 3x = 18 → <strong>x = 6</strong><br>
+      Case 2: 3x − 6 = −12 → 3x = −6 → <strong>x = −2</strong><br><br>
+      Answer: <strong>x = 6 or x = −2</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 — Plotting of Points -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">3<span class="qtag">Plotting</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Identify which quadrant each point lies in:<br><br>
+      <strong>A(−3, 5) &nbsp;&nbsp; B(4, −2) &nbsp;&nbsp; C(−1, −6) &nbsp;&nbsp; D(7, 3)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      A(−3, 5) → <strong>Quadrant II</strong> (x neg, y pos)<br>
+      B(4, −2) → <strong>Quadrant IV</strong> (x pos, y neg)<br>
+      C(−1, −6) → <strong>Quadrant III</strong> (x neg, y neg)<br>
+      D(7, 3) → <strong>Quadrant I</strong> (x pos, y pos)
+    </div>
+  </div>
+</div>
+
+<!-- Q4 — Intercepts -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">4<span class="qtag">Intercepts</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the x-intercept and y-intercept of: &nbsp;<strong>3x − 4y = 12</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      x-intercept (set y = 0): 3x = 12 → <strong>x = 4 → (4, 0)</strong><br>
+      y-intercept (set x = 0): −4y = 12 → <strong>y = −3 → (0, −3)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 — Function -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">5<span class="qtag">Function</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Given f(x) = 3x² − 2x + 1, find: &nbsp;<strong>f(−2)</strong> and <strong>f(0)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      f(−2) = 3(−2)² − 2(−2) + 1 = 12 + 4 + 1 = <strong>17</strong><br>
+      f(0) = 3(0) − 2(0) + 1 = <strong>1</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q6 — Slope -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">6<span class="qtag">Slope</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the slope of the line passing through: &nbsp;<strong>(−2, 4) and (3, −1)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      m = (y₂ − y₁) / (x₂ − x₁)<br>
+      m = (−1 − 4) / (3 − (−2))<br>
+      m = −5 / 5<br>
+      m = <strong>−1</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q7 — Slope Intercept Form -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">7<span class="qtag">Slope-Intercept</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Write the equation of the line in slope-intercept form with slope <strong>m = 2/3</strong> passing through <strong>(0, −4)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Slope-intercept form: y = mx + b<br>
+      m = 2/3, b = −4 (y-intercept given directly)<br><br>
+      <strong>y = (2/3)x − 4</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q8 — Vertex and Latus Rectum -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">8<span class="qtag">Parabola</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the <strong>vertex</strong> and <strong>length of the latus rectum</strong> of: &nbsp;<strong>(x − 2)² = 12(y + 1)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Standard form: (x − h)² = 4p(y − k)<br><br>
+      Vertex: (h, k) = <strong>(2, −1)</strong><br>
+      4p = 12 → p = 3<br>
+      Latus Rectum = |4p| = <strong>12 units</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q9 — Equation of Circle -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">9<span class="qtag">Circle</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Write the equation of a circle with <strong>center (−3, 4)</strong> and <strong>radius = 5</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Standard form: (x − h)² + (y − k)² = r²<br>
+      h = −3, k = 4, r = 5<br><br>
+      <strong>(x + 3)² + (y − 4)² = 25</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q10 — Domain -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">10<span class="qtag">Domain</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the domain of: &nbsp;<strong>f(x) = √(x − 4)</strong> &nbsp;and&nbsp; <strong>g(x) = 1/(x² − 9)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      f(x) = √(x−4): inside must be ≥ 0<br>
+      x − 4 ≥ 0 → <strong>x ≥ 4 → [4, +∞)</strong><br><br>
+      g(x) = 1/(x²−9): denominator ≠ 0<br>
+      x² − 9 ≠ 0 → x ≠ ±3<br>
+      <strong>Domain: all real numbers except x = 3 and x = −3</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q11 — Operations of Functions -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">11<span class="qtag">Operations</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Given <strong>f(x) = x + 3</strong> and <strong>g(x) = x² − 1</strong>, find <strong>(f + g)(x)</strong> and <strong>(f · g)(x)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      (f + g)(x) = f(x) + g(x) = (x+3) + (x²−1) = <strong>x² + x + 2</strong><br><br>
+      (f · g)(x) = f(x) · g(x) = (x+3)(x²−1)<br>
+      = x³ − x + 3x² − 3 = <strong>x³ + 3x² − x − 3</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q12 — Limit Theorem -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">12<span class="qtag">Limit Theorem</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Evaluate the limit: &nbsp;<strong>lim(x→3) (x² − x − 6) / (x − 3)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Direct substitution gives 0/0 → factor first!<br><br>
+      x² − x − 6 = (x − 3)(x + 2)<br><br>
+      lim(x→3) (x−3)(x+2) / (x−3)<br>
+      Cancel (x−3):<br>
+      = lim(x→3) (x + 2)<br>
+      = 3 + 2 = <strong>5</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q13 — Graph of Limits -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">13<span class="qtag">Graph of Limits</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">From a graph, the left-hand limit as x→2⁻ = 4 and right-hand limit as x→2⁺ = 4, but f(2) = 7.<br><br>
+      Does <strong>lim(x→2) f(x) exist?</strong> What is it?</div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      For a limit to exist: left-hand limit = right-hand limit<br><br>
+      lim(x→2⁻) = 4 &nbsp;and&nbsp; lim(x→2⁺) = 4 ✓ (they are equal!)<br><br>
+      <strong>Yes, lim(x→2) f(x) = 4</strong><br><br>
+      💡 The fact that f(2) = 7 does NOT matter — the limit only cares about what happens NEAR x = 2, not AT x = 2!
+    </div>
+  </div>
+</div>
+
+<!-- Q14 — Differentiation Rules -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">14<span class="qtag">Diff. Rules</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Differentiate using the <strong>Power Rule</strong>: &nbsp;<strong>f(x) = 5x⁴ − 3x² + 7x − 2</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Power Rule: d/dx[xⁿ] = nxⁿ⁻¹<br><br>
+      • 5x⁴ → 20x³<br>
+      • 3x² → 6x<br>
+      • 7x → 7<br>
+      • 2 → 0 (constant)<br><br>
+      <strong>f'(x) = 20x³ − 6x + 7</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q15 — Problem Solving Short -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">15<span class="qtag">Velocity</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">A particle's position is <strong>s(t) = t² + 3t</strong> (meters). Find the <strong>average velocity</strong> over <strong>[1, 4]</strong>.</div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Formula: [s(t₂) − s(t₁)] / (t₂ − t₁) — NO differentiation needed!<br><br>
+      s(1) = 1 + 3 = 4<br>
+      s(4) = 16 + 12 = 28<br><br>
+      Avg velocity = (28 − 4) / (4 − 1) = 24 / 3 = <strong>8 m/s</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!--              TEST II — DIFFERENTIATION RULES              -->
+<!-- ========================================================= -->
+<div class="section-banner" style="background:#15803d;">
+  <h2>Test II — Finding Derivatives</h2>
+  <p>10 items · 3 points each · 30 points total · Use differentiation rules</p>
+</div>
+
+<!-- Q16 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">16<span class="qtag">Power Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>f(x) = 6x⁵ − 4x³ + 9</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      • 6x⁵ → 30x⁴<br>
+      • 4x³ → 12x²<br>
+      • 9 → 0<br><br>
+      <strong>f'(x) = 30x⁴ − 12x²</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q17 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">17<span class="qtag">Chain Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = (3x² + 1)⁴</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Chain Rule: d/dx[uⁿ] = nuⁿ⁻¹ · u'<br><br>
+      u = 3x²+1 → u' = 6x<br><br>
+      dy/dx = 4(3x²+1)³ · 6x<br>
+      <strong>dy/dx = 24x(3x² + 1)³</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q18 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">18<span class="qtag">Product Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = (x² + 3)(2x − 5)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Product Rule: u'v + uv'<br><br>
+      u = x²+3, u' = 2x<br>
+      v = 2x−5, v' = 2<br><br>
+      dy/dx = 2x(2x−5) + (x²+3)(2)<br>
+      = 4x²−10x + 2x²+6<br>
+      <strong>dy/dx = 6x² − 10x + 6</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q19 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">19<span class="qtag">Quotient Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>f(x) = (x² + 1) / (x − 2)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Quotient Rule: (u'v − uv') / v²<br><br>
+      u = x²+1, u' = 2x<br>
+      v = x−2, v' = 1<br><br>
+      f'(x) = [2x(x−2) − (x²+1)(1)] / (x−2)²<br>
+      = [2x²−4x − x²−1] / (x−2)²<br>
+      <strong>f'(x) = (x² − 4x − 1) / (x − 2)²</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q20 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">20<span class="qtag">Basic ln</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>f(x) = ln(x² + 5)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Rule: d/dx[ln u] = u'/u<br><br>
+      u = x²+5, u' = 2x<br><br>
+      <strong>f'(x) = 2x / (x² + 5)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q21 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">21<span class="qtag">Product ln</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = x³ ln x</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Product Rule: u'v + uv'<br><br>
+      u = x³, u' = 3x²<br>
+      v = ln x, v' = 1/x<br><br>
+      dy/dx = 3x²·ln x + x³·(1/x)<br>
+      = 3x² ln x + x²<br>
+      <strong>dy/dx = x²(3 ln x + 1)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q22 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">22<span class="qtag">Basic eˣ</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = e^(3x² − 2)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Rule: d/dx[eᵘ] = eᵘ · u'<br><br>
+      u = 3x²−2, u' = 6x<br><br>
+      <strong>dy/dx = 6xe^(3x² − 2)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q23 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">23<span class="qtag">Product eˣ</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = x²e^(2x)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Product Rule: u'v + uv'<br><br>
+      u = x², u' = 2x<br>
+      v = e^(2x), v' = 2e^(2x)<br><br>
+      dy/dx = 2x·e^(2x) + x²·2e^(2x)<br>
+      = 2xe^(2x) + 2x²e^(2x)<br>
+      <strong>dy/dx = 2xe^(2x)(1 + x)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q24 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">24<span class="qtag">Quotient eˣ</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = eˣ / (x + 1)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Quotient Rule: (u'v − uv') / v²<br><br>
+      u = eˣ, u' = eˣ<br>
+      v = x+1, v' = 1<br><br>
+      dy/dx = [eˣ(x+1) − eˣ(1)] / (x+1)²<br>
+      = eˣ[(x+1) − 1] / (x+1)²<br>
+      <strong>dy/dx = xeˣ / (x + 1)²</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q25 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">25<span class="qtag">Mixed</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = ln(2 − e^(3x))</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Rule: d/dx[ln u] = u'/u<br><br>
+      u = 2 − e^(3x), u' = −3e^(3x)<br><br>
+      <strong>dy/dx = −3e^(3x) / (2 − e^(3x))</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!--                  TEST III — PROBLEM SOLVING               -->
+<!-- ========================================================= -->
+<div class="section-banner" style="background:#b45309;">
+  <h2>Test III — Problem Solving</h2>
+  <p>2 items · 5 points each (sub-parts) · 20 points total</p>
+</div>
+
+<!-- Q26 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#b45309;">26<span class="qtag">Avg & Instant Velocity</span></div>
+    <div class="q-body">
+      <div class="q-label">5 points per part · 10 points total</div>
+      <div class="q-text">
+        A particle moves along a straight line with position function:<br><br>
+        <strong>s(t) = 2t² − 4t + 3</strong> &nbsp;(meters, t in seconds)<br><br>
+      </div>
+      <div class="q-choices">
+        (a) Find the average velocity over [1, 3]<br>
+        (b) Find the instantaneous velocity at t = 2s
       </div>
     </div>
-    <div class="quiz-nav">
-      <button class="btn-nav" id="prev-btn" onclick="prevQ()" disabled>← Prev</button>
-      <span style="color:var(--muted);font-size:.82rem" id="ans-count"></span>
-      <button class="btn-finish" id="next-btn" onclick="nextQ()">Next →</button>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines">
+      <div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Full Solution</span>
+      <strong>(a) Average Velocity [1, 3] — NO differentiation!</strong><br>
+      s(1) = 2(1)² − 4(1) + 3 = 2 − 4 + 3 = 1<br>
+      s(3) = 2(3)² − 4(3) + 3 = 18 − 12 + 3 = 9<br>
+      Avg vel = (9 − 1) / (3 − 1) = 8/2 = <strong>4 m/s</strong><br><br>
+      <strong>(b) Instantaneous Velocity at t = 2 — DIFFERENTIATE!</strong><br>
+      v(t) = ds/dt = 4t − 4<br>
+      v(2) = 4(2) − 4 = 8 − 4 = <strong>4 m/s</strong>
     </div>
   </div>
 </div>
 
-<!-- GRAPHS -->
-<div id="graphs-screen" class="screen">
-  <div class="graphs-wrap">
-    <div class="graphs-hdr">
-      <button class="btn-ghost btn-sm" onclick="graphBack()">← Back</button>
-      <h2 style="font-family:'Playfair Display',serif;color:var(--lavender)">Reference Graphs</h2>
+<!-- Q27 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#b45309;">27<span class="qtag">Free Fall</span></div>
+    <div class="q-body">
+      <div class="q-label">5 points per part · 10 points total</div>
+      <div class="q-text">
+        A ball is dropped from the top of a building <strong>900 feet tall</strong>.<br>
+        Use: <strong>s(t) = −16t² + v₀t + s₀</strong><br><br>
+      </div>
+      <div class="q-choices">
+        (a) Write the position function s(t) and velocity function v(t)<br>
+        (b) Find the time it takes to hit the ground and velocity at impact
+      </div>
     </div>
-    <div class="graph-tabs">
-      <button class="gtab active" onclick="switchGraph('parabola',this)">Parabola</button>
-      <button class="gtab" onclick="switchGraph('velocity',this)">Position &amp; Velocity</button>
-      <button class="gtab" onclick="switchGraph('profit',this)">Profit</button>
-      <button class="gtab" onclick="switchGraph('drone',this)">Drone</button>
-      <button class="gtab" onclick="switchGraph('rocket',this)">Rocket</button>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines">
+      <div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
     </div>
-    <div class="gpanel active" id="gp-parabola">
-      <div class="gtitle" style="color:var(--amber)">Parabola: y = x²</div>
-      <p class="gdesc">Vertex at (0,0). Opens upward. Axis of symmetry x = 0. Standard form: x² = 4py where the focus is at (0,p).</p>
-      <canvas id="c-parabola" height="260"></canvas>
-    </div>
-    <div class="gpanel" id="gp-velocity">
-      <div class="gtitle" style="color:var(--green)">Particle: s(t) = t³ − 6t² + 9t</div>
-      <p class="gdesc"><span style="color:#f97316">■</span> Position s(t) &nbsp;|&nbsp; <span style="color:#8b5cf6">■</span> v(t) = 3t²−12t+9 &nbsp;|&nbsp; <span style="color:#14b8a6">- -</span> a(t) = 6t−12 &nbsp;|&nbsp; Particle at rest at <strong style="color:var(--red)">t=1s</strong> and <strong style="color:var(--red)">t=3s</strong>.</p>
-      <canvas id="c-velocity" height="260"></canvas>
-    </div>
-    <div class="gpanel" id="gp-profit">
-      <div class="gtitle" style="color:var(--pink)">P = 4x − x²/10,000 − 6,000</div>
-      <p class="gdesc">Profit peaks at x = 20,000 cups (green line) with P = ₱34,000. The parabola opens downward; profit decreases on either side of the peak.</p>
-      <canvas id="c-profit" height="260"></canvas>
-    </div>
-    <div class="gpanel" id="gp-drone">
-      <div class="gtitle" style="color:var(--teal)">Drone: s(t) = 2 + 6t − t²</div>
-      <p class="gdesc">Max position at t=3s. Avg velocity [0,4] = 2 m/s (rising). Avg velocity [4,6] = −2 m/s (returning/falling).</p>
-      <canvas id="c-drone" height="260"></canvas>
-    </div>
-    <div class="gpanel" id="gp-rocket">
-      <div class="gtitle" style="color:var(--orange)">Rocket: s(t) = −16t² + 80t + 5</div>
-      <p class="gdesc">v(t) = −32t+80. At t=2s: v=16 ft/s (rising). At t=5s: v=0 (maximum height ≈ 205 ft). After t=5s the rocket falls.</p>
-      <canvas id="c-rocket" height="260"></canvas>
-    </div>
-    <div style="text-align:center;margin-top:1.3rem">
-      <button class="btn-primary" onclick="startQuiz()">Take the Quiz</button>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Full Solution</span>
+      <strong>(a) Position and Velocity Functions:</strong><br>
+      Dropped → v₀ = 0, s₀ = 900<br>
+      s(t) = −16t² + 0(t) + 900 = <strong>−16t² + 900</strong><br>
+      v(t) = ds/dt = <strong>−32t</strong><br><br>
+      <strong>(b) Time to hit ground (s = 0):</strong><br>
+      −16t² + 900 = 0<br>
+      16t² = 900<br>
+      t² = 56.25<br>
+      t = √56.25 = <strong>7.5 seconds</strong><br><br>
+      Velocity at impact:<br>
+      v(7.5) = −32(7.5) = <strong>−240 ft/s</strong>
     </div>
   </div>
 </div>
 
-<!-- RESULTS -->
-<div id="results-screen" class="screen">
-  <div class="results-inner">
-    <div id="r-emoji" style="font-size:4rem;margin-bottom:.4rem"></div>
-    <h1 style="margin-bottom:.3rem">Quiz Complete!</h1>
-    <div class="score-big" id="r-pct"></div>
-    <p style="color:var(--muted);margin:.4rem 0" id="r-sub"></p>
-    <p style="color:var(--lavender);margin-bottom:.8rem" id="r-msg"></p>
-    <div class="topic-breakdown" id="topic-breakdown"></div>
-    <div class="review-list" id="review-list"></div>
-    <div class="home-btns" style="margin-top:1.2rem">
-      <button class="btn-primary" onclick="startQuiz()">Retry</button>
-      <button class="btn-ghost" onclick="show('home-screen')">Home</button>
-      <button class="btn-ghost" onclick="gotoGraphs()" style="border-color:var(--green);color:var(--green)">📊 Graphs</button>
-    </div>
-  </div>
+<!-- SCORE BOX -->
+<div class="score-box">
+  <div class="score-title">📊 Score Tracker</div>
+  <table class="score-table">
+    <thead>
+      <tr><th>Section</th><th>Items</th><th>Points Each</th><th>Your Score</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Test I — Short Response</td><td>15</td><td>2 pts</td><td>__ / 30</td><td>30</td></tr>
+      <tr><td>Test II — Derivatives</td><td>10</td><td>3 pts</td><td>__ / 30</td><td>30</td></tr>
+      <tr><td>Test III — Problem Solving</td><td>2</td><td>10 pts</td><td>__ / 20</td><td>20</td></tr>
+      <tr class="total-row"><td><strong>TOTAL</strong></td><td>27</td><td>—</td><td><strong>__ / 80</strong></td><td><strong>80</strong></td></tr>
+    </tbody>
+  </table>
 </div>
 
 <script>
-const TOPIC_COLORS={"Real Number System":"#f59e0b","2D Coordinate System":"#10b981","Lines":"#6366f1","Operations on Functions":"#ec4899","Problem Solving":"#f97316","Limits":"#14b8a6","Differentiation":"#8b5cf6","Trig Derivatives":"#ef4444","Chain Rule":"#f97316","Mixed Rules":"#06b6d4","Applications":"#10b981"};
-
-const Q=[
-  /* 1ST EXAM — Real Number System */
-  {exam:"1st Exam",topic:"Real Number System",q:"Is the integer 7 a solution to the inequality x + 2 < 10?",
-   opts:["Yes — 7 + 2 = 9 < 10, TRUE","No — 7 itself is not < 10","No — 7 + 2 = 10, not strictly less","Cannot be determined"],a:0,
-   why:`<strong>Substitute and check:</strong><div class="step">x + 2 &lt; 10 → plug in x = 7:<br>7 + 2 = 9 → Is 9 &lt; 10? YES ✓</div>Because the substitution gives a true statement, <strong>7 is a solution</strong>. A value is a solution when it satisfies the inequality.`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"What values satisfy −6 < x < 7?",
-   opts:["All real numbers strictly between −6 and 7","All integers from −5 to 6 only","All real numbers from −6 to 7 including endpoints","Only positive numbers less than 7"],a:0,
-   why:`<strong>Strict inequalities (&lt;) exclude endpoints:</strong><div class="step">−6 &lt; x &lt; 7 is the open interval (−6, 7)<br>Contains ALL real numbers between −6 and 7 — not just integers<br>On a number line: open circles at −6 and 7, solid line between them</div>`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"Write x > 10 in interval notation.",
-   opts:["[10, ∞)","(10, ∞)","(−∞, 10)","[10, +∞]"],a:1,
-   why:`<strong>Interval notation rules:</strong><div class="step">( ) = endpoint NOT included (strict inequality)<br>[ ] = endpoint IS included (≤ or ≥)<br>∞ ALWAYS gets ( ), never [ ]</div>x &gt; 10 → strictly greater, so 10 excluded → <strong>(10, ∞)</strong>`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"Is −8 a solution to −20 < x < 9?",
-   opts:["Yes — because −20 < −8 < 9 is TRUE","No — −8 is negative so it doesn't count","No — −8 is not between 0 and 9","Yes — only because −8 > −20"],a:0,
-   why:`<strong>Check BOTH parts of the compound inequality:</strong><div class="step">Is −20 &lt; −8? YES (−8 is to the right of −20)<br>Is −8 &lt; 9? YES<br>Both hold → <strong>−8 is a solution</strong></div>`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"What is the distance between 15 and −8 on the number line?",
-   opts:["7","23","−23","13"],a:1,
-   why:`<strong>Distance = |a − b|</strong><div class="step">|15 − (−8)| = |15 + 8| = |23| = <strong>23</strong></div>Distance is always non-negative. We travel 23 unit-steps to go from −8 to 15.`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"Why does |x| = −6 have NO solution?",
-   opts:["Because x must be positive","Because absolute value is always ≥ 0 and can never equal a negative number","Because −6 is undefined in the reals","Because equations with one variable have two solutions"],a:1,
-   why:`<strong>Key property of absolute value:</strong><div class="step">|x| measures distance from zero → distance ≥ 0 always<br>Therefore |x| ≥ 0 for ALL real x<br>Since −6 &lt; 0, no x can satisfy |x| = −6</div><strong>Rule:</strong> |x| = k has no solution when k &lt; 0.`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"Why does |x| = 3 have exactly 2 solutions?",
-   opts:["Because 3 is an odd positive number","Because two numbers (x=3 and x=−3) are exactly 3 units from zero","Because every equation has exactly 2 solutions","Because 3² = 9"],a:1,
-   why:`<strong>|x| = 3 asks: which numbers are 3 units from zero?</strong><div class="step">x = 3 → 3 steps to the right of zero ✓<br>x = −3 → 3 steps to the left of zero ✓</div><strong>General rule:</strong> |x| = k (k &gt; 0) always yields exactly 2 solutions: x = k and x = −k.`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"Why does |−6| = 6?",
-   opts:["Because negative signs cancel inside absolute value","Because |−6| measures the distance of −6 from zero, which is 6","Because |−6| = −(−6) = 6 algebraically","Both B and C are correct"],a:3,
-   why:`<strong>Two valid explanations:</strong><div class="step"><strong>Geometric:</strong> −6 sits 6 units to the left of zero → distance = 6<br><strong>Algebraic:</strong> for negative x, |x| = −x → |−6| = −(−6) = 6</div>Both correctly explain the result, so <strong>both B and C are right</strong>.`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"What is |10 − (−7 + 4)|?",
-   opts:["1","13","7","17"],a:1,
-   why:`<strong>Follow order of operations:</strong><div class="step">Step 1 — inner parentheses: −7 + 4 = −3<br>Step 2 — subtraction: 10 − (−3) = 10 + 3 = 13<br>Step 3 — absolute value: |13| = <strong>13</strong></div>`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"What are the solutions of |x + 5| = 2?",
-   opts:["x = 7 or x = −3","x = −3 or x = −7","x = 3 or x = −7","x = 3 or x = 7"],a:1,
-   why:`<strong>Split into two cases:</strong><div class="step">Case 1: x + 5 = 2 → x = 2 − 5 = <strong>−3</strong><br>Case 2: x + 5 = −2 → x = −2 − 5 = <strong>−7</strong></div><strong>Verify:</strong> |−3+5| = |2| = 2 ✓ &nbsp; |−7+5| = |−2| = 2 ✓`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"What are the solutions of −3x > 9?",
-   opts:["x > −3","x < −3","x > 3","x < 3"],a:1,
-   why:`<strong>⚠ CRITICAL RULE: Dividing by a negative flips the inequality sign.</strong><div class="step">−3x &gt; 9<br>Divide both sides by −3 (flip &gt; to &lt;):<br>x &lt; 9 ÷ (−3)<br>x &lt; <strong>−3</strong></div>Solution set: (−∞, −3). Check: pick x = −4 → −3(−4) = 12 &gt; 9 ✓`},
-
-  {exam:"1st Exam",topic:"Real Number System",q:"Solve the compound inequality 5 ≥ x − 4 > 10.",
-   opts:["9 ≥ x > 14 — this is an EMPTY SET (no solution exists)","x is between 9 and 14","x > 14 only","x ≤ 9 only"],a:0,
-   why:`<strong>Add 4 to all three parts:</strong><div class="step">5 + 4 ≥ x − 4 + 4 &gt; 10 + 4<br>9 ≥ x &gt; 14</div>This requires x ≤ 9 AND x &gt; 14 <em>simultaneously</em>. No real number satisfies both conditions. → <strong>Empty set (no solution)</strong>.`},
-
-  /* 1ST EXAM — 2D Coordinate System */
-  {exam:"1st Exam",topic:"2D Coordinate System",q:"Coordinates of a point 6 units below the x-axis and 10 units to the right of the y-axis?",
-   opts:["(−10, 6)","(10, −6)","(−6, 10)","(6, −10)"],a:1,
-   why:`<strong>Recall: coordinates are written (x, y).</strong><div class="step">10 units RIGHT of y-axis → x = +10<br>6 units BELOW x-axis → y = −6</div>Answer: <strong>(10, −6)</strong> — located in Quadrant IV.`},
-
-  {exam:"1st Exam",topic:"2D Coordinate System",q:"Vertical distance between (−10, 6) and (4, −9)?",
-   opts:["3","15","14","6"],a:1,
-   why:`<strong>Vertical distance uses y-coordinates only:</strong><div class="step">|y₂ − y₁| = |−9 − 6| = |−15| = <strong>15</strong></div>The x-coordinates are irrelevant for vertical distance.`},
-
-  {exam:"1st Exam",topic:"2D Coordinate System",q:"Horizontal distance between (8, −3) and (5, 9)?",
-   opts:["12","3","6","14"],a:1,
-   why:`<strong>Horizontal distance uses x-coordinates only:</strong><div class="step">|x₂ − x₁| = |5 − 8| = |−3| = <strong>3</strong></div>The y-coordinates are irrelevant for horizontal distance.`},
-
-  {exam:"1st Exam",topic:"2D Coordinate System",q:"Distance of point (18, −15) from the y-axis?",
-   opts:["15","18","√(18²+15²)","33"],a:1,
-   why:`<strong>Distance from the y-axis = |x-coordinate|</strong><div class="step">The y-axis is the line x = 0.<br>Distance = |18| = <strong>18 units</strong></div>Likewise, distance from the x-axis = |y| = |−15| = 15 units.`},
-
-  {exam:"1st Exam",topic:"2D Coordinate System",q:"Coordinates of a point 8 units above the x-axis and 30 units to the left of the y-axis?",
-   opts:["(30, 8)","(−30, 8)","(8, −30)","(−8, 30)"],a:1,
-   why:`<div class="step">30 units LEFT of y-axis → x = −30<br>8 units ABOVE x-axis → y = +8</div>Answer: <strong>(−30, 8)</strong> — Quadrant II.`},
-
-  {exam:"1st Exam",topic:"2D Coordinate System",q:"In what quadrant is the point if x > 0 and y = −3?",
-   opts:["Quadrant I","Quadrant II","Quadrant III","Quadrant IV"],a:3,
-   why:`<strong>Quadrant sign chart:</strong><div class="step">QI: (+,+) &nbsp; QII: (−,+) &nbsp; QIII: (−,−) &nbsp; QIV: (+,−)</div>x &gt; 0 (positive), y = −3 (negative) → (+, −) → <strong>Quadrant IV</strong>`},
-
-  /* 1ST EXAM — Lines */
-  {exam:"1st Exam",topic:"Lines",q:"Slope of the line through (−5, 3) and (4, −6)?",
-   opts:["1","−1","9","−9"],a:1,
-   why:`<strong>Slope formula: m = (y₂ − y₁)/(x₂ − x₁)</strong><div class="step">m = (−6 − 3) ÷ (4 − (−5))<br>= (−9) ÷ (4 + 5)<br>= −9 ÷ 9 = <strong>−1</strong></div>A slope of −1 means the line descends at a 45° angle.`},
-
-  {exam:"1st Exam",topic:"Lines",q:"Slope of the line 3x − 6y = 8?",
-   opts:["3","−6","1/2","−1/3"],a:2,
-   why:`<strong>Solve for y (slope-intercept form y = mx + b):</strong><div class="step">3x − 6y = 8<br>−6y = −3x + 8<br>y = (1/2)x − 4/3</div>Slope m = coefficient of x = <strong>1/2</strong>`},
-
-  {exam:"1st Exam",topic:"Lines",q:"Which three points lie on 2x − 3y = 4?",
-   opts:["(0, −4/3), (2, 0), (5, 2)","(0, 4), (2, 0), (1, −1)","(0, −4/3), (1, 0), (3, 2)","(2, 0), (5, 3), (−1, −2)"],a:0,
-   why:`<strong>Solve y = (2x−4)/3 for each x:</strong><div class="step">x=0: y = (0−4)/3 = −4/3 → (0, −4/3) ✓<br>x=2: y = (4−4)/3 = 0 → (2, 0) ✓<br>x=5: y = (10−4)/3 = 2 → (5, 2) ✓</div>`},
-
-  {exam:"1st Exam",topic:"Lines",q:"Line A has slope 3. Line B ⊥ Line A. What is the slope of Line B?",
-   opts:["3","−3","−1/3","1/3"],a:2,
-   why:`<strong>Perpendicular lines have negative reciprocal slopes:</strong><div class="step">m₁ = 3 → m₂ = −1/m₁ = −1/3</div><strong>Verify:</strong> m₁ × m₂ = 3 × (−1/3) = −1 ✓ (product of perpendicular slopes is always −1)`},
-
-  {exam:"1st Exam",topic:"Lines",q:"Equation of the line with slope ¼ and y-intercept −5?",
-   opts:["y = 4x − 5","y = ¼x + 5","y = ¼x − 5","y = −¼x − 5"],a:2,
-   why:`<strong>Slope-intercept form: y = mx + b</strong><div class="step">m = 1/4, b = −5<br>→ y = <strong>(1/4)x − 5</strong></div>The line crosses the y-axis at (0, −5) and rises 1 unit for every 4 units to the right.`},
-
-  /* 2ND EXAM — Operations on Functions */
-  {exam:"2nd Exam",topic:"Operations on Functions",q:"f(x)=3x−5, g(x)=x²+1. Find f(x)+g(x).",
-   opts:["x²+3x−4","3x²−4","x²−3x+6","4x²+3x"],a:0,
-   why:`<div class="step">(3x−5) + (x²+1)<br>= x² + 3x + (−5+1)<br>= <strong>x² + 3x − 4</strong></div>`},
-
-  {exam:"2nd Exam",topic:"Operations on Functions",q:"f(x)=3x−5, g(x)=x²+1. Find f(x)−g(x).",
-   opts:["−x²+3x−6","x²−3x+4","−x²+3x+6","3x−x²−6"],a:0,
-   why:`<strong>Distribute the negative sign over ALL of g(x):</strong><div class="step">(3x−5) − (x²+1)<br>= 3x − 5 − x² − 1<br>= <strong>−x² + 3x − 6</strong></div>Key mistake to avoid: students often forget to change the sign of +1 to −1.`},
-
-  {exam:"2nd Exam",topic:"Operations on Functions",q:"f(x)=3x−5, g(x)=x²+1. Find f(x)·g(x).",
-   opts:["3x³+3x−5x²−5","3x³−5x²+3x−5","3x²−4","3x³+5x²+3x+5"],a:0,
-   why:`<strong>Distribute (FOIL extended):</strong><div class="step">(3x−5)(x²+1)<br>= 3x·x² + 3x·1 + (−5)·x² + (−5)·1<br>= 3x³ + 3x − 5x² − 5</div>This is the same as option B rearranged — both are correct.`},
-
-  {exam:"2nd Exam",topic:"Operations on Functions",q:"f(x)=3x−5, g(x)=x²+1. Find f(x)/g(x) and its domain.",
-   opts:["(3x−5)/(x²+1), domain: all real numbers ℝ","(x²+1)/(3x−5), domain: x ≠ 5/3","(3x−5)/(x²+1), domain: x ≠ ±1","3x−5, domain: x > 0"],a:0,
-   why:`<div class="step">f(x)/g(x) = (3x−5)/(x²+1)</div><strong>Domain:</strong> We need the denominator ≠ 0.<br><div class="step">x²+1 ≥ 1 for all real x (since x² ≥ 0 always)<br>Denominator is NEVER zero → no restrictions</div>Domain = <strong>all real numbers ℝ</strong>`},
-
-  {exam:"2nd Exam",topic:"Operations on Functions",q:"Describe the domain of f(x) = √(x − 7).",
-   opts:["All real numbers","x > 7","x ≥ 7","x ≤ 7"],a:2,
-   why:`<strong>Square root domain rule: radicand must be ≥ 0.</strong><div class="step">x − 7 ≥ 0<br>x ≥ 7</div>Domain: <strong>[7, ∞)</strong>. Note: x=7 is included because √0 = 0 is valid. Any x &lt; 7 gives √(negative) which is undefined in ℝ.`},
-
-  {exam:"2nd Exam",topic:"Operations on Functions",q:"f(x) = 7x² + 3x − 4. Find f(−3).",
-   opts:["54","56","50","−50"],a:2,
-   why:`<strong>Substitute x = −3 (carefully square first!):</strong><div class="step">f(−3) = 7(−3)² + 3(−3) − 4<br>= 7(9) − 9 − 4 &nbsp;&nbsp; ← (−3)² = +9, NOT −9<br>= 63 − 9 − 4<br>= <strong>50</strong></div>`},
-
-  {exam:"2nd Exam",topic:"Operations on Functions",q:"f(x)=x²+3, g(x)=3x−7. Find f(x)−g(x).",
-   opts:["x²−3x+10","x²+3x−10","x²−3x−4","−x²+3x−10"],a:0,
-   why:`<div class="step">(x²+3) − (3x−7)<br>= x² + 3 − 3x + 7 &nbsp;&nbsp; ← distribute minus: −(3x−7) = −3x+7<br>= <strong>x² − 3x + 10</strong></div>`},
-
-  {exam:"2nd Exam",topic:"Operations on Functions",q:"f(x)=4x²−2, g(x)=3x+1. Find f(g(x)).",
-   opts:["36x²+24x+2","12x²−1","36x²−24x+2","12x²+24x−1"],a:0,
-   why:`<strong>Composition: replace every x in f with g(x).</strong><div class="step">f(g(x)) = 4[g(x)]² − 2<br>= 4(3x+1)² − 2<br>Expand (3x+1)²: 9x² + 6x + 1<br>= 4(9x²+6x+1) − 2<br>= 36x² + 24x + 4 − 2<br>= <strong>36x² + 24x + 2</strong></div>`},
-
-  /* 2ND EXAM — Problem Solving */
-  {exam:"2nd Exam",topic:"Problem Solving",q:"Variable cost ₱250/unit, fixed costs ₱800,000. Write total cost C(x).",
-   opts:["C(x)=250x","C(x)=800,000x+250","C(x)=250x+800,000","C(x)=250+800,000x"],a:2,
-   why:`<strong>Total Cost = Variable Cost + Fixed Cost</strong><div class="step">Variable cost changes with output: 250 × x<br>Fixed cost does not change: 800,000<br>C(x) = <strong>250x + 800,000</strong></div>This is linear. Slope = 250 = marginal cost (cost of one more unit).`},
-
-  {exam:"2nd Exam",topic:"Problem Solving",q:"Selling price ₱400/unit, variable cost ₱250, fixed costs ₱800,000. Write profit P(x).",
-   opts:["P(x)=400x−800,000","P(x)=150x+800,000","P(x)=150x−800,000","P(x)=400x−250x"],a:2,
-   why:`<strong>Profit = Revenue − Total Cost</strong><div class="step">Revenue = 400x<br>Total Cost = 250x + 800,000<br>P(x) = 400x − (250x + 800,000)<br>= 400x − 250x − 800,000<br>= <strong>150x − 800,000</strong></div>Break-even: 150x = 800,000 → x ≈ 5,334 units.`},
-
-  /* 3RD EXAM — Limits */
-  {exam:"3rd Exam",topic:"Limits",q:"Find lim(x→3) [x² − 5x + 8] using direct substitution.",
-   opts:["2","8","3","0"],a:0,
-   why:`<strong>Direct Substitution (works for continuous/polynomial functions):</strong><div class="step">Substitute x = 3:<br>(3)² − 5(3) + 8<br>= 9 − 15 + 8<br>= <strong>2</strong></div>`},
-
-  {exam:"3rd Exam",topic:"Limits",q:"lim(x→5⁺)f(x)=6 and lim(x→5⁻)f(x)=−4. Does lim(x→5)f(x) exist?",
-   opts:["Yes, it equals 6","Yes, it equals 1 (the average)","No — one-sided limits differ, so the two-sided limit does NOT exist","Yes, it equals −4"],a:2,
-   why:`<strong>Existence condition for a two-sided limit:</strong><div class="step">lim(x→c) f(x) exists ⟺ lim(x→c⁺) f(x) = lim(x→c⁻) f(x)</div>Here 6 ≠ −4, so the limit <strong>does not exist (DNE)</strong>. The function "jumps" at x=5.`},
-
-  {exam:"3rd Exam",topic:"Differentiation",q:"Find the tangent slope to f(x)=7x²−3x+2 using mₜₐₙ = lim(h→0) [f(x+h)−f(x)]/h.",
-   opts:["14x−3","7x−3","14x","7x²−3"],a:0,
-   why:`<strong>Apply the limit definition step by step:</strong><div class="step">f(x+h) = 7(x+h)²−3(x+h)+2<br>= 7x²+14xh+7h²−3x−3h+2<br><br>f(x+h)−f(x) = 14xh+7h²−3h<br><br>÷ h: 14x+7h−3<br><br>lim(h→0): 14x+0−3 = <strong>14x−3</strong></div>`},
-
-  {exam:"3rd Exam",topic:"Differentiation",q:"Find f′(x) for f(x) = (1/4)x⁵ − 3x + 5.",
-   opts:["(5/4)x⁴−3","(1/4)x⁴−3","5x⁴−3","(5/4)x⁴"],a:0,
-   why:`<strong>Power Rule: d/dx[xⁿ] = n·xⁿ⁻¹ &nbsp; Constant Rule: d/dx[c] = 0</strong><div class="step">d/dx[(1/4)x⁵] = (1/4)·5·x⁴ = (5/4)x⁴<br>d/dx[−3x] = −3<br>d/dx[5] = 0<br>f′(x) = <strong>(5/4)x⁴ − 3</strong></div>`},
-
-  {exam:"3rd Exam",topic:"Differentiation",q:"Find y′ for y = 3cos(x) + sin(x).",
-   opts:["−3sin(x)+cos(x)","3sin(x)+cos(x)","−3sin(x)−cos(x)","3cos(x)−sin(x)"],a:0,
-   why:`<strong>Trig derivatives: d/dx[cos x] = −sin x &nbsp; d/dx[sin x] = cos x</strong><div class="step">d/dx[3cos x] = 3·(−sin x) = −3sin x<br>d/dx[sin x] = cos x<br>y′ = <strong>−3sin(x) + cos(x)</strong></div>`},
-
-  {exam:"3rd Exam",topic:"Differentiation",q:"Find dy/dx for y = 4/x⁵.",
-   opts:["−20/x⁶","20/x⁶","−20x⁴","4/x⁴"],a:0,
-   why:`<strong>Rewrite with negative exponent, then apply Power Rule:</strong><div class="step">y = 4x⁻⁵<br>dy/dx = 4·(−5)·x⁻⁶ = −20x⁻⁶ = <strong>−20/x⁶</strong></div>`},
-
-  /* 4TH EXAM — Trig Derivatives */
-  {exam:"4th Exam",topic:"Trig Derivatives",q:"Find y′ for y = tan(x) + x.",
-   opts:["sec²(x)+1","tan(x)+1","sec(x)+1","sec²(x)−1"],a:0,
-   why:`<strong>d/dx[tan x] = sec²x &nbsp; d/dx[x] = 1</strong><div class="step">y′ = sec²(x) + 1</div>`},
-
-  {exam:"4th Exam",topic:"Trig Derivatives",q:"Find f′(x) for f(x) = 3sec(x) − cot(x).",
-   opts:["3sec(x)tan(x)+csc²(x)","3sec(x)+csc²(x)","3tan(x)−csc²(x)","3sec²(x)+csc(x)"],a:0,
-   why:`<strong>d/dx[sec x] = sec x tan x &nbsp; d/dx[cot x] = −csc²x</strong><div class="step">d/dx[3sec x] = 3sec x tan x<br>d/dx[−cot x] = −(−csc²x) = +csc²x<br>f′(x) = <strong>3sec(x)tan(x) + csc²(x)</strong></div>`},
-
-  {exam:"4th Exam",topic:"Trig Derivatives",q:"Find g′(x) for g(x) = x²·tan(x). [Product Rule]",
-   opts:["2x·tan(x)+x²·sec²(x)","x²·sec²(x)","2x·tan(x)","2x·sec²(x)"],a:0,
-   why:`<strong>Product Rule: (uv)′ = u′v + uv′</strong><div class="step">u = x² → u′ = 2x<br>v = tan x → v′ = sec²x<br>g′(x) = (2x)(tan x) + (x²)(sec²x)<br>= <strong>2x·tan(x) + x²·sec²(x)</strong></div>`},
-
-  {exam:"4th Exam",topic:"Trig Derivatives",q:"Find h′(x) for h(x) = csc(x)/x. [Quotient Rule]",
-   opts:["[−x·csc(x)cot(x)−csc(x)]/x²","[x·csc(x)cot(x)−csc(x)]/x²","−csc(x)cot(x)/x","csc(x)/x²"],a:0,
-   why:`<strong>Quotient Rule: (u/v)′ = (u′v − uv′)/v²</strong><div class="step">u = csc x → u′ = −csc x cot x<br>v = x → v′ = 1<br>h′(x) = [(−csc x cot x)(x) − (csc x)(1)] / x²<br>= <strong>[−x·csc(x)cot(x) − csc(x)] / x²</strong></div>`},
-
-  /* 4TH EXAM — Chain Rule */
-  {exam:"4th Exam",topic:"Chain Rule",q:"Find dy/dx for y = (3x+1)⁵.",
-   opts:["15(3x+1)⁴","5(3x+1)⁴","(3x+1)⁵","3(3x+1)⁴"],a:0,
-   why:`<strong>Chain Rule: d/dx[f(g(x))] = f′(g(x))·g′(x)</strong><div class="step">Outer: u⁵ → 5u⁴<br>Inner: u = 3x+1 → u′ = 3<br>dy/dx = 5(3x+1)⁴ · 3 = <strong>15(3x+1)⁴</strong></div>`},
-
-  {exam:"4th Exam",topic:"Chain Rule",q:"Find f′(x) for f(x) = √(x²+4) = (x²+4)^(1/2).",
-   opts:["x/√(x²+4)","1/[2√(x²+4)]","2x/√(x²+4)","x/(x²+4)"],a:0,
-   why:`<div class="step">d/dx[(x²+4)^(1/2)] = (1/2)(x²+4)^(−1/2)·(2x)<br>= 2x / [2√(x²+4)]<br>= <strong>x / √(x²+4)</strong></div>`},
-
-  {exam:"4th Exam",topic:"Chain Rule",q:"Find g′(x) for g(x) = sin(4x).",
-   opts:["4cos(4x)","cos(4x)","−4cos(4x)","4sin(4x)"],a:0,
-   why:`<div class="step">d/dx[sin(u)] = cos(u)·u′<br>u = 4x → u′ = 4<br>g′(x) = cos(4x)·4 = <strong>4cos(4x)</strong></div>`},
-
-  {exam:"4th Exam",topic:"Chain Rule",q:"Find h′(x) for h(x) = cos(x³ − 2x).",
-   opts:["−(3x²−2)sin(x³−2x)","(3x²−2)cos(x³−2x)","−sin(x³−2x)","sin(x³−2x)·(3x²−2)"],a:0,
-   why:`<div class="step">d/dx[cos(u)] = −sin(u)·u′<br>u = x³−2x → u′ = 3x²−2<br>h′(x) = −sin(x³−2x)·(3x²−2)<br>= <strong>−(3x²−2)sin(x³−2x)</strong></div>`},
-
-  /* 4TH EXAM — Mixed Rules */
-  {exam:"4th Exam",topic:"Mixed Rules",q:"Find dy/dx for y = 5x³ − 2√x + 9.",
-   opts:["15x² − 1/√x","15x² − x^(−1/2)","Both A and B are equivalent","None of the above"],a:2,
-   why:`<div class="step">d/dx[5x³] = 15x²<br>d/dx[−2x^(1/2)] = −2·(1/2)·x^(−1/2) = −x^(−1/2) = −1/√x<br>d/dx[9] = 0<br>dy/dx = 15x² − 1/√x</div>Options A and B express the same answer in different notation — both are correct, so <strong>C is the best choice</strong>.`},
-
-  {exam:"4th Exam",topic:"Mixed Rules",q:"Find dy/dx for y = (x²+3)·cos(x). [Product+Trig]",
-   opts:["2x·cos(x)−(x²+3)·sin(x)","−(x²+3)·sin(x)","2x·cos(x)","(x²+3)·sin(x)+2x·cos(x)"],a:0,
-   why:`<strong>Product Rule: (uv)′ = u′v + uv′</strong><div class="step">u = x²+3 → u′ = 2x<br>v = cos x → v′ = −sin x<br>dy/dx = (2x)(cos x) + (x²+3)(−sin x)<br>= <strong>2x·cos(x) − (x²+3)·sin(x)</strong></div>`},
-
-  {exam:"4th Exam",topic:"Mixed Rules",q:"Find dy/dx for y = sin(x²+1). [Chain+Trig]",
-   opts:["2x·cos(x²+1)","cos(x²+1)","2x·sin(x²+1)","−2x·cos(x²+1)"],a:0,
-   why:`<div class="step">d/dx[sin(u)] = cos(u)·u′<br>u = x²+1 → u′ = 2x<br>dy/dx = cos(x²+1)·2x = <strong>2x·cos(x²+1)</strong></div>`},
-
-  {exam:"4th Exam",topic:"Mixed Rules",q:"Find dy/dx for y = (2x−1)⁴·cos(3x). [Product+Chain]",
-   opts:["8(2x−1)³·cos(3x)−3(2x−1)⁴·sin(3x)","4(2x−1)³·cos(3x)−3sin(3x)","8(2x−1)³·cos(3x)+3(2x−1)⁴·sin(3x)","(2x−1)⁴·sin(3x)"],a:0,
-   why:`<strong>Product Rule on two chain-rule parts:</strong><div class="step">u = (2x−1)⁴ → u′ = 4(2x−1)³·2 = 8(2x−1)³<br>v = cos(3x) → v′ = −sin(3x)·3 = −3sin(3x)<br>dy/dx = u′v + uv′<br>= 8(2x−1)³·cos(3x) + (2x−1)⁴·(−3sin(3x))<br>= <strong>8(2x−1)³·cos(3x) − 3(2x−1)⁴·sin(3x)</strong></div>`},
-
-  /* 4TH EXAM — Applications */
-  {exam:"4th Exam",topic:"Applications",q:"Particle: s(t)=t³−6t²+9t. Find v(t) and a(t).",
-   opts:["v(t)=3t²−12t+9, a(t)=6t−12","v(t)=t²−6t+9, a(t)=2t−6","v(t)=3t²+12t+9, a(t)=6t+12","v(t)=3t²−12t, a(t)=6t"],a:0,
-   why:`<strong>v(t) = s′(t) &nbsp; (1st derivative) &nbsp; a(t) = v′(t) &nbsp; (2nd derivative)</strong><div class="step">v(t) = 3t² − 12t + 9<br>a(t) = 6t − 12</div>`},
-
-  {exam:"4th Exam",topic:"Applications",q:"For s(t)=t³−6t²+9t, find velocities at t=0, 2, and 4.",
-   opts:["v(0)=9, v(2)=−3, v(4)=9","v(0)=0, v(2)=−3, v(4)=0","v(0)=9, v(2)=0, v(4)=9","v(0)=9, v(2)=3, v(4)=9"],a:0,
-   why:`<strong>v(t) = 3t²−12t+9:</strong><div class="step">v(0) = 0−0+9 = <strong>9 m/s</strong> (moving forward)<br>v(2) = 3(4)−12(2)+9 = 12−24+9 = <strong>−3 m/s</strong> (moving backward)<br>v(4) = 3(16)−12(4)+9 = 48−48+9 = <strong>9 m/s</strong> (forward again)</div>`},
-
-  {exam:"4th Exam",topic:"Applications",q:"For s(t)=t³−6t²+9t, when is the particle at rest?",
-   opts:["t=1s and t=3s","t=0 and t=6s","t=2s only","t=4s only"],a:0,
-   why:`<strong>At rest when v(t) = 0:</strong><div class="step">3t²−12t+9 = 0<br>÷3: t²−4t+3 = 0<br>Factor: (t−1)(t−3) = 0<br>t = <strong>1s</strong> or t = <strong>3s</strong></div>`},
-
-  {exam:"4th Exam",topic:"Applications",q:"Coffee shop P=4x−x²/10,000−6,000. Find dP/dx and the cup count that maximizes profit.",
-   opts:["dP/dx=4−x/5,000; max at x=20,000 cups","dP/dx=4−x/10,000; max at x=40,000 cups","dP/dx=4x−1/5,000; max at x=10,000 cups","dP/dx=4; max at x=6,000 cups"],a:0,
-   why:`<strong>(a) Differentiate:</strong><div class="step">dP/dx = 4 − 2x/10,000 = <strong>4 − x/5,000</strong></div><strong>(b) Set = 0:</strong><div class="step">4 − x/5,000 = 0 → x = 4×5,000 = <strong>20,000 cups</strong></div><strong>(c) Maximum profit:</strong><div class="step">P(20,000) = 4(20,000) − (20,000)²/10,000 − 6,000<br>= 80,000 − 40,000 − 6,000 = <strong>₱34,000</strong></div>`},
-
-  {exam:"4th Exam",topic:"Applications",q:"Drone: s(t)=2+6t−t². Average velocity over [0,4] and [4,6]?",
-   opts:["[0,4]: 2 m/s; [4,6]: −2 m/s","[0,4]: 4 m/s; [4,6]: 2 m/s","[0,4]: 6 m/s; [4,6]: −6 m/s","[0,4]: 2 m/s; [4,6]: 2 m/s"],a:0,
-   why:`<strong>Avg velocity = [s(b)−s(a)]/(b−a)</strong><div class="step">s(0)=2, s(4)=2+24−16=10, s(6)=2+36−36=2<br>[0,4]: (10−2)/4 = 8/4 = <strong>2 m/s</strong><br>[4,6]: (2−10)/2 = −8/2 = <strong>−2 m/s</strong></div>Negative average velocity on [4,6] means the drone is moving backward (descending).`},
-
-  {exam:"4th Exam",topic:"Applications",q:"Rocket: s(t)=−16t²+80t+5. Find v(t), v at t=2s, and interpret v at t=5s.",
-   opts:["v(t)=−32t+80; v(2)=16 ft/s (rising); v(5)=0 — rocket at maximum height","v(t)=−32t+80; v(2)=48 ft/s; v(5)=−80 ft/s","v(t)=32t−80; v(2)=−16 ft/s; v(5)=80 ft/s","v(t)=−16t+80; v(2)=48 ft/s; v(5)=0"],a:0,
-   why:`<strong>v(t) = s′(t):</strong><div class="step">v(t) = −32t + 80</div><strong>At t=2s:</strong><div class="step">v(2) = −32(2)+80 = −64+80 = <strong>16 ft/s</strong> (positive → still rising)</div><strong>At t=5s:</strong><div class="step">v(5) = −32(5)+80 = −160+80 = <strong>0 ft/s</strong><br>Zero velocity → the rocket is at its <strong>maximum height</strong>, momentarily at rest before falling.</div>`}
-];
-
-/* STATE */
-let filter="All", filtered=[...Q], cq=0, ans={}, graphFrom="home-screen";
-
-/* HELPERS */
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
-function setFilter(btn){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');filter=btn.dataset.f;filtered=filter==="All"?[...Q]:Q.filter(q=>q.exam===filter);document.getElementById('q-count').textContent=filtered.length;}
-function gotoGraphs(){graphFrom=document.querySelector('.screen.active').id;if(!window._cb){buildCharts();window._cb=true;}show('graphs-screen');}
-function graphBack(){show(graphFrom);}
-
-/* QUIZ */
-function startQuiz(){filtered=filter==="All"?[...Q]:Q.filter(q=>q.exam===filter);cq=0;ans={};renderQ();show('quiz-screen');}
-function renderQ(){
-  const q=filtered[cq];
-  document.getElementById('qnum').textContent=cq+1;
-  document.getElementById('qtotal').textContent=filtered.length;
-  document.getElementById('pfill').style.width=`${((cq+1)/filtered.length)*100}%`;
-  document.getElementById('ans-count').textContent=`${Object.keys(ans).length} answered`;
-  const tc=TOPIC_COLORS[q.topic]||'#a78bfa';
-  document.getElementById('qtags').innerHTML=`<span class="tag" style="background:${tc}22;color:${tc};border:1px solid ${tc}44">${q.exam}</span><span class="tag" style="background:rgba(255,255,255,.06);color:#9ca3af;border:1px solid rgba(255,255,255,.1)">${q.topic}</span>`;
-  document.getElementById('qtext').textContent=q.q;
-  const ua=ans[cq], answered=ua!==undefined;
-  const opts=document.getElementById('qopts'); opts.innerHTML='';
-  q.opts.forEach((o,i)=>{
-    const b=document.createElement('button');b.className='opt-btn';
-    b.innerHTML=`<span class="opt-letter">${['A','B','C','D'][i]}</span>${o}`;
-    if(answered){b.disabled=true;if(i===q.a)b.classList.add('correct');else if(i===ua)b.classList.add('wrong');}
-    else b.onclick=()=>pick(i);
-    opts.appendChild(b);
-  });
-  const box=document.getElementById('explain-box');
-  const ec=document.getElementById('excontent');
-  const eb=document.getElementById('exbtn');
-  box.classList.toggle('show',answered);
-  ec.style.display=answered?'block':'none';
-  eb.textContent=answered?'🙈 Hide Explanation':'📖 Show Full Explanation';
-  ec.innerHTML=q.why;
-  document.getElementById('prev-btn').disabled=cq===0;
-  document.getElementById('next-btn').textContent=cq===filtered.length-1?'🎯 Finish':'Next →';
-}
-function pick(i){ans[cq]=i;renderQ();}
-function toggleExplain(){const c=document.getElementById('excontent'),b=document.getElementById('exbtn'),v=c.style.display==='block';c.style.display=v?'none':'block';b.textContent=v?'📖 Show Full Explanation':'🙈 Hide Explanation';}
-function nextQ(){if(cq<filtered.length-1){cq++;renderQ();}else showResults();}
-function prevQ(){if(cq>0){cq--;renderQ();}}
-
-/* RESULTS */
-function showResults(){
-  const score=Object.entries(ans).filter(([i,a])=>filtered[+i]?.a===a).length;
-  const pct=Math.round(score/filtered.length*100);
-  document.getElementById('r-emoji').textContent=pct>=80?'🏆':pct>=60?'📚':'💪';
-  const pe=document.getElementById('r-pct');pe.textContent=pct+'%';pe.className='score-big '+(pct>=80?'great':pct>=60?'okay':'low');
-  document.getElementById('r-sub').textContent=`${score} / ${filtered.length} correct`;
-  document.getElementById('r-msg').textContent=pct>=80?"Outstanding! You're ready for finals! 🎉":pct>=60?"Good job! Review the missed topics.":"Keep studying — every attempt builds understanding!";
-  const tm={};filtered.forEach((q,i)=>{if(!tm[q.topic])tm[q.topic]={c:0,t:0};tm[q.topic].t++;if(ans[i]===q.a)tm[q.topic].c++;});
-  document.getElementById('topic-breakdown').innerHTML=Object.entries(tm).map(([t,{c,tot=0,...r}])=>{const p=Math.round(r.c/r.t*100)||Math.round(c/tm[t].t*100);const cl=p>=80?'#10b981':p>=60?'#f59e0b':'#ef4444';return`<div class="tb-item"><div class="tb-topic">${t}</div><div class="tb-bar-wrap"><div class="tb-bar" style="width:${p}%;background:${cl}"></div></div><div class="tb-score" style="color:${cl}">${tm[t].c}/${tm[t].t} (${p}%)</div></div>`}).join('');
-  document.getElementById('review-list').innerHTML=filtered.map((q,i)=>{const ua=ans[i],ok=ua===q.a;return`<div class="ri ${ok?'c':'w'}"><div class="ri-q"><strong>Q${i+1} [${q.topic}]:</strong> ${q.q}</div><div style="font-size:.8rem;color:${ok?'#10b981':'#ef4444'}">${ok?'✓ Correct':'✗ '+(ua!==undefined?q.opts[ua]:'Not answered')}</div>${!ok?`<div style="font-size:.8rem;color:#10b981">✓ ${q.opts[q.a]}</div>`:''}</div>`;}).join('');
-  show('results-screen');
-}
-
-/* GRAPH SWITCH */
-function switchGraph(k,btn){document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.gpanel').forEach(p=>p.classList.remove('active'));document.getElementById('gp-'+k).classList.add('active');}
-
-/* CHARTS */
-function buildCharts(){
-  const g='#1e1a3a',tk='#9ca3af';
-  const base={responsive:true,plugins:{legend:{labels:{color:'#ddd',font:{size:11}}}},scales:{x:{grid:{color:g},ticks:{color:tk}},y:{grid:{color:g},ticks:{color:tk}}}};
-  // Parabola
-  const px=[],py=[];for(let x=-5;x<=5;x+=.2){px.push(x.toFixed(1));py.push(+(x*x).toFixed(2));}
-  new Chart('c-parabola',{type:'line',data:{labels:px,datasets:[{label:'y=x²',data:py,borderColor:'#f59e0b',borderWidth:2.5,pointRadius:0,tension:.3}]},options:{...base}});
-  // Velocity
-  const vt=[],vs=[],vv=[],va=[];
-  for(let t=0;t<=5;t+=.1){const tt=+t.toFixed(1);vt.push(tt.toFixed(1));vs.push(+(tt**3-6*tt**2+9*tt).toFixed(2));vv.push(+(3*tt**2-12*tt+9).toFixed(2));va.push(+(6*tt-12).toFixed(2));}
-  new Chart('c-velocity',{type:'line',data:{labels:vt,datasets:[{label:'s(t)',data:vs,borderColor:'#f97316',borderWidth:2.5,pointRadius:0,tension:.3},{label:'v(t)',data:vv,borderColor:'#8b5cf6',borderWidth:2.5,pointRadius:0,tension:.3},{label:'a(t)',data:va,borderColor:'#14b8a6',borderWidth:1.5,pointRadius:0,tension:.3,borderDash:[4,4]}]},options:{...base}});
-  // Profit
-  const prx=[],pry=[];for(let x=0;x<=40000;x+=500){prx.push(x/1000+'k');pry.push(+(4*x-x*x/10000-6000).toFixed(0));}
-  new Chart('c-profit',{type:'line',data:{labels:prx,datasets:[{label:'Profit(₱)',data:pry,borderColor:'#ec4899',borderWidth:2.5,pointRadius:0,tension:.3,fill:{target:'origin',above:'rgba(236,72,153,.08)',below:'rgba(239,68,68,.06)'}}]},options:{...base,scales:{...base.scales,y:{...base.scales.y,ticks:{color:tk,callback:v=>'₱'+Number(v).toLocaleString()}}}}});
-  // Drone
-  const dt=[],ds=[];for(let t=0;t<=7;t+=.1){dt.push(t.toFixed(1));ds.push(+(2+6*t-t*t).toFixed(2));}
-  new Chart('c-drone',{type:'line',data:{labels:dt,datasets:[{label:'s(t)=2+6t−t²',data:ds,borderColor:'#14b8a6',borderWidth:2.5,pointRadius:0,tension:.3}]},options:{...base}});
-  // Rocket
-  const rt=[],rs=[];for(let t=0;t<=6;t+=.1){rt.push(t.toFixed(1));rs.push(+(-16*t*t+80*t+5).toFixed(2));}
-  new Chart('c-rocket',{type:'line',data:{labels:rt,datasets:[{label:'s(t)=−16t²+80t+5',data:rs,borderColor:'#f97316',borderWidth:2.5,pointRadius:0,tension:.3}]},options:{...base}});
-}
+  function toggle(btn) {
+    const reveal = btn.nextElementSibling;
+    if (reveal.classList.contains('shown')) {
+      reveal.classList.remove('shown');
+      btn.textContent = '👁 Show Answer';
+    } else {
+      reveal.classList.add('shown');
+      btn.textContent = '🙈 Hide Answer';
+    }
+  }
 </script>
 </body>
 </html>

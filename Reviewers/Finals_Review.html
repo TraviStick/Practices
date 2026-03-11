@@ -2,707 +2,857 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Finals Review Questions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Exam Practice Test</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #222; }
-header { background: #1a237e; color: white; padding: 24px 40px; }
-header h1 { font-size: 1.8rem; }
-header p { opacity: 0.8; margin-top: 4px; }
-nav { background: #283593; display: flex; gap: 4px; padding: 8px 40px; flex-wrap:wrap; }
-nav button { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white;
-  padding: 6px 18px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
-nav button:hover, nav button.active { background: #fff; color: #1a237e; font-weight: 600; }
-.section { display: none; padding: 32px 40px; max-width: 1100px; margin: 0 auto; }
-.section.active { display: block; }
-h2 { font-size: 1.5rem; color: #1a237e; border-bottom: 3px solid #1a237e; padding-bottom: 8px; margin-bottom: 20px; }
-h3 { font-size: 1.05rem; color: #283593; margin: 20px 0 10px; }
-h4.sub { font-size: 0.95rem; color: #444; margin: 14px 0 6px; }
-.card { background: white; border-radius: 10px; padding: 20px 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 24px; }
-.card ol { padding-left: 0; list-style: none; counter-reset: qcount; }
-.card ol.alpha-list { counter-reset: none; }
-.q-item { counter-increment: qcount; margin: 12px 0; padding: 10px 14px; border-radius: 8px;
-  background: #f8f9ff; border-left: 3px solid #c5cae9; }
-.card ol.alpha-list .q-item { counter-increment: none; }
-.q-text { font-size: 0.97rem; line-height: 1.6; margin-bottom: 6px; }
-.q-text::before { content: counter(qcount) ". "; font-weight: 700; color: #1a237e; }
-.card ol.alpha-list .q-text::before { content: none; }
-.ans-btn { display: inline-block; margin-top: 4px; padding: 4px 14px; font-size: 0.8rem;
-  background: #e8eaf6; border: 1px solid #9fa8da; border-radius: 20px; cursor: pointer;
-  color: #283593; font-weight: 600; transition: all 0.18s; }
-.ans-btn:hover { background: #1a237e; color: white; border-color: #1a237e; }
-.ans-btn.open { background: #1a237e; color: white; border-color: #1a237e; }
-.ans-box { display: none; margin-top: 10px; padding: 12px 16px; background: #e8f5e9;
-  border-left: 4px solid #43a047; border-radius: 0 8px 8px 0; font-size: 0.92rem; line-height: 1.7; }
-.ans-box strong { color: #1b5e20; }
-.ans-box code { background: #c8e6c9; padding: 1px 5px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9rem; }
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Lora:ital,wght@0,600;1,400&display=swap');
 
-/* CONIC styles */
-.conic-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-.conic-tab { background: #e8eaf6; border: none; padding: 8px 20px; border-radius: 20px;
-  cursor: pointer; font-size: 0.95rem; font-weight: 500; transition: all 0.2s; }
-.conic-tab:hover { background: #c5cae9; }
-.conic-tab.active { background: #1a237e; color: white; }
-.conic-panel { display: none; }
-.conic-panel.active { display: block; }
-.conic-layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
-canvas { border: 1px solid #ddd; border-radius: 8px; background: #1a1a2e; display: block; }
-.conic-info { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-.conic-info h4 { color: #1a237e; font-size: 1.1rem; margin-bottom: 14px; }
-.info-row { display: flex; flex-direction: column; gap: 10px; }
-.info-item { background: #f5f7ff; border-left: 3px solid #1a237e; padding: 10px 14px; border-radius: 0 6px 6px 0; }
-.info-item label { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; display:block; }
-.info-item .val { font-weight: 600; font-size: 1rem; color: #1a237e; margin-top: 2px; font-family: 'Courier New', monospace; }
-.conic-q-list { list-style: none; padding: 0; margin-top: 14px; }
-.conic-q-list .q-item { border-left-color: #ffe082; }
-.conic-q-list .q-text::before { content: none; }
-.conic-q-list .q-text { font-weight: 500; }
-.figure-wrap { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 24px; text-align: center; }
-.figure-wrap img { max-width: 100%; border-radius: 6px; }
-.figure-caption { margin-top: 10px; font-style: italic; color: #666; font-size: 0.9rem; }
-@media (max-width: 700px) { .conic-layout { grid-template-columns: 1fr; } .section { padding: 20px 16px; } }
+  :root {
+    --bg: #f8f8ff;
+    --ink: #12122a;
+    --red: #b91c1c;
+    --blue: #1d4ed8;
+    --green: #15803d;
+    --gold: #b45309;
+    --purple: #7c3aed;
+    --muted: #6b7280;
+    --border: #e2e8f0;
+    --card: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 40px 20px 80px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .test-header {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+  .test-header h1 { font-family: 'Lora', serif; font-size: 1.7rem; margin-bottom: 4px; }
+  .test-header .sub { font-size: 0.75rem; opacity: 0.55; margin-bottom: 16px; }
+  .meta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .meta-chip { background: rgba(255,255,255,0.1); border-radius: 6px; padding: 5px 12px; font-size: 0.7rem; color: #fff; }
+
+  .tip {
+    background: #fffbea; border: 1px solid #fcd34d;
+    border-radius: 8px; padding: 10px 16px;
+    font-size: 0.76rem; color: #78350f;
+    margin-bottom: 24px; line-height: 1.8;
+  }
+
+  /* SECTION BANNERS */
+  .section-banner {
+    border-radius: 10px;
+    padding: 16px 22px;
+    margin: 32px 0 16px;
+    color: #fff;
+  }
+  .section-banner h2 { font-family: 'Lora', serif; font-size: 1.2rem; margin-bottom: 2px; }
+  .section-banner p { font-size: 0.72rem; opacity: 0.8; }
+
+  /* QUESTION CARDS */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .q-top { display: flex; align-items: stretch; }
+  .q-num {
+    width: 50px; min-height: 64px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 600;
+    color: #fff; flex-shrink: 0; gap: 2px;
+  }
+  .q-num .qtag { font-size: 0.52rem; font-family: 'JetBrains Mono', monospace; font-weight: 400; opacity: 0.8; text-align: center; padding: 0 3px; line-height: 1.3; }
+  .q-body { padding: 14px 18px; flex: 1; }
+  .q-label { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 5px; }
+  .q-text { font-size: 0.86rem; line-height: 1.9; color: var(--ink); }
+  .q-choices { margin-top: 8px; padding-left: 10px; font-size: 0.83rem; line-height: 2.1; color: #1e293b; }
+
+  /* ANSWER AREA */
+  .answer-area {
+    border-top: 1px dashed var(--border);
+    padding: 10px 18px 14px;
+    background: #fafbff;
+  }
+  .answer-label { font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 7px; }
+  .answer-lines { display: flex; flex-direction: column; gap: 8px; }
+  .answer-line { border-bottom: 1.5px solid #cbd5e1; height: 26px; width: 100%; }
+
+  .reveal-btn {
+    background: none; border: 1.5px solid var(--border);
+    border-radius: 6px; padding: 5px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; cursor: pointer;
+    color: var(--muted); margin-top: 9px; transition: all 0.2s;
+  }
+  .reveal-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  .answer-reveal {
+    display: none; margin-top: 10px;
+    background: var(--ink); color: #e2e8f0;
+    border-radius: 8px; padding: 12px 16px;
+    font-size: 0.81rem; line-height: 2.1;
+  }
+  .answer-reveal .ans-label {
+    font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #94a3b8; display: block; margin-bottom: 5px;
+  }
+  .answer-reveal.shown { display: block; }
+
+  /* SCORE TABLE */
+  .score-box {
+    background: var(--card); border: 2px solid var(--border);
+    border-radius: 10px; padding: 20px 24px; margin-top: 36px;
+  }
+  .score-title { font-family: 'Lora', serif; font-size: 1.1rem; margin-bottom: 14px; }
+  table.score-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  table.score-table th { background: var(--ink); color: #fff; padding: 8px 12px; text-align: left; }
+  table.score-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  table.score-table tr:nth-child(even) td { background: #f8fafc; }
+  .total-row td { font-weight: 600; background: #f0f4ff !important; }
 </style>
 </head>
 <body>
-<header>
-  <h1>&#128218; Finals Review Questions</h1>
-  <p>Mathematics &mdash; Interactive Study Guide with Answers</p>
-</header>
-<nav>
-  <button class="active" onclick="showSection('exam1',this)">1st Exam</button>
-  <button onclick="showSection('exam2',this)">2nd Exam</button>
-  <button onclick="showSection('exam3',this)">3rd Exam</button>
-  <button onclick="showSection('exam4',this)">4th Exam</button>
-</nav>
 
-<div id="exam1" class="section active">
-  <h2>1st Exam</h2>
-  <div class="card">
-    <h3>Real Number System &amp; Inequalities</h3>
-    <ol>
-<li class="q-item">
-      <div class="q-text">Review of the Real Number System as an ordered field.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">The real numbers &#8477; form an <strong>ordered field</strong> under + and &times;. Key properties: Closure, Commutativity, Associativity, Distributivity, Identity elements (0 and 1), Inverses, and the <strong>Order axiom</strong> (trichotomy: for any a,b exactly one holds: a&lt;b, a=b, or a&gt;b).</div>
-    </li><li class="q-item">
-      <div class="q-text">Is the integer 7 a solution to x + 2 &lt; 10?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>Yes.</strong> Substitute: 7 + 2 = 9, and 9 &lt; 10 ✓. So 7 is a solution.</div>
-    </li><li class="q-item">
-      <div class="q-text">What are the solutions to &minus;6 &lt; x &lt; 7? Show in a number line.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">All real numbers strictly between &minus;6 and 7. In interval notation: <code>(&minus;6, 7)</code>. Number line: open circle at &minus;6, open circle at 7, shaded between them.</div>
-    </li><li class="q-item">
-      <div class="q-text">Write x &gt; 10 in interval notation.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><code>(10, +&infin;)</code> — open parenthesis at 10 (not included), extends to positive infinity.</div>
-    </li><li class="q-item">
-      <div class="q-text">Is &minus;8 a solution to &minus;20 &lt; x &lt; 9?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>Yes.</strong> Check: &minus;20 &lt; &minus;8 ✓ and &minus;8 &lt; 9 ✓. So &minus;8 is in the interval.</div>
-    </li><li class="q-item">
-      <div class="q-text">What is the distance between 15 and &minus;8 on the number line?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Distance = |15 &minus; (&minus;8)| = |15 + 8| = <strong>23 units</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Why does |x| = &minus;6 have no solution?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Absolute value is <strong>always non-negative</strong> (|x| &ge; 0 for all x). A negative right-hand side (&minus;6) is impossible, so there is no solution.</div>
-    </li><li class="q-item">
-      <div class="q-text">Why does |x| = 3 have 2 solutions?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">|x| = 3 means x is 3 units from 0. Two numbers satisfy this: <strong>x = 3</strong> and <strong>x = &minus;3</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Why is |&minus;6| = 6?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Absolute value measures <strong>distance from 0</strong>, regardless of sign. &minus;6 is 6 units from 0, so |&minus;6| = 6.</div>
-    </li><li class="q-item">
-      <div class="q-text">What is |10 &minus; (&minus;7 + 4)|?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Simplify inside: &minus;7 + 4 = &minus;3. Then 10 &minus; (&minus;3) = 13. So |13| = <strong>13</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">What are the solutions of |x + 5| = 2?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Split: x + 5 = 2 &rarr; <strong>x = &minus;3</strong>, or x + 5 = &minus;2 &rarr; <strong>x = &minus;7</strong>. Solutions: {&minus;7, &minus;3}.</div>
-    </li><li class="q-item">
-      <div class="q-text">What are the solutions of &minus;3x &gt; 9?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Divide both sides by &minus;3 and <strong>flip the inequality</strong>: x &lt; &minus;3. Solution: <code>(&minus;&infin;, &minus;3)</code>.</div>
-    </li><li class="q-item">
-      <div class="q-text">What are the solutions of 5 &ge; x &minus; 4 &gt; 10?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Add 4 to all parts: 9 &ge; x &gt; 14. But 9 &ge; x and x &gt; 14 is a <strong>contradiction</strong> (no number is both &gt;14 and &le;9). <strong>No solution.</strong></div>
-    </li></ol><h3>2D Coordinate System</h3><ol><li class="q-item">
-      <div class="q-text">Coordinates of a point 6 units below the x-axis and 10 units to the right of the y-axis?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Moving right means x is positive, below means y is negative. Answer: <strong>(10, &minus;6)</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Vertical distance between (&minus;10, 6) and (4, &minus;9)?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Vertical distance = |y&#8322; &minus; y&#8321;| = |&minus;9 &minus; 6| = |&minus;15| = <strong>15 units</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Horizontal distance between (8, &minus;3) and (5, 9)?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Horizontal distance = |x&#8322; &minus; x&#8321;| = |5 &minus; 8| = |&minus;3| = <strong>3 units</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Distance of (18, &minus;15) from the y-axis?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Distance from the y-axis = |x| = |18| = <strong>18 units</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Coordinates of a point 8 units above x-axis and 30 units left of y-axis?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Above x-axis: y = +8. Left of y-axis: x = &minus;30. Answer: <strong>(&minus;30, 8)</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">In what quadrant if x &gt; 0 and y = &minus;3?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">x &gt; 0 (positive x), y = &minus;3 (negative y). That is <strong>Quadrant IV</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Show any line with a y-intercept of &minus;5.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Any line crossing the y-axis at &minus;5, e.g., <code>y = x &minus; 5</code> or <code>y = 2x &minus; 5</code>. The y-intercept is the point <strong>(0, &minus;5)</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Show the line with x-intercept 4 and y-intercept &minus;3.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Using intercept form: <code>x/4 + y/(&minus;3) = 1</code>. Rearranged: <strong>3x &minus; 4y = 12</strong>. Passes through (4, 0) and (0, &minus;3).</div>
-    </li></ol><h3>Lines</h3><ol><li class="q-item">
-      <div class="q-text">Slope of the line through (&minus;5, 3) and (4, &minus;6)?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">m = (y&#8322;&minus;y&#8321;)/(x&#8322;&minus;x&#8321;) = (&minus;6&minus;3)/(4&minus;(&minus;5)) = &minus;9/9 = <strong>&minus;1</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Slope of the line 3x &minus; 6y = 8?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Rewrite in slope-intercept form: &minus;6y = &minus;3x + 8 &rarr; y = (1/2)x &minus; 4/3. Slope = <strong>1/2</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Find 3 points on 2x &minus; 3y = 4.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Let x=0: &minus;3y=4, y=&minus;4/3 &rarr; <strong>(0, &minus;4/3)</strong>. Let x=2: 4&minus;3y=4, y=0 &rarr; <strong>(2, 0)</strong>. Let x=5: 10&minus;3y=4, y=2 &rarr; <strong>(5, 2)</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Line A &perp; Line B. Slope of A = 3. Slope of B?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Perpendicular slopes are <strong>negative reciprocals</strong>. Slope of B = &minus;1/3.</div>
-    </li><li class="q-item">
-      <div class="q-text">Draw the line through (&minus;2, 5) with slope 2/3.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Start at (&minus;2, 5). Slope 2/3 means: rise 2, run 3. Next point: (&minus;2+3, 5+2) = <strong>(1, 7)</strong>. Plot both points and draw the line. Equation: y&minus;5 = (2/3)(x+2) &rarr; <strong>y = (2/3)x + 19/3</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Equation of the line with slope 1/4 and y-intercept &minus;5?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Using slope-intercept form y = mx + b: <strong>y = (1/4)x &minus; 5</strong>.</div>
-    </li></ol></div></div>
-<div id="exam2" class="section">
-  <h2>2nd Exam</h2>
-  <h3>Test I &mdash; Conics: Interactive Graphs</h3>
-  <p style="color:#555;margin-bottom:16px;">Click each conic to view its graph and properties.</p>
-  <div class="conic-tabs">
-    <button class="conic-tab active" onclick="showConic('parabola',this)">Parabola</button>
-    <button class="conic-tab" onclick="showConic('circle',this)">Circle</button>
-    <button class="conic-tab" onclick="showConic('ellipse',this)">Ellipse</button>
-    <button class="conic-tab" onclick="showConic('hyperbola',this)">Hyperbola</button>
+<!-- HEADER -->
+<div class="test-header">
+  <h1>Final Exam — Practice Test</h1>
+  <div class="sub">Calculus & Pre-Calculus · Comprehensive Review</div>
+  <div class="meta-row">
+    <div class="meta-chip">📋 27 Items</div>
+    <div class="meta-chip">💯 80 Points</div>
+    <div class="meta-chip">⏱ ~90 minutes</div>
+    <div class="meta-chip">📖 Show all work</div>
   </div>
+</div>
 
-  <div id="conic-parabola" class="conic-panel active">
-    <div class="conic-layout">
-      <canvas id="cv-parabola" width="520" height="420"></canvas>
-      <div class="conic-info">
-        <h4>&#128208; Parabola &mdash; x&sup2; = 8y</h4>
-        <div class="info-row">
-          <div class="info-item"><label>Vertex</label><div class="val">(0, 0)</div></div>
-          <div class="info-item"><label>Focus</label><div class="val">(0, 2)</div></div>
-          <div class="info-item"><label>Directrix</label><div class="val">y = &minus;2</div></div>
-          <div class="info-item"><label>Latus Rectum</label><div class="val">|4p| = 8 units</div></div>
-        </div>
-        <ul class="conic-q-list">
-<li class="q-item"><div class="q-text">Coordinates of the vertex?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>Vertex = (0, 0)</strong>. The parabola x&sup2; = 4py has vertex at the origin.</div></li><li class="q-item"><div class="q-text">Length of the latus rectum?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Latus rectum = |4p|. Here 4p = 8, so p = 2. <strong>Length = 8 units</strong>.</div></li><li class="q-item"><div class="q-text">Equation of this parabola?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Since it opens upward with p=2: <strong>x&sup2; = 8y</strong>. General form: x&sup2; &minus; 8y = 0.</div></li></ul></div></div></div>
-  <div id="conic-circle" class="conic-panel">
-    <div class="conic-layout">
-      <canvas id="cv-circle" width="520" height="420"></canvas>
-      <div class="conic-info">
-        <h4>&#11093; Circle &mdash; (x&minus;1)&sup2; + (y&minus;1)&sup2; = 16</h4>
-        <div class="info-row">
-          <div class="info-item"><label>Center</label><div class="val">(1, 1)</div></div>
-          <div class="info-item"><label>Radius</label><div class="val">r = 4</div></div>
-          <div class="info-item"><label>Latus Rectum (Diameter)</label><div class="val">8 units</div></div>
-        </div>
-        <ul class="conic-q-list">
-<li class="q-item"><div class="q-text">Coordinates of the center?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>Center = (1, 1)</strong>. From (x&minus;h)&sup2;+(y&minus;k)&sup2;=r&sup2;, h=1, k=1.</div></li><li class="q-item"><div class="q-text">Length of the latus rectum?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">For a circle, the latus rectum equals the <strong>diameter</strong> = 2r = 2(4) = <strong>8 units</strong>.</div></li><li class="q-item"><div class="q-text">Equation of this circle?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>(x&minus;1)&sup2; + (y&minus;1)&sup2; = 16</strong>. General form: x&sup2; + y&sup2; &minus; 2x &minus; 2y &minus; 14 = 0.</div></li></ul></div></div></div>
-  <div id="conic-ellipse" class="conic-panel">
-    <div class="conic-layout">
-      <canvas id="cv-ellipse" width="520" height="420"></canvas>
-      <div class="conic-info">
-        <h4>&#129370; Ellipse &mdash; x&sup2;/25 + y&sup2;/9 = 1</h4>
-        <div class="info-row">
-          <div class="info-item"><label>Center</label><div class="val">(0, 0)</div></div>
-          <div class="info-item"><label>a (semi-major)</label><div class="val">5</div></div>
-          <div class="info-item"><label>b (semi-minor)</label><div class="val">3</div></div>
-          <div class="info-item"><label>Latus Rectum</label><div class="val">2b&sup2;/a = 3.6 units</div></div>
-        </div>
-        <ul class="conic-q-list">
-<li class="q-item"><div class="q-text">Coordinates of the center?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>Center = (0, 0)</strong>. The ellipse x&sup2;/a&sup2; + y&sup2;/b&sup2; = 1 is centered at the origin.</div></li><li class="q-item"><div class="q-text">Length of the latus rectum?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">LR = 2b&sup2;/a = 2(9)/5 = 18/5 = <strong>3.6 units</strong>.</div></li><li class="q-item"><div class="q-text">Equation of this ellipse?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>x&sup2;/25 + y&sup2;/9 = 1</strong>. General form: 9x&sup2; + 25y&sup2; &minus; 225 = 0.</div></li></ul></div></div></div>
-  <div id="conic-hyperbola" class="conic-panel">
-    <div class="conic-layout">
-      <canvas id="cv-hyperbola" width="520" height="420"></canvas>
-      <div class="conic-info">
-        <h4>&#127744; Hyperbola &mdash; x&sup2;/9 &minus; y&sup2;/16 = 1</h4>
-        <div class="info-row">
-          <div class="info-item"><label>Center</label><div class="val">(0, 0)</div></div>
-          <div class="info-item"><label>Vertices</label><div class="val">(&plusmn;3, 0)</div></div>
-          <div class="info-item"><label>Asymptotes</label><div class="val">y = &plusmn;(4/3)x</div></div>
-          <div class="info-item"><label>Latus Rectum</label><div class="val">2b&sup2;/a &asymp; 10.67 units</div></div>
-        </div>
-        <ul class="conic-q-list">
-<li class="q-item"><div class="q-text">Coordinates of the center/vertex?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>Center = (0,0)</strong>. Vertices at <strong>(&plusmn;3, 0)</strong> since a=3 for x&sup2;/9&minus;y&sup2;/16=1.</div></li><li class="q-item"><div class="q-text">Length of the latus rectum?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">LR = 2b&sup2;/a = 2(16)/3 = 32/3 &asymp; <strong>10.67 units</strong>.</div></li><li class="q-item"><div class="q-text">Equation of this hyperbola?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>x&sup2;/9 &minus; y&sup2;/16 = 1</strong>. General form: 16x&sup2; &minus; 9y&sup2; &minus; 144 = 0.</div></li></ul></div></div></div>
-  <div class="card" style="margin-top:28px;">
-    <h3>Operations on Functions &mdash; f(x) = 3x&minus;5, g(x) = x&sup2;+1</h3>
-    <ol>
-<li class="q-item">
-      <div class="q-text">f(x) + g(x) = ?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">(3x&minus;5) + (x&sup2;+1) = <strong>x&sup2; + 3x &minus; 4</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">f(x) &minus; g(x) = ?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">(3x&minus;5) &minus; (x&sup2;+1) = <strong>&minus;x&sup2; + 3x &minus; 6</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">f(x) &middot; g(x) = ?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">(3x&minus;5)(x&sup2;+1) = 3x&sup3;+3x&minus;5x&sup2;&minus;5 = <strong>3x&sup3; &minus; 5x&sup2; + 3x &minus; 5</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">f(x) / g(x) = ?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>(3x&minus;5)/(x&sup2;+1)</strong>. Domain: all reals since x&sup2;+1 &ne; 0 for any real x.</div>
-    </li><li class="q-item">
-      <div class="q-text">Describe the domain of f(x) = 3x&minus;5.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">f(x) is a linear function &mdash; no restrictions. Domain: <strong>all real numbers (&minus;&infin;, +&infin;)</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">f(x) = x&sup2; + 3x &minus; 4. What is f(&minus;3)?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">f(&minus;3) = (&minus;3)&sup2; + 3(&minus;3) &minus; 4 = 9 &minus; 9 &minus; 4 = <strong>&minus;4</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">f(x) = x&sup2;+3, g(x) = 3x&minus;7. What is f(x) &minus; g(x)?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">(x&sup2;+3) &minus; (3x&minus;7) = <strong>x&sup2; &minus; 3x + 10</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">f(x) = x&sup2;&minus;2, g(x) = 3x+1. Find f(g(x)).</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">f(g(x)) = f(3x+1) = (3x+1)&sup2; &minus; 2 = 9x&sup2;+6x+1&minus;2 = <strong>9x&sup2; + 6x &minus; 1</strong></div>
-    </li></ol>
-    <h3>Test II &mdash; General Equation &rarr; Standard Form &amp; Identify the Conic</h3>
-    <p style="color:#555;margin-bottom:12px;">For each general equation below, convert it to standard form and identify the conic section.</p>
-    <ol>
-      <li class="q-item">
-        <div class="q-text"><strong>Parabola:</strong> &nbsp; x&sup2; &minus; 8y = 0</div>
-        <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-        <div class="ans-box">
-          <strong>Conic: Parabola</strong><br><br>
-          <strong>Step 1 &mdash; Rearrange:</strong><br>
-          x&sup2; = 8y<br><br>
-          <strong>Step 2 &mdash; Standard Form:</strong><br>
-          x&sup2; = 4py &nbsp;&rArr;&nbsp; 4p = 8 &nbsp;&rArr;&nbsp; <strong>p = 2</strong><br>
-          &there4; Standard form: <code>x&sup2; = 8y</code><br><br>
-          <strong>Step 3 &mdash; Key Properties:</strong><br>
-          &bull; Vertex: (0, 0)<br>
-          &bull; Opens: upward<br>
-          &bull; Focus: (0, 2)<br>
-          &bull; Directrix: y = &minus;2<br>
-          &bull; Latus Rectum: |4p| = 8 units
-        </div>
-      </li>
-      <li class="q-item">
-        <div class="q-text"><strong>Circle:</strong> &nbsp; x&sup2; + y&sup2; &minus; 2x &minus; 2y &minus; 14 = 0</div>
-        <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-        <div class="ans-box">
-          <strong>Conic: Circle</strong><br><br>
-          <strong>Step 1 &mdash; Group &amp; Complete the Square:</strong><br>
-          (x&sup2; &minus; 2x) + (y&sup2; &minus; 2y) = 14<br>
-          (x&sup2; &minus; 2x + 1) + (y&sup2; &minus; 2y + 1) = 14 + 1 + 1<br><br>
-          <strong>Step 2 &mdash; Standard Form:</strong><br>
-          <code>(x &minus; 1)&sup2; + (y &minus; 1)&sup2; = 16</code><br><br>
-          <strong>Step 3 &mdash; Key Properties:</strong><br>
-          &bull; Center: (1, 1)<br>
-          &bull; Radius: r = 4<br>
-          &bull; Latus Rectum (diameter): 8 units
-        </div>
-      </li>
-      <li class="q-item">
-        <div class="q-text"><strong>Ellipse:</strong> &nbsp; 9x&sup2; + 25y&sup2; &minus; 225 = 0</div>
-        <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-        <div class="ans-box">
-          <strong>Conic: Ellipse</strong><br><br>
-          <strong>Step 1 &mdash; Rearrange:</strong><br>
-          9x&sup2; + 25y&sup2; = 225<br><br>
-          <strong>Step 2 &mdash; Divide by 225:</strong><br>
-          <code>x&sup2;/25 + y&sup2;/9 = 1</code><br><br>
-          <strong>Step 3 &mdash; Key Properties:</strong><br>
-          &bull; Center: (0, 0)<br>
-          &bull; Semi-major axis: a = 5 (along x-axis)<br>
-          &bull; Semi-minor axis: b = 3<br>
-          &bull; c = &radic;(25 &minus; 9) = 4 &nbsp;&rArr;&nbsp; Foci: (&plusmn;4, 0)<br>
-          &bull; Latus Rectum: 2b&sup2;/a = 18/5 = 3.6 units
-        </div>
-      </li>
-      <li class="q-item">
-        <div class="q-text"><strong>Hyperbola:</strong> &nbsp; 16x&sup2; &minus; 9y&sup2; &minus; 144 = 0</div>
-        <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-        <div class="ans-box">
-          <strong>Conic: Hyperbola</strong><br><br>
-          <strong>Step 1 &mdash; Rearrange:</strong><br>
-          16x&sup2; &minus; 9y&sup2; = 144<br><br>
-          <strong>Step 2 &mdash; Divide by 144:</strong><br>
-          <code>x&sup2;/9 &minus; y&sup2;/16 = 1</code><br><br>
-          <strong>Step 3 &mdash; Key Properties:</strong><br>
-          &bull; Center: (0, 0)<br>
-          &bull; Vertices: (&plusmn;3, 0)<br>
-          &bull; a = 3, b = 4<br>
-          &bull; c = &radic;(9 + 16) = 5 &nbsp;&rArr;&nbsp; Foci: (&plusmn;5, 0)<br>
-          &bull; Asymptotes: y = &plusmn;(4/3)x<br>
-          &bull; Latus Rectum: 2b&sup2;/a = 32/3 &asymp; 10.67 units
-        </div>
-      </li>
-    </ol>
-    <h3>Test III &mdash; Problem Solving (6 pts)</h3>
-    <p style="margin-bottom:8px;">Variable cost = Php 250/unit, fixed costs = Php 800,000, selling price = Php 400.</p>
-    <ol class="alpha-list"><li class="q-item"><div class="q-text">(a) Write total cost C as a function of units produced.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box"><strong>C(x) = 250x + 800,000</strong> where x = number of units. Fixed cost is constant (800,000); variable cost grows with x.</div></li><li class="q-item"><div class="q-text">(b) Write profit P as a function of x.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Revenue = 400x. Profit = Revenue &minus; Cost.<br><strong>P(x) = 400x &minus; (250x + 800,000) = 150x &minus; 800,000</strong><br>Break-even when P=0: x = 800,000/150 &asymp; 5,334 units.</div></li></ol></div></div>
-<div id="exam3" class="section">
-  <h2>3rd Exam</h2>
-  <h3>Test I &mdash; Short Response (2 pts each)</h3>
-  <div class="figure-wrap">
-    <img src="data:image/png;base64,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QUFB6tGjh1555RXNnz9fEyZM0IEDB8xtDrOyZ3lpzuL9LFncMzkXsbJnci7iTM8dOnTQ9OnTlZaWpsTERB0+fNimXpDzv//9b8XExOiiiy5SRESEQkJCtGTJEq1cuVLfffedzdeUhzM9l4en5VwWd76fGzdurO+//17NmzfXrl27zC9xiK/l/P777+vQoUO69957zVKprOxZPphzRVnZs8i5kJU9i5wLOdIz18R6sHfeeUft2rXT9ddfrzlz5uiqq64ytwAAXGjAgAF66623NG/ePPXp0+eMAba47777Ti+//LISExOVlpamv/76Sy+//HKFBlhUrr/++kvvvPOOcvz87sT2jB8/XtHR0Ro6dKhZAoBKwxDr4datW6dbbrlFx44d0/z589W1a1dzCwDABV588UU99dRTGjJkCHdm9TMHDx7UgAEDlJWVZZb83k8//aRx48bp8ccf1y233GKWAaBSMMR6gaysLPXs2VPvvvuuZs6cqWHDhplbAAAVVKdOHX3wwQdq166dOnfurHnz5plbAL/21ltvafbs2Ro3bpzCw8PNMgC4HUOsFxk3bpyGDRum0aNH69VXX1Xt2rXNLQAAB1x33XVasWKFAgIC1LFjR61cudLcAuD0v4P8/fffevLJJ80SALgdQ6yXmTt3rrp166Zrr71WCxcu1LXXXmtuAQCUQ0JCglJTU/Xll1/qjjvucPqGPvBe9erVU0pKiv71r3+ZJZx29OhRjR8/XnFxcerfv79ZBgC3Yoj1Ql999ZW6du2qv/76S4sXL9Zdd91lbgEAlGLs2LFKTk7Wk08+yQ1roOrVq6tnz54MsWVYu3atxo0bpyeffFLR0dFmGQDchiHWS2VkZKhnz5567733NGXKFCUlJZlbAACGs88+W3PnztV9992nu+++W9OmTTO3wA8FBARIUpnPJYQ0e/ZsLV68WOPGjdO5555rlgHALRhivVheXp6GDRum5557TiNHjmSQBYBSXH755VqxYoUiIiLUsWNHffzxx+YW+CmGWMeMGzdOVatW5fpYAJWGIdYHvPDCC3r66acZZAGgBHFxcVqxYoU2b96sDh06aNOmTeYW+LGtW7eqZcuW2rdvn1mCHQcOHND48eN177336pFHHjHLAGA5hlgf8fLLL2vcuHEMsgBgePTRR/XGG29o+vTp6tu3r3Jzc80tgP73v/+ZSyjF119/rSFDhujJJ5/UPffcY5YBwFIMsT5k6tSpevzxxxlkAeC05ORkPfHEE0pMTNTEiRPNMgAnzJs3T88++6xefvllxcXFmWUAsAxDrI959dVX9eijj2rkyJEaP368WQYAvxAREaH3339fUVFR6tixoxYtWmRuAQqdddZZatiwobmMcnjxxRf1+uuva9q0aYqJiTHLAGAJhlgfNH/+fN11110aOHCgXnrpJbMMAD7thhtu0Mcff6wjR47otttu07fffmtuAWzUq1dP//d//6fw8HCzhHJISkrSV199penTp6tu3bpmGQBcjiHWR61YsULt27dXnz59NHv2bLMMAD7p/vvv1/vvv6/U1FTdfffd+vPPP80twBm4O7Hz+vTpo507d+qdd94xSwDgcgyxPuz777/XVVddpTvuuIN/qADweU8//bReeOEFjRo1SqNGjTLLQIkYYl0jPj5eNWrU0PLly80SALgUQ6yP+/3339WwYUPdcsstWrBggVkGAK933nnnaeHChbrzzjvVo0cPzZw509wClOrAgQNavHixjh8/bpbggJycHHXp0kVXXnml5s6da5YBwGUYYv3AkSNH1LRpU3Xs2JEHkwPwKVdddZVWrFih0NBQdezYUZ9//rm5BShTVlaW+vfvr7/++ssswUG///67unXrpk6dOnFHcACWYYj1EwcOHNBtt92mgQMHqmfPnmYZALxOt27dtGLFCq1bt04dO3bUtm3bzC0AKsHatWv1wAMP6J577tHDDz9slgHAaQyxfmTt2rUaPHiwXnzxRbVq1cosA4DXSEpK0muvvabnn39eAwYM4FpGwMMsX75cTz75pJ566indeuutZhkAnMIQ62cWLlyoGTNmaMGCBQoNDTXLAODRAgIC9Oqrr2ro0KF66KGH9OKLL5pbAIc1bNhQ06ZN09lnn22W4ITXX39dU6dO1dtvv60LL7zQLANAhQW0atXKob++Dgw8Nffm5+ebJadVqVJFJ06cMJddonr16jp27Ji57DSrerY65+eee05hYWG6//77zbJTyLmIVT2LnG1Y1bPI2YZVPcuBnCMiIvTkk0+qRo0aGj9+vH799Vdziw2reraXc9++fdWyZUv179+/2E7HWdWzHMjZUVb1bC9nVzF7bty4sRYtWqQOHTro4MGDNnsdRc5FCnoeN26cOnbsqGuvvdbcUmHkXMSqnkXONqzqWeRso7w9B4SGhjo0xAYFBUmScnNzzZJTAgMDFRwcrJycHEsCiYiIUGZmprnsFCt7tjrns88+Wx9//LHWr1/v0utVyPkUK3sWOReysmeRcyEre1Y5c27Xrp2mT5+utWvXKjExUdnZ2eYWG1b2bC/npKQkxcTEKC4urthOx1jZs8qZs6Os7Nlezq5gr+dLLrlE6enpioyMVFZWlvklDiHnU8yelyxZorZt26phw4Y6cuSIud1h5HyKlT2LnAtZ2bPIuZAjPfNxYj918OBBDRgwQN27d1dSUpJZBgCP0a9fPy1atEhvv/22EhISyhxgAUfxnFjr3XHHHfrPf/6jHTt26PzzzzfLAOAQhlg/9sMPP+jhhx/WyJEj1b17d7MMAJVu0qRJmjhxooYPH66xY8eaZcAlfv31V1199dU6cOCAWYILJSQk6O2339amTZvUqFEjswwA5cYQ6+feffddTZo0SaNGjVKDBg3MMgBUivPPP1/vvvuuOnXqpC5duuiNN94wtwAutX37dnMJFhg4cKBeffVVrVu3Ts2aNTPLAFAuDLHQ888/r8zMTI0YMcIsAYDbXXvttVqxYoWCg4PVsWNH/fe//zW3APBijz/+uJ577jmtXLlSV199tVkGgDIxxEKS9Nxzz6lnz57q1q2bWQIAt+nVq5c+/vhjrVy5UnFxcdqxY4e5BXC5GjVq8GkkN3vhhRc0atQoffLJJ2rbtq1ZBoBSMcRCkrRmzRo999xzGjFihMLDw80yAFju8ccf17Rp0zRhwgQNHjzYLAOWiYiI0I8//sjz091s5syZGjFihJYsWaIOHTqYZQAoEUMsCr388st8rBiA2wUFBen1119Xv379dO+99yo5OdncAliKuxNXnjlz5mjo0KF666231KVLF7MMAHYxxMJGwceKO3fubJYAwOWaNWumN998UxdeeKE6duyo1NRUcwtgOYbYyvXmm2/qkUce0axZs3T33XebZQA4A0MsbPzwww+FHyvmY1UArNSpUyetWLFCf/zxhzp27KiNGzeaWwC32Ldvn959913l5eWZJbjJW2+9pcTERL3yyivq16+fWQYAGwyxOMO0adP0+++/87FiAJYZNGiQ5s2bp9mzZ2vEiBE6evSouQVwm/379+vhhx/W4cOHzRLcaNGiRXr44Yc1ceJEDRkyxCwDQCGGWNg1adIk9ezZU+3btzdLAOCUl19+WePGjdMjjzyip556yiwD8GPvvvuu+vbtqzFjxmjSpEmqWrWquQUAGGJh308//aTZs2erd+/eZgkAKqR+/fpatmyZbrjhBt1+++166623zC0AoCVLlqh79+5q27at3n33XV166aXmFgB+jiEWJXr77bd10003KSYmxiwBgEPatGmjFStWKC8vTx06dNDq1avNLUClady4saZOnarg4GCzhEry5Zdf6s4779ShQ4e0ePFibjgJwAZDLEqUkZGhRYsWcTYWgFP69OmjpUuXasWKFeratav27t1rboHDkrU6K0NL+5vrqIgaNWqod+/eql69ullCJdqxY4fuueceLVq0SHPmzOFeHQAKMcSiVIsWLVKPHj105ZVXmiUAKNP48eP10ksvacyYMfwLqMska3VWgiLNZVQYj9jxbE8//bQGDBigfv36aebMmTr//PPNLQD8DEMsSvXDDz9oyZIluuuuu8wSAJTonHPO0fz585WQkKDevXtrxowZ5hZUxNTVyspKUGR2trLNGiqMIdbzvfPOO+revbsaNGigd999Vy1btjS3APAjDLEoU8FHii+++GKzBABn+Pe//60VK1aoTp066tChgz755BNzCyokUUs7RWrzwjCFvfCTWYQTfvrpJ1199dU6dOiQWYIHWb9+ve688079+OOPSklJ0b333mtuAeAnGGJRps8//1yrVq3i2lgAZbrjjju0YsUK/fzzz+rYsaO2bNlibkGFpSi+SZiiBpnrcIXt27ebS/BAhw8f1uDBgzV9+nRNnjxZEydOLDyTDsB/MMSiXBYtWqS77rpLDRo0MEsAIEkaNmyYZs+erVdeeUX9+vVTXl6eucVr9OrVS1lZWXaP3bt3a/fu3TZrI0eOVHR09Bl7SzumTZtm/rEAymnevHnq1auX2rVrp8WLFysykqvEAX8SEBoa6tAFIEFBQZKk3Nxcs+SUwMBABQcHKycnR/n5+WbZaREREcrMzDSXnWJlz56Y8xdffKFPPvlEzz//vFkqRM6nWNmzyLmQlT2LnAuVp+eUlBTdeeedGjBggN59912zXCpPzLl27dpq2rSpuSxJqlatmiTp+PHjhWu9evVS8+bNNXr06GI7S7dv3z6bM9UO9dx/qTKebqGfxjRRfDkvN/bEnEvjzvfzv/71L4WEhGjnzp3mdoeR8ylW9qxiOV9wwQV6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U6YoLS1Ne/fu1XfffaeFCxdq3Lhx6t69u2699VZdeumlOvfcc80/Bqg0DLGokIIh9oxnxQJwi65du2rFihVav369OnbsyL+AAwDKZcuWLfroo4/08ssva8CAAbrlllsUERGhFi1aqGvXrpo1a5Z27dqlq666Sn369NGCBQuUlpam7du3a/v27UpLS9Pbb7+tF154QY8++qi6deum1q1bq0GDBuYfBViGIRYVcvToUcnXz8QCHmrEiBGaOXOmXnjhBQ0YMIDr+AAnnXPOOapbt665DPiVnTt36uuvv9bMmTM1fPhwxcXF6fbbb1ft2rV12WWXqX379hoyZIjeeecd/f7776pbt67i4+P13HPP6aOPPtKPP/6orKws/fjjj/roo4/02muv6YknntD999/P2Vy4HEMsKsQvPk4MeJiAgADNmDFDw4YN00MPPaQXX3zR3AKgAi699FL9/PPPqlrVa++AB1hqz549+v7777V06VJNmzZNjz32mBISEnTDDTfooosuUsOGDRUVFaXu3btr8uTJSk9P14kTJ3TNNddo4MCBNmdzt23bps8//1wLFy7kbC4qjCEWFcLHiQH3uvDCC7VixQr9+9//VseOHfX++++bWwBUEHcnBpxz5MgRbd68WV9++aXmzZuniRMnasCAAYqLi9NVV11lczZ36NCheu+990o9m7t582atXr1aH374od5880299NJLevzxx/Xwww+re/fuuummm/Tvf/9bDRo04N9F/RR3J3aClT17Q867d+/WXXfdpS+//LJwjZxPsbJnkXMhK3uWB+Xcrl07TZ8+XWvXrlViYqKys7PNLRI527CyZ3s5c3di1/dsL2dXsNdzVFSUPvzwQ51//vlOvw5yPsXKnkXOhazsWW7O+eyzz1aDBg1Ur149hYWFlXkEBhadizt69KiysrJ04MABZWVl6c8//yx8jF1JhyNK6tlV3JmzK3jC+5kh1glW9uwNOW/fvl0DBw7URx99VLjmKznfeOONatiwoebNm2ezXl5W9iwHcnbkdVjZc0k5l1ft2rV188036+2337ZZt7JnOZBzedWuXVu33HKLlixZUu6e+/Xrp4kTJ2r69Ol64oknzLINZ3MuiZlzST+PinJ1zrLTsyvZy5kh1vU928vZFez1HBERoSeeeEIPPvigud1h5HyKlT2LnAtZ2bM8POeaNWsWDrSh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tWuXuew0q3r2l5zHjx+vtm3b6oEHHlBGRoZZLmRVz/6Sc3lZ1TM527KqZ3K2ZVXP9nIeNmyYoqKi1K1bt2I7HWdVz/KRnF3F7Llz584aP368rrjiCpt9FUHORazqWeRsw6qeRc42rOpZ5GyjvD0HhIaGOjTEFlzDmJuba5acEhgYqODgYOXk5JSrcUdFREQoMzPTXHaKlT37S86BgYFauHChatasqXvuuUd79+41t1jas7/kXB5W9kzORazsmZyLWNmzvZyTkpIUExOjuLi4YjsdY2XP8pGcXcFez127dtVTTz2lSy+91NzuMHI+xcqeRc6FrOxZ5FzIyp5FzoUc6ZlrYlGp8vPzdf/990uSZs2apX/961/mFgAALBUQEKCTJx36O30AQCViiEWlO3LkiHr37q06depo4cKFZhkAAEu99957io+PN5cBAB6KIRYeISsrS3fccYeaNWum5cuXm2UAACy1ZcsWcwkA4KEYYuExdu7cqQ4dOui6665jkAUAAABgF0MsPMq2bdt0ww03KDo6mkEWAOAWtWrVUs2aNc1lAICHYoiFx/n555/Vvn17RUdHl/n8WAAAnHX99dcrPT3dXAYAeCiGWHik77//Xu3atVPLli21Z88eXXnlleYWAABcgrsTA4B3YYiFx1q3bp3CwsKUnp6u1NRUjRgxwtwCAIDTGGIBwLswxMLjde3aVWPGjFFSUpLefPNNswwAgFM2bdqkTz75xFwGAHgohlh4hblz5yo+Pl433HCDvv76a7Vs2dLcAgBAhWzYsEHDhg0zlwEAHoohFl4jPT1drVq10rZt2/T++++rR48e5hYAAAAAPo4hFl5l7969euCBB/Taa69p+vTpSkpKUq1atcxtAAAAAHwUQyy80rPPPquHH35YHTt21GeffaZBgwbp7LPPNrcBAFCm66+/XqNHjzaXAQAeiiEWXuvdd9/VzTffrGnTpqlHjx767LPP9MADD5jbAAAoVXh4uHr27GkuAwA8FEMsvFp+fr5ef/113XzzzZo/f74eeughff755+rVq5e5FQAAu3jEDgB4F4ZY+IScnBy9+uqruvnmm7Vs2TKNGDFCy5cvV+fOnc2tAADYYIgFAO/CEAufcvjwYU2dOlU333yzvv76az311FNatGiRunTporPOOsvcDgCAFi1apG7dupnLAAAPxRALn3Tw4EG99NJLuuWWW7Ru3To9+uijWrt2rSZNmqQbbrjB3A4A8HNbt241lwAAHoohFj5t3759ev7559W2bVsNHz5c1atX1+zZs/XVV18pKSlJl19+ufklAAAAADwYQyz8xqeffqrBgwcrKipKb775plq1aqXPPvtM77zzjvr27av69eubXwIA8AO1atVSzZo1zWUAgIcKqF+/vl/cyaBOnTras2ePuQwX87acW7RooQ4dOqhjx45q0KCBPv30U3399ddKT0/Xrl27zO0ew9ty9lbk7B6+kPPQoUMVFRWl7t27myWP4Qs5W6Vbt24aMWKErr32WrPkMHJ2D3J2D3J2D3J2XECtWrUcGmKrVq0qScrLyzNLTgkICFBQUJByc3MtuUNgw4YNtWPHDnPZKVb2TM5FrOy5eM633XabbrvtNt10000KDQ1VWlqaVq5cqbS0NK1bt8780lJZ2bO8PGdXsrJnkXMhK3uWj+Q8YsQIRUdHKz4+vthOx1jZs3wkZ1ew13PPnj2VlJSkq666ytzuMHI+xcqeRc6FrOxZ5FzIyp5FzoUc6TkgNDS09B2GoKAgSVJubq5ZckpgYKCCg4OVk5Oj/Px8s+y0iIgIZWZmmstOsbJnci5iZc/2cj7rrLPUpk2bwqN58+b69ddflZaWVngcOnSo2Hc5k5U9y0dydgUrexY5F7KyZ/lIzklJSYqJiVFcXFyxnY6xsmf5SM6uYK/nXr16KSkpSVdeeaW53WHkfIqVPYucC1nZs8i5kJU9i5wLOdIz18QChqNHj+rTTz/VE088oRtuuEE33XSTFi1apCZNmmj27Nlat26d5syZo/vuu08XXnih+eUe44orrlB8fLx69eql2267TU2bNjW3AAAk/fLLL/r888/NZQCAh2KIBcrw448/atq0aerRo4euvPJKjRo1SocOHdKgQYP07bffasmSJXrkkUfUokUL80vd7qKLLtILL7ygbdu26YsvvtBzzz2nESNGKCUlRWvWrNG3336rYcOGqXr16uaXAoDf+vHHHzVixAhzGQDgoRhiAQfs3btX7733ngYPHqyrrrpKnTt31tq1a3Xrrbfqq6++0qeffqpRo0apdevW5pdaruBZuBdeeKEGDx6s8PBw1a5dWxdccIFCQkJ08cUX69VXX1WPHj303XffKTY21vwWwP+3d+/RUZX3GsefCSFJLxibWIJigkRAa4tiCykxCVovoMbEKJeK4J3KgXATIQgKKFKwJ4hEDUi9gSAUaj2A9SAWL5VbEKEctNJGAQkqAZtKsCgJSTh/RGYyLxEymXmHPTPfz1qzlv29O+FZz6Fn9eee2QMAAOB4LLGAH9auXatHHnlE1113ndLS0rRkyRKdd955eu655/TWW29p2rRp6tWrl2JjY80fDaiZM2dq/Pjxuuuuu3TZZZfphRde0P79+72uKS0t1YwZM9ShQwfNnz9f8+bN06BBg7yuAQAAAJyOJRYIkB07dujZZ5/V7bffri5dumjq1Kk6evSoJk+erH/+859auHChBg0apA4dOpg/6pcHHnhAffv21a9+9Ss999xz5nGjJkyYoKFDh+p3v/sdd2QBRLxf/epXGjdunDkGADgUSyxgQXV1td544w3df//9uuSSS5SXl6ctW7a433785z//Wffdd58yMzPNH/VJRkaG7rnnHt16661au3ateXxCc+bM0fTp0zVt2jQ+IwuEnCJtqKhQhfu1QUXmJWiys846S/369TPHAACHYokFgmDr1q2aOXOmcnJylJmZqZUrV6pbt25avny5tm7dqtmzZ2vAgAFq3769+aMnNHz4cC1cuFB/+tOfzKMmmTBhgr755hvl5+ebRwAcq0gbKgYqae0kJSYmKjExUZPWJmkgi2yzuVyuk34nIQDAOVhigSDbvn27iouL1bt3b6WlpWnWrFmKjo7W+PHj9d5772nlypWaOHGirrjiCvf3cDUmNTVVV111lYqLi80jnxx72BOAEPFEmjqpVK9c7/nvfvH1r6hUnZT2hNeVaCKXy2WOAAAOxhILnEI7duzQvHnzdPfdd6tLly664YYb9M477ygtLU1Lly7VBx98oGeeeUa33nqr2rVr5/WzWVlZ2r17t0pKSrzmvlqxYoXOPffcgH9WF4Alw9OVmJiukeYczbZgwQL+ZR4AhBCWWMAhampq9M4772j69OnKyclRly5dNHHiRB06dEjDhg3Tli1btG3bNj399NO66aablJmZqW3btpm/xmelpaU6ePCgOnXqZB4BCBVPpKmTKrXvQ/MATbVjxw5zBABwKJZYwKH27NmjJUuWaOTIkUpLS9PFF1+s6dOnq6qqSrfccotuvPFGVVRUmD/WLF9++aVOO+00cwxErP79+zd4aJL3a+/evdq7d6/XbNy4ccrIyDju2hO9nnzy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ycn617/+pW+++ca83Gf0XM9mZtGzm83Momc3m5lFz26+ZOZOLAAEwK5du3T++eebY5+1bt1aP/7xj/XJJ5+YRwiidevWfedr/fr1Wr9+vdesrKxMlZWVx117stfJ5C/f6XX3dufyfPOSbxVr935zhqYaMWKEH3fGAQDBxhILAAGwceNGde7cWampqeaRT66++modOHBAW7duNY8QgYqvT/W8ZTgxUanXF0tDlmnncZ+B/fZzsvt4XnFz8HRiAAgtLLEAEACbN2/WBx98oEGDBplHPrnzzjv18ssvm2PAY85ftK0yXlm3FblH+cvvVVZ8qV65nucVNwdLLACEFpZYAOFjyDLtPO5tl0XacNxdq8YVlZzo7Zon99RTT2n8+PHq3LmzedQkd955py699FLNnTvXPAIaKFZe6iStaT3Q/TbjKZn7tDAxXY1/GhYn89e//lX/93//Z44BAA7FEgsgbBTdlqX4jxZ63nYpqahkoJLWPqq8OebVxxvZfaH2Zd7bpIW3MYsXL9aKFSv03HPP+fx04czMTM2dO1cPP/ywPv74Y/MYMBQrL9XzNuNEFli/rFixgs/EAkAIYYkFECYa+UzgkGXK6ejLWyxHauFaeb1N01fDhg1TXV2dVq9e3eQ7sr1799aqVav04osvatasWeYxAAAAGmCJBRAGZmlDxRRlxUvxmVNUUbFBRe47s++671AVlVSowuutxflatrNCFTuX6dibiIuvf0WlHXOafTf20KFD6tOnjz7//HNt27ZN06ZN+86HPXXv3l0LFizQSy+9pLlz52r06NHmJQAAADCwxAIIA6OUnjhJayqlyrWTvn1rZZHSOkqlmzxvshzZfZLWVMYra2z90nrsYTgLU/PkuVdbqn2V8brw6uZ/NvbQoUO64447NGzYMOXk5GjHjh3atm2bli5dqueff14rVqzQJ598og0bNigpKUm5ubmaOnWq+WsABMldd90VkO94BgAEB0ssgPA0pJ2SVKl9HzYcFiuvcI0q47M0sGSDpmTGq3SR+VnC+u/bjE/q5DVtjsWLF+vSSy9Vz549tXTpUn311VeKi4vTvn379Pjjj6tbt2666aabmvR9oQDs+dnPfqYrrrjCHAMAHIolFkBkmZOnR9dWqlPHTtJHC5U+3LxAKt1XKbVup1vMg2bavHmzZs+erbFjx2r48OF68MEH9cILL2jn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" alt="Figure 1">
-    <div class="figure-caption">Figure 1 &mdash; Use this graph to answer questions 1&ndash;4.</div>
+<div class="tip">💡 Try answering on paper first. Click <strong>"Show Answer"</strong> only after writing your answer. Each section mirrors your actual final exam format!</div>
+
+<!-- ========================================================= -->
+<!--                     TEST I — SHORT RESPONSE               -->
+<!-- ========================================================= -->
+<div class="section-banner" style="background:#1d4ed8;">
+  <h2>Test I — Short Response</h2>
+  <p>15 items · 2 points each · 30 points total</p>
+</div>
+
+<!-- Q1 — Inequality -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">1<span class="qtag">Inequality</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Solve and graph on a number line: &nbsp;<strong>2x − 5 &lt; 7</strong></div>
+    </div>
   </div>
-  <div class="card">
-    <ol>
-<li class="q-item">
-      <div class="q-text">What is f(&minus;3)? <em>(refer to Figure 1)</em></div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">From the graph, at x = &minus;3, the filled point appears to be at y = 0. <strong>f(&minus;3) = 0</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Limit of the function as x approaches 2 from the right? <em>(refer to Figure 1)</em></div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">As x &rarr; 2&sup+;, the curve (the hyperbolic-like branch) shoots upward toward +&infin;. <strong>lim<sub>x&rarr;2&sup+;</sub> f(x) = +&infin;</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Limit of the function as x approaches &minus;2 from the left? <em>(refer to Figure 1)</em></div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">As x &rarr; &minus;2&sup-;, the curve comes from the lower-left branch heading downward. <strong>lim<sub>x&rarr;&minus;2&sup-;</sub> f(x) = &minus;&infin;</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">At what values of x is the function undefined? <em>(refer to Figure 1)</em></div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">The dashed vertical line is at x = 2, which is a vertical asymptote. There also appears to be a discontinuity near x = &minus;2. <strong>f is undefined at x = 2</strong> (vertical asymptote) and has a removable/jump discontinuity at x = &minus;2.</div>
-    </li><li class="q-item">
-      <div class="q-text">Using limit theorem, find the value of the given limit.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Apply limit theorems: substitute the value directly if the function is continuous at that point. If of indeterminate form (0/0), factor and cancel. Example: lim<sub>x&rarr;2</sub> (x&sup2;&minus;4)/(x&minus;2) = lim (x+2) = <strong>4</strong>.</div>
-    </li><li class="q-item">
-      <div class="q-text">Given the limit conditions, show the graph of the function.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">When given one-sided limits and point values, plot: open circles at points where the limit exists but f is not defined there, closed circles at defined points, and sketch each branch according to its limit behavior.</div>
-    </li><li class="q-item">
-      <div class="q-text">Show the graph with f(&minus;1) = 3 and f(&minus;4) = &minus;2.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Plot a <strong>closed circle at (&minus;1, 3)</strong> and a <strong>closed circle at (&minus;4, &minus;2)</strong>. Connect branches as indicated by the limit conditions given in the full problem.</div>
-    </li></ol>
-    <h3>Test II &mdash; Computation (5 pts)</h3>
-    <ol><li class="q-item">
-      <div class="q-text">Find the slope of any tangent line to f(x) = 7 &minus; 3x + 2 using the limit process.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Using the limit definition: m = lim<sub>h&rarr;0</sub> [f(x+h)&minus;f(x)]/h. If f(x)=&minus;3x+9: f(x+h)=&minus;3(x+h)+9. [f(x+h)&minus;f(x)]/h = [&minus;3h]/h = &minus;3. So <strong>slope = &minus;3</strong> (constant for a linear function, meaning all tangent lines have slope &minus;3).</div>
-    </li></ol>
-    <h3>Test III &mdash; Differentiation Rules (2 pts each)</h3>
-    <ol><li class="q-item">
-      <div class="q-text">f(x) = x&sup2; &minus; 3x + 5</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Power rule: d/dx[x&sup2;] = 2x, d/dx[&minus;3x] = &minus;3, d/dx[5] = 0. <strong>f'(x) = 2x &minus; 3</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">y = 3 cos x + sin x</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">d/dx[3cos x] = &minus;3sin x, d/dx[sin x] = cos x. <strong>y' = &minus;3sin x + cos x</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">y = (given function &mdash; refer to original test sheet for the expression)</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Apply the appropriate rule (power, trig, chain, product, or quotient) based on the function given. Show each step clearly.</div>
-    </li></ol></div></div>
-<div id="exam4" class="section">
-  <h2>4th Exam</h2>
-  <div class="card">
-    <h3>Test II &mdash; Find the Derivative</h3>
-    <h4 class="sub">Trig Derivatives (tan, cot, sec, csc)</h4>
-    <ol>
-<li class="q-item">
-      <div class="q-text">y = tan x + x</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">d/dx[tan x] = sec&sup2;x, d/dx[x] = 1. <strong>y' = sec&sup2;x + 1</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">f(x) = 3 sec x &minus; cot x</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">d/dx[3sec x] = 3sec x tan x, d/dx[&minus;cot x] = csc&sup2;x. <strong>f'(x) = 3sec x tan x + csc&sup2;x</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">g(x) = x&sup2; &middot; tan x</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Product rule: (x&sup2;)'tan x + x&sup2;(tan x)' = 2x&middot;tan x + x&sup2;&middot;sec&sup2;x. <strong>g'(x) = 2x tan x + x&sup2; sec&sup2;x</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">h(x) = csc x / x</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Quotient rule: [(csc x)'&middot;x &minus; csc x&middot;1] / x&sup2; = [&minus;csc x cot x &middot; x &minus; csc x] / x&sup2;. <strong>h'(x) = &minus;csc x (x cot x + 1) / x&sup2;</strong></div>
-    </li></ol><h4 class='sub'>Chain Rule &amp; General Power Rule</h4><ol start='5'><li class="q-item">
-      <div class="q-text">y = (3x + 1)&sup5;</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Chain rule: 5(3x+1)&sup4; &middot; (3x+1)'. Derivative of (3x+1) = 3. <strong>y' = 15(3x+1)&sup4;</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">f(x) = &radic;(x&sup2; + 4)</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Rewrite as (x&sup2;+4)<sup>1/2</sup>. Chain rule: (1/2)(x&sup2;+4)<sup>&minus;1/2</sup>&middot;2x. <strong>f'(x) = x / &radic;(x&sup2;+4)</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">g(x) = sin(4x)</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Chain rule: cos(4x) &middot; 4. <strong>g'(x) = 4cos(4x)</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">h(x) = cos(x&sup3; &minus; 2x)</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Chain rule: &minus;sin(x&sup3;&minus;2x) &middot; (3x&sup2;&minus;2). <strong>h'(x) = &minus;(3x&sup2;&minus;2)sin(x&sup3;&minus;2x)</strong></div>
-    </li></ol><h4 class='sub'>Mixed Rules</h4><ol start='9'><li class="q-item">
-      <div class="q-text">y = 5x&sup3; &minus; 2&radic;x + 9</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Power rule each term: d/dx[5x&sup3;]=15x&sup2;, d/dx[&minus;2x<sup>1/2</sup>]=&minus;x<sup>&minus;1/2</sup>=&minus;1/&radic;x, d/dx[9]=0. <strong>y' = 15x&sup2; &minus; 1/&radic;x</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">y = (x&sup2; + 3) &middot; cos x</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Product rule: (x&sup2;+3)'cos x + (x&sup2;+3)(cos x)' = 2x&middot;cos x + (x&sup2;+3)(&minus;sin x). <strong>y' = 2x cos x &minus; (x&sup2;+3)sin x</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">y = tan x / (1 + sec x)</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Quotient rule: [(1+sec x)(sec&sup2;x) &minus; tan x(sec x tan x)] / (1+sec x)&sup2;. Simplify using sec&sup2;x&minus;tan&sup2;x=1: <strong>y' = sec x / (1 + sec x)</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">y = sin(x&sup2; + 1)</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Chain rule: cos(x&sup2;+1) &middot; 2x. <strong>y' = 2x cos(x&sup2;+1)</strong></div>
-    </li><li class="q-item">
-      <div class="q-text">y = (2x &minus; 1)&sup4; &middot; cos(3x)</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Product + chain: [(2x&minus;1)&sup4;]'cos(3x) + (2x&minus;1)&sup4;[cos(3x)]' = 4(2x&minus;1)&sup3;&middot;2&middot;cos(3x) + (2x&minus;1)&sup4;&middot;(&minus;sin(3x))&middot;3. <strong>y' = 8(2x&minus;1)&sup3;cos(3x) &minus; 3(2x&minus;1)&sup4;sin(3x)</strong></div>
-    </li></ol>    <h3>Test III &mdash; Applications</h3>
-    <p style="margin:10px 0 8px;"><strong>1.</strong> Particle: s(t) = t&sup3; &minus; 6t&sup2; + 9t (meters, t in seconds)</p>
-    <ol class="alpha-list"><li class="q-item"><div class="q-text">(a) Find the velocity function v(t).</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">v(t) = s'(t) = 3t&sup2; &minus; 12t + 9. <strong>v(t) = 3t&sup2; &minus; 12t + 9</strong></div></li><li class="q-item"><div class="q-text">(b) Velocity at t = 0, 2, and 4.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">v(0) = 9 &mdash; moving forward at <strong>9 m/s</strong>. v(2) = 12&minus;24+9 = <strong>&minus;3 m/s</strong> (moving backward). v(4) = 48&minus;48+9 = <strong>9 m/s</strong> (moving forward again).</div></li><li class="q-item"><div class="q-text">(c) When is the particle at rest?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Set v(t) = 0: 3t&sup2;&minus;12t+9=0 &rarr; t&sup2;&minus;4t+3=0 &rarr; (t&minus;1)(t&minus;3)=0. <strong>t = 1 s and t = 3 s</strong>.</div></li><li class="q-item"><div class="q-text">(d) Find the acceleration function a(t).</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">a(t) = v'(t) = d/dt[3t&sup2;&minus;12t+9]. <strong>a(t) = 6t &minus; 12</strong></div></li></ol><p style="margin:14px 0 8px;"><strong>2.</strong> Coffee shop: P = 4.00x &minus; x&sup2;/10,000 &minus; 6,000</p>
-    <ol class="alpha-list"><li class="q-item"><div class="q-text">(a) Marginal profit dP/dx.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">dP/dx = d/dx[4x &minus; x&sup2;/10000 &minus; 6000] = <strong>4 &minus; x/5000</strong></div></li><li class="q-item"><div class="q-text">(b) Number of cups that maximizes profit.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Set dP/dx = 0: 4 &minus; x/5000 = 0 &rarr; x = 20,000. Check: d&sup2;P/dx&sup2; = &minus;1/5000 &lt; 0 (maximum confirmed). <strong>x = 20,000 cups/day</strong>.</div></li><li class="q-item"><div class="q-text">(c) Maximum profit.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">P(20000) = 4(20000) &minus; (20000)&sup2;/10000 &minus; 6000 = 80000 &minus; 40000 &minus; 6000 = <strong>Php 34,000</strong></div></li></ol><p style="margin:14px 0 8px;"><strong>3.</strong> Drone: s(t) = 2 + 6t &minus; t&sup2;</p>
-    <ol class="alpha-list"><li class="q-item"><div class="q-text">(a) Average velocity over [0, 4].</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">Avg v = [s(4)&minus;s(0)]/(4&minus;0). s(4)=2+24&minus;16=10, s(0)=2. Avg v = (10&minus;2)/4 = <strong>2 m/s</strong></div></li><li class="q-item"><div class="q-text">(b) Average velocity over [4, 6].</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">s(6)=2+36&minus;36=2, s(4)=10. Avg v = (2&minus;10)/(6&minus;4) = &minus;8/2 = <strong>&minus;4 m/s</strong> (drone moving backward)</div></li></ol><p style="margin:14px 0 8px;"><strong>4.</strong> Rocket: s(t) = &minus;16t&sup2; + 80t + 5</p>
-    <ol class="alpha-list"><li class="q-item"><div class="q-text">(a) Find the velocity function v(t).</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">v(t) = s'(t) = <strong>&minus;32t + 80</strong></div></li><li class="q-item"><div class="q-text">(b) Instantaneous velocity at t = 2s.</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">v(2) = &minus;32(2) + 80 = &minus;64 + 80 = <strong>16 ft/s</strong> (still moving upward)</div></li><li class="q-item"><div class="q-text">(c) Instantaneous velocity at t = 5s — what does it mean?</div>
-      <button class="ans-btn" onclick="toggleAns(this)">Show Answer</button>
-      <div class="ans-box">v(5) = &minus;32(5) + 80 = &minus;160 + 80 = <strong>&minus;80 ft/s</strong>. Negative means the rocket is <strong>moving downward</strong> at 80 ft/s at t=5s. (Note: the rocket reaches its peak when v=0: t = 80/32 = 2.5s.)</div></li></ol></div></div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      2x − 5 &lt; 7<br>
+      2x &lt; 12<br>
+      x &lt; 6<br><br>
+      Answer: <strong>x &lt; 6</strong> or interval notation: <strong>(−∞, 6)</strong><br>
+      Number line: open circle at 6, shade everything to the left ←●
+    </div>
+  </div>
+</div>
+
+<!-- Q2 — Absolute Value -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">2<span class="qtag">Absolute Value</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Solve: &nbsp;<strong>|3x − 6| = 12</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Split into 2 equations:<br><br>
+      Case 1: 3x − 6 = 12 → 3x = 18 → <strong>x = 6</strong><br>
+      Case 2: 3x − 6 = −12 → 3x = −6 → <strong>x = −2</strong><br><br>
+      Answer: <strong>x = 6 or x = −2</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 — Plotting of Points -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">3<span class="qtag">Plotting</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Identify which quadrant each point lies in:<br><br>
+      <strong>A(−3, 5) &nbsp;&nbsp; B(4, −2) &nbsp;&nbsp; C(−1, −6) &nbsp;&nbsp; D(7, 3)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      A(−3, 5) → <strong>Quadrant II</strong> (x neg, y pos)<br>
+      B(4, −2) → <strong>Quadrant IV</strong> (x pos, y neg)<br>
+      C(−1, −6) → <strong>Quadrant III</strong> (x neg, y neg)<br>
+      D(7, 3) → <strong>Quadrant I</strong> (x pos, y pos)
+    </div>
+  </div>
+</div>
+
+<!-- Q4 — Intercepts -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">4<span class="qtag">Intercepts</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the x-intercept and y-intercept of: &nbsp;<strong>3x − 4y = 12</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      x-intercept (set y = 0): 3x = 12 → <strong>x = 4 → (4, 0)</strong><br>
+      y-intercept (set x = 0): −4y = 12 → <strong>y = −3 → (0, −3)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 — Function -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">5<span class="qtag">Function</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Given f(x) = 3x² − 2x + 1, find: &nbsp;<strong>f(−2)</strong> and <strong>f(0)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      f(−2) = 3(−2)² − 2(−2) + 1 = 12 + 4 + 1 = <strong>17</strong><br>
+      f(0) = 3(0) − 2(0) + 1 = <strong>1</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q6 — Slope -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">6<span class="qtag">Slope</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the slope of the line passing through: &nbsp;<strong>(−2, 4) and (3, −1)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      m = (y₂ − y₁) / (x₂ − x₁)<br>
+      m = (−1 − 4) / (3 − (−2))<br>
+      m = −5 / 5<br>
+      m = <strong>−1</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q7 — Slope Intercept Form -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">7<span class="qtag">Slope-Intercept</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Write the equation of the line in slope-intercept form with slope <strong>m = 2/3</strong> passing through <strong>(0, −4)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Slope-intercept form: y = mx + b<br>
+      m = 2/3, b = −4 (y-intercept given directly)<br><br>
+      <strong>y = (2/3)x − 4</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q8 — Vertex and Latus Rectum -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">8<span class="qtag">Parabola</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the <strong>vertex</strong> and <strong>length of the latus rectum</strong> of: &nbsp;<strong>(x − 2)² = 12(y + 1)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Standard form: (x − h)² = 4p(y − k)<br><br>
+      Vertex: (h, k) = <strong>(2, −1)</strong><br>
+      4p = 12 → p = 3<br>
+      Latus Rectum = |4p| = <strong>12 units</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q9 — Equation of Circle -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">9<span class="qtag">Circle</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Write the equation of a circle with <strong>center (−3, 4)</strong> and <strong>radius = 5</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Standard form: (x − h)² + (y − k)² = r²<br>
+      h = −3, k = 4, r = 5<br><br>
+      <strong>(x + 3)² + (y − 4)² = 25</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q10 — Domain -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">10<span class="qtag">Domain</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the domain of: &nbsp;<strong>f(x) = √(x − 4)</strong> &nbsp;and&nbsp; <strong>g(x) = 1/(x² − 9)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      f(x) = √(x−4): inside must be ≥ 0<br>
+      x − 4 ≥ 0 → <strong>x ≥ 4 → [4, +∞)</strong><br><br>
+      g(x) = 1/(x²−9): denominator ≠ 0<br>
+      x² − 9 ≠ 0 → x ≠ ±3<br>
+      <strong>Domain: all real numbers except x = 3 and x = −3</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q11 — Operations of Functions -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">11<span class="qtag">Operations</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Given <strong>f(x) = x + 3</strong> and <strong>g(x) = x² − 1</strong>, find <strong>(f + g)(x)</strong> and <strong>(f · g)(x)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      (f + g)(x) = f(x) + g(x) = (x+3) + (x²−1) = <strong>x² + x + 2</strong><br><br>
+      (f · g)(x) = f(x) · g(x) = (x+3)(x²−1)<br>
+      = x³ − x + 3x² − 3 = <strong>x³ + 3x² − x − 3</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q12 — Limit Theorem -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">12<span class="qtag">Limit Theorem</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Evaluate the limit: &nbsp;<strong>lim(x→3) (x² − x − 6) / (x − 3)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Direct substitution gives 0/0 → factor first!<br><br>
+      x² − x − 6 = (x − 3)(x + 2)<br><br>
+      lim(x→3) (x−3)(x+2) / (x−3)<br>
+      Cancel (x−3):<br>
+      = lim(x→3) (x + 2)<br>
+      = 3 + 2 = <strong>5</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q13 — Graph of Limits -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">13<span class="qtag">Graph of Limits</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">From a graph, the left-hand limit as x→2⁻ = 4 and right-hand limit as x→2⁺ = 4, but f(2) = 7.<br><br>
+      Does <strong>lim(x→2) f(x) exist?</strong> What is it?</div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      For a limit to exist: left-hand limit = right-hand limit<br><br>
+      lim(x→2⁻) = 4 &nbsp;and&nbsp; lim(x→2⁺) = 4 ✓ (they are equal!)<br><br>
+      <strong>Yes, lim(x→2) f(x) = 4</strong><br><br>
+      💡 The fact that f(2) = 7 does NOT matter — the limit only cares about what happens NEAR x = 2, not AT x = 2!
+    </div>
+  </div>
+</div>
+
+<!-- Q14 — Differentiation Rules -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">14<span class="qtag">Diff. Rules</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Differentiate using the <strong>Power Rule</strong>: &nbsp;<strong>f(x) = 5x⁴ − 3x² + 7x − 2</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Power Rule: d/dx[xⁿ] = nxⁿ⁻¹<br><br>
+      • 5x⁴ → 20x³<br>
+      • 3x² → 6x<br>
+      • 7x → 7<br>
+      • 2 → 0 (constant)<br><br>
+      <strong>f'(x) = 20x³ − 6x + 7</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q15 — Problem Solving Short -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">15<span class="qtag">Velocity</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">A particle's position is <strong>s(t) = t² + 3t</strong> (meters). Find the <strong>average velocity</strong> over <strong>[1, 4]</strong>.</div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Formula: [s(t₂) − s(t₁)] / (t₂ − t₁) — NO differentiation needed!<br><br>
+      s(1) = 1 + 3 = 4<br>
+      s(4) = 16 + 12 = 28<br><br>
+      Avg velocity = (28 − 4) / (4 − 1) = 24 / 3 = <strong>8 m/s</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!--              TEST II — DIFFERENTIATION RULES              -->
+<!-- ========================================================= -->
+<div class="section-banner" style="background:#15803d;">
+  <h2>Test II — Finding Derivatives</h2>
+  <p>10 items · 3 points each · 30 points total · Use differentiation rules</p>
+</div>
+
+<!-- Q16 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">16<span class="qtag">Power Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>f(x) = 6x⁵ − 4x³ + 9</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      • 6x⁵ → 30x⁴<br>
+      • 4x³ → 12x²<br>
+      • 9 → 0<br><br>
+      <strong>f'(x) = 30x⁴ − 12x²</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q17 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">17<span class="qtag">Chain Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = (3x² + 1)⁴</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Chain Rule: d/dx[uⁿ] = nuⁿ⁻¹ · u'<br><br>
+      u = 3x²+1 → u' = 6x<br><br>
+      dy/dx = 4(3x²+1)³ · 6x<br>
+      <strong>dy/dx = 24x(3x² + 1)³</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q18 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">18<span class="qtag">Product Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = (x² + 3)(2x − 5)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Product Rule: u'v + uv'<br><br>
+      u = x²+3, u' = 2x<br>
+      v = 2x−5, v' = 2<br><br>
+      dy/dx = 2x(2x−5) + (x²+3)(2)<br>
+      = 4x²−10x + 2x²+6<br>
+      <strong>dy/dx = 6x² − 10x + 6</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q19 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">19<span class="qtag">Quotient Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>f(x) = (x² + 1) / (x − 2)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Quotient Rule: (u'v − uv') / v²<br><br>
+      u = x²+1, u' = 2x<br>
+      v = x−2, v' = 1<br><br>
+      f'(x) = [2x(x−2) − (x²+1)(1)] / (x−2)²<br>
+      = [2x²−4x − x²−1] / (x−2)²<br>
+      <strong>f'(x) = (x² − 4x − 1) / (x − 2)²</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q20 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">20<span class="qtag">Basic ln</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>f(x) = ln(x² + 5)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Rule: d/dx[ln u] = u'/u<br><br>
+      u = x²+5, u' = 2x<br><br>
+      <strong>f'(x) = 2x / (x² + 5)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q21 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">21<span class="qtag">Product ln</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = x³ ln x</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Product Rule: u'v + uv'<br><br>
+      u = x³, u' = 3x²<br>
+      v = ln x, v' = 1/x<br><br>
+      dy/dx = 3x²·ln x + x³·(1/x)<br>
+      = 3x² ln x + x²<br>
+      <strong>dy/dx = x²(3 ln x + 1)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q22 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">22<span class="qtag">Basic eˣ</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = e^(3x² − 2)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Rule: d/dx[eᵘ] = eᵘ · u'<br><br>
+      u = 3x²−2, u' = 6x<br><br>
+      <strong>dy/dx = 6xe^(3x² − 2)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q23 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">23<span class="qtag">Product eˣ</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = x²e^(2x)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Product Rule: u'v + uv'<br><br>
+      u = x², u' = 2x<br>
+      v = e^(2x), v' = 2e^(2x)<br><br>
+      dy/dx = 2x·e^(2x) + x²·2e^(2x)<br>
+      = 2xe^(2x) + 2x²e^(2x)<br>
+      <strong>dy/dx = 2xe^(2x)(1 + x)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q24 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">24<span class="qtag">Quotient eˣ</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = eˣ / (x + 1)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Quotient Rule: (u'v − uv') / v²<br><br>
+      u = eˣ, u' = eˣ<br>
+      v = x+1, v' = 1<br><br>
+      dy/dx = [eˣ(x+1) − eˣ(1)] / (x+1)²<br>
+      = eˣ[(x+1) − 1] / (x+1)²<br>
+      <strong>dy/dx = xeˣ / (x + 1)²</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q25 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">25<span class="qtag">Mixed</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = ln(2 − e^(3x))</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Rule: d/dx[ln u] = u'/u<br><br>
+      u = 2 − e^(3x), u' = −3e^(3x)<br><br>
+      <strong>dy/dx = −3e^(3x) / (2 − e^(3x))</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!--                  TEST III — PROBLEM SOLVING               -->
+<!-- ========================================================= -->
+<div class="section-banner" style="background:#b45309;">
+  <h2>Test III — Problem Solving</h2>
+  <p>2 items · 5 points each (sub-parts) · 20 points total</p>
+</div>
+
+<!-- Q26 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#b45309;">26<span class="qtag">Avg & Instant Velocity</span></div>
+    <div class="q-body">
+      <div class="q-label">5 points per part · 10 points total</div>
+      <div class="q-text">
+        A particle moves along a straight line with position function:<br><br>
+        <strong>s(t) = 2t² − 4t + 3</strong> &nbsp;(meters, t in seconds)<br><br>
+      </div>
+      <div class="q-choices">
+        (a) Find the average velocity over [1, 3]<br>
+        (b) Find the instantaneous velocity at t = 2s
+      </div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines">
+      <div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Full Solution</span>
+      <strong>(a) Average Velocity [1, 3] — NO differentiation!</strong><br>
+      s(1) = 2(1)² − 4(1) + 3 = 2 − 4 + 3 = 1<br>
+      s(3) = 2(3)² − 4(3) + 3 = 18 − 12 + 3 = 9<br>
+      Avg vel = (9 − 1) / (3 − 1) = 8/2 = <strong>4 m/s</strong><br><br>
+      <strong>(b) Instantaneous Velocity at t = 2 — DIFFERENTIATE!</strong><br>
+      v(t) = ds/dt = 4t − 4<br>
+      v(2) = 4(2) − 4 = 8 − 4 = <strong>4 m/s</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q27 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#b45309;">27<span class="qtag">Free Fall</span></div>
+    <div class="q-body">
+      <div class="q-label">5 points per part · 10 points total</div>
+      <div class="q-text">
+        A ball is dropped from the top of a building <strong>900 feet tall</strong>.<br>
+        Use: <strong>s(t) = −16t² + v₀t + s₀</strong><br><br>
+      </div>
+      <div class="q-choices">
+        (a) Write the position function s(t) and velocity function v(t)<br>
+        (b) Find the time it takes to hit the ground and velocity at impact
+      </div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines">
+      <div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Full Solution</span>
+      <strong>(a) Position and Velocity Functions:</strong><br>
+      Dropped → v₀ = 0, s₀ = 900<br>
+      s(t) = −16t² + 0(t) + 900 = <strong>−16t² + 900</strong><br>
+      v(t) = ds/dt = <strong>−32t</strong><br><br>
+      <strong>(b) Time to hit ground (s = 0):</strong><br>
+      −16t² + 900 = 0<br>
+      16t² = 900<br>
+      t² = 56.25<br>
+      t = √56.25 = <strong>7.5 seconds</strong><br><br>
+      Velocity at impact:<br>
+      v(7.5) = −32(7.5) = <strong>−240 ft/s</strong>
+    </div>
+  </div>
+</div>
+
+<!-- SCORE BOX -->
+<div class="score-box">
+  <div class="score-title">📊 Score Tracker</div>
+  <table class="score-table">
+    <thead>
+      <tr><th>Section</th><th>Items</th><th>Points Each</th><th>Your Score</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Test I — Short Response</td><td>15</td><td>2 pts</td><td>__ / 30</td><td>30</td></tr>
+      <tr><td>Test II — Derivatives</td><td>10</td><td>3 pts</td><td>__ / 30</td><td>30</td></tr>
+      <tr><td>Test III — Problem Solving</td><td>2</td><td>10 pts</td><td>__ / 20</td><td>20</td></tr>
+      <tr class="total-row"><td><strong>TOTAL</strong></td><td>27</td><td>—</td><td><strong>__ / 80</strong></td><td><strong>80</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
 <script>
-function showSection(id, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-  if (id === 'exam2') setTimeout(drawAllConics, 60);
-}
-function showConic(name, btn) {
-  document.querySelectorAll('.conic-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.conic-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById('conic-' + name).classList.add('active');
-  btn.classList.add('active');
-  setTimeout(() => drawConic(name), 30);
-}
-function toggleAns(btn) {
-  const box = btn.nextElementSibling;
-  const open = box.style.display === 'block';
-  box.style.display = open ? 'none' : 'block';
-  btn.textContent = open ? 'Show Answer' : 'Hide Answer';
-  btn.classList.toggle('open', !open);
-}
-function setupCtx(id) {
-  const cv = document.getElementById(id);
-  const ctx = cv.getContext('2d');
-  ctx.clearRect(0, 0, cv.width, cv.height);
-  return {ctx, W: cv.width, H: cv.height};
-}
-function drawGrid(ctx, ox, oy, W, H, sc) {
-  ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = 1;
-  for (let x = 0; x < W; x += sc) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
-  for (let y = 0; y < H; y += sc) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
-}
-function drawAxes(ctx, ox, oy, W, H, sc, ts) {
-  ctx.strokeStyle = '#666'; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(W, oy); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, H); ctx.stroke();
-  ctx.fillStyle = '#666';
-  ctx.beginPath(); ctx.moveTo(W-2,oy); ctx.lineTo(W-10,oy-5); ctx.lineTo(W-10,oy+5); ctx.closePath(); ctx.fill();
-  ctx.beginPath(); ctx.moveTo(ox,2); ctx.lineTo(ox-5,10); ctx.lineTo(ox+5,10); ctx.closePath(); ctx.fill();
-  ctx.fillStyle = '#888'; ctx.font = '11px sans-serif';
-  for (let v = -20; v <= 20; v++) {
-    if (v === 0) continue;
-    const px = ox + v*sc;
-    if (px > 5 && px < W-5 && v % ts === 0) {
-      ctx.strokeStyle='#444'; ctx.lineWidth=1;
-      ctx.beginPath(); ctx.moveTo(px,oy-4); ctx.lineTo(px,oy+4); ctx.stroke();
-      ctx.textAlign='center'; ctx.fillText(v, px, oy+16);
-    }
-    const py = oy - v*sc;
-    if (py > 5 && py < H-5 && v % ts === 0) {
-      ctx.strokeStyle='#444'; ctx.lineWidth=1;
-      ctx.beginPath(); ctx.moveTo(ox-4,py); ctx.lineTo(ox+4,py); ctx.stroke();
-      ctx.textAlign='right'; ctx.fillText(v, ox-7, py+4);
+  function toggle(btn) {
+    const reveal = btn.nextElementSibling;
+    if (reveal.classList.contains('shown')) {
+      reveal.classList.remove('shown');
+      btn.textContent = '👁 Show Answer';
+    } else {
+      reveal.classList.add('shown');
+      btn.textContent = '🙈 Hide Answer';
     }
   }
-}
-function dot(ctx, x, y, col, lbl, dx, dy) {
-  ctx.fillStyle = col;
-  ctx.beginPath(); ctx.arc(x, y, 5, 0, 2*Math.PI); ctx.fill();
-  ctx.fillStyle = col; ctx.font = '12px sans-serif'; ctx.textAlign = 'left';
-  ctx.fillText(lbl, x+dx, y+dy);
-}
-function drawParabola() {
-  const {ctx, W, H} = setupCtx('cv-parabola');
-  const sc=38, ox=W/2, oy=H/2+60;
-  drawGrid(ctx,ox,oy,W,H,sc); drawAxes(ctx,ox,oy,W,H,sc,2);
-  ctx.strokeStyle='#64b5f6'; ctx.lineWidth=2.5; ctx.beginPath();
-  let s=false;
-  for (let px=0;px<=W;px++) {
-    const x=(px-ox)/sc, y=x*x/8, py=oy-y*sc;
-    if(py<0||py>H){s=false;continue;}
-    s?ctx.lineTo(px,py):(ctx.moveTo(px,py),s=true);
-  }
-  ctx.stroke();
-  dot(ctx,ox,oy,'#ffeb3b','V(0,0)',8,-14);
-  dot(ctx,ox,oy-2*sc,'#ff7043','F(0,2)',8,-14);
-  ctx.strokeStyle='#ef9a9a'; ctx.setLineDash([5,4]); ctx.lineWidth=1.5;
-  ctx.beginPath(); ctx.moveTo(0,oy+2*sc); ctx.lineTo(W,oy+2*sc); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='#ef9a9a'; ctx.font='11px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('y = -2 (directrix)', ox+6, oy+2*sc-5);
-  ctx.strokeStyle='#a5d6a7'; ctx.lineWidth=2; ctx.setLineDash([4,3]);
-  ctx.beginPath(); ctx.moveTo(ox-4*sc,oy-2*sc); ctx.lineTo(ox+4*sc,oy-2*sc); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='#a5d6a7'; ctx.font='11px sans-serif'; ctx.textAlign='center';
-  ctx.fillText('Latus Rectum = 8', ox, oy-2*sc-8);
-  ctx.fillStyle='#64b5f6'; ctx.font='bold 14px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('x² = 8y', ox+10, 28);
-}
-function drawCircle() {
-  const {ctx, W, H} = setupCtx('cv-circle');
-  const sc=42, ox=W/2-42, oy=H/2+42;
-  drawGrid(ctx,ox,oy,W,H,sc); drawAxes(ctx,ox,oy,W,H,sc,2);
-  ctx.strokeStyle='#80cbc4'; ctx.lineWidth=2.5;
-  ctx.beginPath(); ctx.arc(ox+sc, oy-sc, 4*sc, 0, 2*Math.PI); ctx.stroke();
-  dot(ctx,ox+sc,oy-sc,'#ffeb3b','C(1,1)',8,-14);
-  ctx.strokeStyle='#a5d6a7'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
-  ctx.beginPath(); ctx.moveTo(ox+sc-4*sc,oy-sc); ctx.lineTo(ox+sc+4*sc,oy-sc); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='#a5d6a7'; ctx.font='11px sans-serif'; ctx.textAlign='center';
-  ctx.fillText('Diameter = 8 (latus rectum)', ox+sc, oy-sc-8);
-  ctx.fillStyle='#80cbc4'; ctx.font='bold 13px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('(x-1)² + (y-1)² = 16', 10, 24);
-}
-function drawEllipse() {
-  const {ctx, W, H} = setupCtx('cv-ellipse');
-  const sc=42, ox=W/2, oy=H/2;
-  drawGrid(ctx,ox,oy,W,H,sc); drawAxes(ctx,ox,oy,W,H,sc,2);
-  ctx.strokeStyle='#ce93d8'; ctx.lineWidth=2.5;
-  ctx.beginPath(); ctx.ellipse(ox, oy, 5*sc, 3*sc, 0, 0, 2*Math.PI); ctx.stroke();
-  dot(ctx,ox,oy,'#ffeb3b','C(0,0)',8,-14);
-  const cv2 = Math.sqrt(25-9);
-  dot(ctx,ox+cv2*sc,oy,'#ff7043','F1',6,14);
-  dot(ctx,ox-cv2*sc,oy,'#ff7043','F2',6,14);
-  const lr = 2*9/5;
-  ctx.strokeStyle='#a5d6a7'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
-  ctx.beginPath(); ctx.moveTo(ox+cv2*sc,oy-(lr/2)*sc); ctx.lineTo(ox+cv2*sc,oy+(lr/2)*sc); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='#a5d6a7'; ctx.font='11px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('LR=3.6', ox+cv2*sc+5, oy-8);
-  ctx.fillStyle='#ce93d8'; ctx.font='bold 13px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('x²/25 + y²/9 = 1', 10, 24);
-}
-function drawHyperbola() {
-  const {ctx, W, H} = setupCtx('cv-hyperbola');
-  const sc=36, ox=W/2, oy=H/2;
-  drawGrid(ctx,ox,oy,W,H,sc); drawAxes(ctx,ox,oy,W,H,sc,2);
-  ctx.strokeStyle='rgba(255,193,7,0.4)'; ctx.setLineDash([5,4]); ctx.lineWidth=1.5;
-  ctx.beginPath(); ctx.moveTo(0,oy+(4/3)*ox); ctx.lineTo(W,oy-(4/3)*(W-ox)); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(0,oy-(4/3)*ox); ctx.lineTo(W,oy+(4/3)*(W-ox)); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='rgba(255,193,7,0.7)'; ctx.font='11px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('y = ±(4/3)x', ox+8, 28);
-  ctx.strokeStyle='#ffab91'; ctx.lineWidth=2.5;
-  for (let br of [-1,1]) {
-    ctx.beginPath(); let st=false;
-    for (let py2=0;py2<=H;py2++) {
-      const y=(oy-py2)/sc;
-      const x2=9*(1+y*y/16);
-      if(x2<0){st=false;continue;}
-      const x=br*Math.sqrt(x2);
-      const px=ox+x*sc;
-      if(px<0||px>W){st=false;continue;}
-      st?ctx.lineTo(px,py2):(ctx.moveTo(px,py2),st=true);
-    }
-    ctx.stroke();
-  }
-  dot(ctx,ox+3*sc,oy,'#ffeb3b','V(3,0)',6,16);
-  dot(ctx,ox-3*sc,oy,'#ffeb3b','V(-3,0)',6,16);
-  const ch=Math.sqrt(9+16), lr2=2*16/3;
-  ctx.strokeStyle='#a5d6a7'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
-  ctx.beginPath(); ctx.moveTo(ox+ch*sc,oy-(lr2/2)*sc); ctx.lineTo(ox+ch*sc,oy+(lr2/2)*sc); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle='#a5d6a7'; ctx.font='11px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('LR≈10.67', ox+ch*sc+5, oy-8);
-  ctx.fillStyle='#ffab91'; ctx.font='bold 13px sans-serif'; ctx.textAlign='left';
-  ctx.fillText('x²/9 - y²/16 = 1', 10, 24);
-}
-function drawConic(n) {
-  if(n==='parabola') drawParabola();
-  else if(n==='circle') drawCircle();
-  else if(n==='ellipse') drawEllipse();
-  else if(n==='hyperbola') drawHyperbola();
-}
-function drawAllConics() { drawParabola(); drawCircle(); drawEllipse(); drawHyperbola(); }
 </script>
 </body>
 </html>

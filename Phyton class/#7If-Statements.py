@@ -46,17 +46,33 @@ print(f"Calculated number is: {calculated}")
 
 
 
-#-------------------Python Calculator-----------------------------a
+#-------------------Python Weight Converter-----------------------------
 import math
 weight = float(input("Enter Weight: "))
 unit = input("Is this a Pound or Kg?(P/K): ")
 if unit == "K":
     weight *= 2.205
-    unit = "Kgs."
+    unit = "Lbs."
+    print(f"Ur weight is converted to {round(weight, 3)}{unit}")    
 elif unit == "P":
     weight /= 2.205
-    unit = "Lbs."
+    unit = "Kgs."
+    print(f"Ur weight is converted to {round(weight, 3)}{unit}")    
 else:
     print("Pls Enter a valid unit")
 
-print(f"Ur weight is {round(weight, 3)}{unit}")    
+
+
+
+#-------------------Python Temperature Conversion---------------------------
+unit = input("Is this temp a Celsius or Fahrenheit (°C/°F): ")
+temp = float(input("Enter the temp: ")) 
+
+if unit == "C":
+    temp = round(((temp * 9) / 5) + 32, 1)
+    print(f"Your converted temp is not {temp}°F")
+elif unit == "F":
+    temp = round((temp - 32) * 5/9, 1)
+    print(f"Your converted temp is not {temp}°C")
+else:
+    print(f"{unit} isn't a valid measurement, please try again.....")

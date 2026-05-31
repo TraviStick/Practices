@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Exam Practice Test</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Lora:ital,wght@0,600;1,400&display=swap');
+
+  :root {
+    --bg: #f8f8ff;
+    --ink: #12122a;
+    --red: #b91c1c;
+    --blue: #1d4ed8;
+    --green: #15803d;
+    --gold: #b45309;
+    --purple: #7c3aed;
+    --muted: #6b7280;
+    --border: #e2e8f0;
+    --card: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 40px 20px 80px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .test-header {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+  .test-header h1 { font-family: 'Lora', serif; font-size: 1.7rem; margin-bottom: 4px; }
+  .test-header .sub { font-size: 0.75rem; opacity: 0.55; margin-bottom: 16px; }
+  .meta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .meta-chip { background: rgba(255,255,255,0.1); border-radius: 6px; padding: 5px 12px; font-size: 0.7rem; color: #fff; }
+
+  .tip {
+    background: #fffbea; border: 1px solid #fcd34d;
+    border-radius: 8px; padding: 10px 16px;
+    font-size: 0.76rem; color: #78350f;
+    margin-bottom: 24px; line-height: 1.8;
+  }
+
+  /* SECTION BANNERS */
+  .section-banner {
+    border-radius: 10px;
+    padding: 16px 22px;
+    margin: 32px 0 16px;
+    color: #fff;
+  }
+  .section-banner h2 { font-family: 'Lora', serif; font-size: 1.2rem; margin-bottom: 2px; }
+  .section-banner p { font-size: 0.72rem; opacity: 0.8; }
+
+  /* QUESTION CARDS */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .q-top { display: flex; align-items: stretch; }
+  .q-num {
+    width: 50px; min-height: 64px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 600;
+    color: #fff; flex-shrink: 0; gap: 2px;
+  }
+  .q-num .qtag { font-size: 0.52rem; font-family: 'JetBrains Mono', monospace; font-weight: 400; opacity: 0.8; text-align: center; padding: 0 3px; line-height: 1.3; }
+  .q-body { padding: 14px 18px; flex: 1; }
+  .q-label { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 5px; }
+  .q-text { font-size: 0.86rem; line-height: 1.9; color: var(--ink); }
+  .q-choices { margin-top: 8px; padding-left: 10px; font-size: 0.83rem; line-height: 2.1; color: #1e293b; }
+
+  /* ANSWER AREA */
+  .answer-area {
+    border-top: 1px dashed var(--border);
+    padding: 10px 18px 14px;
+    background: #fafbff;
+  }
+  .answer-label { font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 7px; }
+  .answer-lines { display: flex; flex-direction: column; gap: 8px; }
+  .answer-line { border-bottom: 1.5px solid #cbd5e1; height: 26px; width: 100%; }
+
+  .reveal-btn {
+    background: none; border: 1.5px solid var(--border);
+    border-radius: 6px; padding: 5px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; cursor: pointer;
+    color: var(--muted); margin-top: 9px; transition: all 0.2s;
+  }
+  .reveal-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  .answer-reveal {
+    display: none; margin-top: 10px;
+    background: var(--ink); color: #e2e8f0;
+    border-radius: 8px; padding: 12px 16px;
+    font-size: 0.81rem; line-height: 2.1;
+  }
+  .answer-reveal .ans-label {
+    font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #94a3b8; display: block; margin-bottom: 5px;
+  }
+  .answer-reveal.shown { display: block; }
+
+  /* SCORE TABLE */
+  .score-box {
+    background: var(--card); border: 2px solid var(--border);
+    border-radius: 10px; padding: 20px 24px; margin-top: 36px;
+  }
+  .score-title { font-family: 'Lora', serif; font-size: 1.1rem; margin-bottom: 14px; }
+  table.score-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  table.score-table th { background: var(--ink); color: #fff; padding: 8px 12px; text-align: left; }
+  table.score-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  table.score-table tr:nth-child(even) td { background: #f8fafc; }
+  .total-row td { font-weight: 600; background: #f0f4ff !important; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="test-header">
+  <h1>Final Exam — Practice Test</h1>
+  <div class="sub">Calculus & Pre-Calculus · Comprehensive Review</div>
+  <div class="meta-row">
+    <div class="meta-chip">📋 27 Items</div>
+    <div class="meta-chip">💯 80 Points</div>
+    <div class="meta-chip">⏱ ~90 minutes</div>
+    <div class="meta-chip">📖 Show all work</div>
+  </div>
+</div>
+
+<div class="tip">💡 Try answering on paper first. Click <strong>"Show Answer"</strong> only after writing your answer. Each section mirrors your actual final exam format!</div>
+
+<!-- ========================================================= -->
+<!--                     TEST I — SHORT RESPONSE               -->
+<!-- ========================================================= -->
+<div class="section-banner" style="background:#1d4ed8;">
+  <h2>Test I — Short Response</h2>
+  <p>15 items · 2 points each · 30 points total</p>
+</div>
+
+<!-- Q1 — Inequality -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">1<span class="qtag">Inequality</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Solve and graph on a number line: &nbsp;<strong>2x − 5 &lt; 7</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      2x − 5 &lt; 7<br>
+      2x &lt; 12<br>
+      x &lt; 6<br><br>
+      Answer: <strong>x &lt; 6</strong> or interval notation: <strong>(−∞, 6)</strong><br>
+      Number line: open circle at 6, shade everything to the left ←●
+    </div>
+  </div>
+</div>
+
+<!-- Q2 — Absolute Value -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">2<span class="qtag">Absolute Value</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Solve: &nbsp;<strong>|3x − 6| = 12</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Split into 2 equations:<br><br>
+      Case 1: 3x − 6 = 12 → 3x = 18 → <strong>x = 6</strong><br>
+      Case 2: 3x − 6 = −12 → 3x = −6 → <strong>x = −2</strong><br><br>
+      Answer: <strong>x = 6 or x = −2</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 — Plotting of Points -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">3<span class="qtag">Plotting</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Identify which quadrant each point lies in:<br><br>
+      <strong>A(−3, 5) &nbsp;&nbsp; B(4, −2) &nbsp;&nbsp; C(−1, −6) &nbsp;&nbsp; D(7, 3)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      A(−3, 5) → <strong>Quadrant II</strong> (x neg, y pos)<br>
+      B(4, −2) → <strong>Quadrant IV</strong> (x pos, y neg)<br>
+      C(−1, −6) → <strong>Quadrant III</strong> (x neg, y neg)<br>
+      D(7, 3) → <strong>Quadrant I</strong> (x pos, y pos)
+    </div>
+  </div>
+</div>
+
+<!-- Q4 — Intercepts -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">4<span class="qtag">Intercepts</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the x-intercept and y-intercept of: &nbsp;<strong>3x − 4y = 12</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      x-intercept (set y = 0): 3x = 12 → <strong>x = 4 → (4, 0)</strong><br>
+      y-intercept (set x = 0): −4y = 12 → <strong>y = −3 → (0, −3)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 — Function -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">5<span class="qtag">Function</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Given f(x) = 3x² − 2x + 1, find: &nbsp;<strong>f(−2)</strong> and <strong>f(0)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      f(−2) = 3(−2)² − 2(−2) + 1 = 12 + 4 + 1 = <strong>17</strong><br>
+      f(0) = 3(0) − 2(0) + 1 = <strong>1</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q6 — Slope -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">6<span class="qtag">Slope</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the slope of the line passing through: &nbsp;<strong>(−2, 4) and (3, −1)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      m = (y₂ − y₁) / (x₂ − x₁)<br>
+      m = (−1 − 4) / (3 − (−2))<br>
+      m = −5 / 5<br>
+      m = <strong>−1</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q7 — Slope Intercept Form -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">7<span class="qtag">Slope-Intercept</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Write the equation of the line in slope-intercept form with slope <strong>m = 2/3</strong> passing through <strong>(0, −4)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Slope-intercept form: y = mx + b<br>
+      m = 2/3, b = −4 (y-intercept given directly)<br><br>
+      <strong>y = (2/3)x − 4</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q8 — Vertex and Latus Rectum -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">8<span class="qtag">Parabola</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the <strong>vertex</strong> and <strong>length of the latus rectum</strong> of: &nbsp;<strong>(x − 2)² = 12(y + 1)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Standard form: (x − h)² = 4p(y − k)<br><br>
+      Vertex: (h, k) = <strong>(2, −1)</strong><br>
+      4p = 12 → p = 3<br>
+      Latus Rectum = |4p| = <strong>12 units</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q9 — Equation of Circle -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">9<span class="qtag">Circle</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Write the equation of a circle with <strong>center (−3, 4)</strong> and <strong>radius = 5</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Standard form: (x − h)² + (y − k)² = r²<br>
+      h = −3, k = 4, r = 5<br><br>
+      <strong>(x + 3)² + (y − 4)² = 25</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q10 — Domain -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">10<span class="qtag">Domain</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Find the domain of: &nbsp;<strong>f(x) = √(x − 4)</strong> &nbsp;and&nbsp; <strong>g(x) = 1/(x² − 9)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      f(x) = √(x−4): inside must be ≥ 0<br>
+      x − 4 ≥ 0 → <strong>x ≥ 4 → [4, +∞)</strong><br><br>
+      g(x) = 1/(x²−9): denominator ≠ 0<br>
+      x² − 9 ≠ 0 → x ≠ ±3<br>
+      <strong>Domain: all real numbers except x = 3 and x = −3</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q11 — Operations of Functions -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">11<span class="qtag">Operations</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Given <strong>f(x) = x + 3</strong> and <strong>g(x) = x² − 1</strong>, find <strong>(f + g)(x)</strong> and <strong>(f · g)(x)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      (f + g)(x) = f(x) + g(x) = (x+3) + (x²−1) = <strong>x² + x + 2</strong><br><br>
+      (f · g)(x) = f(x) · g(x) = (x+3)(x²−1)<br>
+      = x³ − x + 3x² − 3 = <strong>x³ + 3x² − x − 3</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q12 — Limit Theorem -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">12<span class="qtag">Limit Theorem</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Evaluate the limit: &nbsp;<strong>lim(x→3) (x² − x − 6) / (x − 3)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Direct substitution gives 0/0 → factor first!<br><br>
+      x² − x − 6 = (x − 3)(x + 2)<br><br>
+      lim(x→3) (x−3)(x+2) / (x−3)<br>
+      Cancel (x−3):<br>
+      = lim(x→3) (x + 2)<br>
+      = 3 + 2 = <strong>5</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q13 — Graph of Limits -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">13<span class="qtag">Graph of Limits</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">From a graph, the left-hand limit as x→2⁻ = 4 and right-hand limit as x→2⁺ = 4, but f(2) = 7.<br><br>
+      Does <strong>lim(x→2) f(x) exist?</strong> What is it?</div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      For a limit to exist: left-hand limit = right-hand limit<br><br>
+      lim(x→2⁻) = 4 &nbsp;and&nbsp; lim(x→2⁺) = 4 ✓ (they are equal!)<br><br>
+      <strong>Yes, lim(x→2) f(x) = 4</strong><br><br>
+      💡 The fact that f(2) = 7 does NOT matter — the limit only cares about what happens NEAR x = 2, not AT x = 2!
+    </div>
+  </div>
+</div>
+
+<!-- Q14 — Differentiation Rules -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">14<span class="qtag">Diff. Rules</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">Differentiate using the <strong>Power Rule</strong>: &nbsp;<strong>f(x) = 5x⁴ − 3x² + 7x − 2</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Power Rule: d/dx[xⁿ] = nxⁿ⁻¹<br><br>
+      • 5x⁴ → 20x³<br>
+      • 3x² → 6x<br>
+      • 7x → 7<br>
+      • 2 → 0 (constant)<br><br>
+      <strong>f'(x) = 20x³ − 6x + 7</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q15 — Problem Solving Short -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#1d4ed8;">15<span class="qtag">Velocity</span></div>
+    <div class="q-body">
+      <div class="q-label">2 points</div>
+      <div class="q-text">A particle's position is <strong>s(t) = t² + 3t</strong> (meters). Find the <strong>average velocity</strong> over <strong>[1, 4]</strong>.</div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Formula: [s(t₂) − s(t₁)] / (t₂ − t₁) — NO differentiation needed!<br><br>
+      s(1) = 1 + 3 = 4<br>
+      s(4) = 16 + 12 = 28<br><br>
+      Avg velocity = (28 − 4) / (4 − 1) = 24 / 3 = <strong>8 m/s</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!--              TEST II — DIFFERENTIATION RULES              -->
+<!-- ========================================================= -->
+<div class="section-banner" style="background:#15803d;">
+  <h2>Test II — Finding Derivatives</h2>
+  <p>10 items · 3 points each · 30 points total · Use differentiation rules</p>
+</div>
+
+<!-- Q16 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">16<span class="qtag">Power Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>f(x) = 6x⁵ − 4x³ + 9</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      • 6x⁵ → 30x⁴<br>
+      • 4x³ → 12x²<br>
+      • 9 → 0<br><br>
+      <strong>f'(x) = 30x⁴ − 12x²</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q17 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">17<span class="qtag">Chain Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = (3x² + 1)⁴</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Chain Rule: d/dx[uⁿ] = nuⁿ⁻¹ · u'<br><br>
+      u = 3x²+1 → u' = 6x<br><br>
+      dy/dx = 4(3x²+1)³ · 6x<br>
+      <strong>dy/dx = 24x(3x² + 1)³</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q18 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">18<span class="qtag">Product Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = (x² + 3)(2x − 5)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Product Rule: u'v + uv'<br><br>
+      u = x²+3, u' = 2x<br>
+      v = 2x−5, v' = 2<br><br>
+      dy/dx = 2x(2x−5) + (x²+3)(2)<br>
+      = 4x²−10x + 2x²+6<br>
+      <strong>dy/dx = 6x² − 10x + 6</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q19 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">19<span class="qtag">Quotient Rule</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>f(x) = (x² + 1) / (x − 2)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Quotient Rule: (u'v − uv') / v²<br><br>
+      u = x²+1, u' = 2x<br>
+      v = x−2, v' = 1<br><br>
+      f'(x) = [2x(x−2) − (x²+1)(1)] / (x−2)²<br>
+      = [2x²−4x − x²−1] / (x−2)²<br>
+      <strong>f'(x) = (x² − 4x − 1) / (x − 2)²</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q20 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">20<span class="qtag">Basic ln</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>f(x) = ln(x² + 5)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Rule: d/dx[ln u] = u'/u<br><br>
+      u = x²+5, u' = 2x<br><br>
+      <strong>f'(x) = 2x / (x² + 5)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q21 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">21<span class="qtag">Product ln</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = x³ ln x</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Product Rule: u'v + uv'<br><br>
+      u = x³, u' = 3x²<br>
+      v = ln x, v' = 1/x<br><br>
+      dy/dx = 3x²·ln x + x³·(1/x)<br>
+      = 3x² ln x + x²<br>
+      <strong>dy/dx = x²(3 ln x + 1)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q22 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">22<span class="qtag">Basic eˣ</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = e^(3x² − 2)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Rule: d/dx[eᵘ] = eᵘ · u'<br><br>
+      u = 3x²−2, u' = 6x<br><br>
+      <strong>dy/dx = 6xe^(3x² − 2)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q23 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">23<span class="qtag">Product eˣ</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = x²e^(2x)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Product Rule: u'v + uv'<br><br>
+      u = x², u' = 2x<br>
+      v = e^(2x), v' = 2e^(2x)<br><br>
+      dy/dx = 2x·e^(2x) + x²·2e^(2x)<br>
+      = 2xe^(2x) + 2x²e^(2x)<br>
+      <strong>dy/dx = 2xe^(2x)(1 + x)</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q24 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">24<span class="qtag">Quotient eˣ</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = eˣ / (x + 1)</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Quotient Rule: (u'v − uv') / v²<br><br>
+      u = eˣ, u' = eˣ<br>
+      v = x+1, v' = 1<br><br>
+      dy/dx = [eˣ(x+1) − eˣ(1)] / (x+1)²<br>
+      = eˣ[(x+1) − 1] / (x+1)²<br>
+      <strong>dy/dx = xeˣ / (x + 1)²</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q25 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#15803d;">25<span class="qtag">Mixed</span></div>
+    <div class="q-body">
+      <div class="q-label">3 points</div>
+      <div class="q-text">Find the derivative: &nbsp;<strong>y = ln(2 − e^(3x))</strong></div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Solution</span>
+      Rule: d/dx[ln u] = u'/u<br><br>
+      u = 2 − e^(3x), u' = −3e^(3x)<br><br>
+      <strong>dy/dx = −3e^(3x) / (2 − e^(3x))</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!--                  TEST III — PROBLEM SOLVING               -->
+<!-- ========================================================= -->
+<div class="section-banner" style="background:#b45309;">
+  <h2>Test III — Problem Solving</h2>
+  <p>2 items · 5 points each (sub-parts) · 20 points total</p>
+</div>
+
+<!-- Q26 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#b45309;">26<span class="qtag">Avg & Instant Velocity</span></div>
+    <div class="q-body">
+      <div class="q-label">5 points per part · 10 points total</div>
+      <div class="q-text">
+        A particle moves along a straight line with position function:<br><br>
+        <strong>s(t) = 2t² − 4t + 3</strong> &nbsp;(meters, t in seconds)<br><br>
+      </div>
+      <div class="q-choices">
+        (a) Find the average velocity over [1, 3]<br>
+        (b) Find the instantaneous velocity at t = 2s
+      </div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines">
+      <div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Full Solution</span>
+      <strong>(a) Average Velocity [1, 3] — NO differentiation!</strong><br>
+      s(1) = 2(1)² − 4(1) + 3 = 2 − 4 + 3 = 1<br>
+      s(3) = 2(3)² − 4(3) + 3 = 18 − 12 + 3 = 9<br>
+      Avg vel = (9 − 1) / (3 − 1) = 8/2 = <strong>4 m/s</strong><br><br>
+      <strong>(b) Instantaneous Velocity at t = 2 — DIFFERENTIATE!</strong><br>
+      v(t) = ds/dt = 4t − 4<br>
+      v(2) = 4(2) − 4 = 8 − 4 = <strong>4 m/s</strong>
+    </div>
+  </div>
+</div>
+
+<!-- Q27 -->
+<div class="q-card">
+  <div class="q-top">
+    <div class="q-num" style="background:#b45309;">27<span class="qtag">Free Fall</span></div>
+    <div class="q-body">
+      <div class="q-label">5 points per part · 10 points total</div>
+      <div class="q-text">
+        A ball is dropped from the top of a building <strong>900 feet tall</strong>.<br>
+        Use: <strong>s(t) = −16t² + v₀t + s₀</strong><br><br>
+      </div>
+      <div class="q-choices">
+        (a) Write the position function s(t) and velocity function v(t)<br>
+        (b) Find the time it takes to hit the ground and velocity at impact
+      </div>
+    </div>
+  </div>
+  <div class="answer-area">
+    <div class="answer-label">Your Work</div>
+    <div class="answer-lines">
+      <div class="answer-line"></div><div class="answer-line"></div>
+      <div class="answer-line"></div><div class="answer-line"></div>
+    </div>
+    <button class="reveal-btn" onclick="toggle(this)">👁 Show Answer</button>
+    <div class="answer-reveal">
+      <span class="ans-label">✅ Full Solution</span>
+      <strong>(a) Position and Velocity Functions:</strong><br>
+      Dropped → v₀ = 0, s₀ = 900<br>
+      s(t) = −16t² + 0(t) + 900 = <strong>−16t² + 900</strong><br>
+      v(t) = ds/dt = <strong>−32t</strong><br><br>
+      <strong>(b) Time to hit ground (s = 0):</strong><br>
+      −16t² + 900 = 0<br>
+      16t² = 900<br>
+      t² = 56.25<br>
+      t = √56.25 = <strong>7.5 seconds</strong><br><br>
+      Velocity at impact:<br>
+      v(7.5) = −32(7.5) = <strong>−240 ft/s</strong>
+    </div>
+  </div>
+</div>
+
+<!-- SCORE BOX -->
+<div class="score-box">
+  <div class="score-title">📊 Score Tracker</div>
+  <table class="score-table">
+    <thead>
+      <tr><th>Section</th><th>Items</th><th>Points Each</th><th>Your Score</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Test I — Short Response</td><td>15</td><td>2 pts</td><td>__ / 30</td><td>30</td></tr>
+      <tr><td>Test II — Derivatives</td><td>10</td><td>3 pts</td><td>__ / 30</td><td>30</td></tr>
+      <tr><td>Test III — Problem Solving</td><td>2</td><td>10 pts</td><td>__ / 20</td><td>20</td></tr>
+      <tr class="total-row"><td><strong>TOTAL</strong></td><td>27</td><td>—</td><td><strong>__ / 80</strong></td><td><strong>80</strong></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  function toggle(btn) {
+    const reveal = btn.nextElementSibling;
+    if (reveal.classList.contains('shown')) {
+      reveal.classList.remove('shown');
+      btn.textContent = '👁 Show Answer';
+    } else {
+      reveal.classList.add('shown');
+      btn.textContent = '🙈 Hide Answer';
+    }
+  }
+</script>
+</body>
+</html>

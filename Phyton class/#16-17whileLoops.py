@@ -1,3 +1,20 @@
+name = input("Enter your fav food q to quit: ")
+
+while not name == "q":
+    if name == "booty":
+        print(f"You eat {name}?")
+        ans1 = input("Answer: ")
+        if ans1 == "uh uh":
+            print("You lick coochie?")
+            ans2 = input("Answer: ")
+            if ans2 == "mh hm":
+                exit
+    name = input("Enter your name: ")
+else:
+    print(f"Your name is {name}?")
+
+
+#------------------Compound Interest Calculator------------------
 initial = 0
 rate = 0
 time = 0

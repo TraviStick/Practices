@@ -53,4 +53,4 @@ print("Your Guesses:", end=" ")
 for guess in guesses:    
     print(guess, end ="")        
 total = (score/item_number)*100
-print(f"\nYour total score is {score} or {total:.02f}%. Congrats FN")
+print(f"\nYour total score is {score} or {total:.02f}%. Congrats FN!")

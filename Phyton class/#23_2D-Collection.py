@@ -41,4 +41,16 @@ for question in questions:
     else:
         print("Incorrect FN")
     item_number += 1
-print(f"Your total score is {score}. Congrats FN!")     
+
+print("------------------------------------------")
+print("---------------RESULTS FN-----------------")
+print("------------------------------------------")
+print("Answer Key:", end=" ")
+for answer in answers:
+    print(answer, end="")
+print()
+print("Your Guesses:", end=" ")
+for guess in guesses:    
+    print(guess, end ="")        
+total = (score/item_number)*100
+print(f"\nYour total score is {score} or {total:.02f}%. Congrats FN!")

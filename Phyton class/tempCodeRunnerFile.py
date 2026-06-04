@@ -3,7 +3,7 @@ questions = ("Whats 9 + 10?",
              "I am therefore....",
              "I am......",
              "Whose your main in Wildrift")
-options = (("A. 21", "B. 19", "C.910", "D.idk"),
+options = (("A. 21", "B. 19", "C. 910", "D. idk"),
            ("A. No", "B. Yes", "C. Maybe", "D. Perhaps"),
            ("A. I am", "B. Are you.... are you...", "C. He is", "D. Idk"),
            ("A. Ako si jose rizal", "B. John Cena", "C. Steve", "D. You"),
@@ -28,4 +28,16 @@ for question in questions:
     else:
         print("Incorrect FN")
     item_number += 1
-print(f"Your total score is {score}. Congrats FN!")     
+
+print("------------------------------------------")
+print("---------------RESULTS FN-----------------")
+print("------------------------------------------")
+print("Answer Key:", end=" ")
+for answer in answers:
+    print(answer, end="")
+print()
+print("Your Guesses:", end=" ")
+for guess in guesses:    
+    print(guess, end ="")        
+total = (score/item_number)*100
+print(f"\nYour total score is {score} or {total:.02f}%. Congrats FN!")

@@ -19,10 +19,24 @@ print(capitals)
 capitals.popitem() # Removes the latest/last value of key:value method
 print(capitals)
 # capitals.clear() - Clears the entire dictionary
-capitals.keys()# Gets all the key NOT the values
+
+keys = capitals.keys()# Returns all the key NOT the values
+print(keys)
+values = capitals.values()# Returns all the values NOT the keys
+print(values)
+items = capitals.items()# Returns all the key:value pairs in 2D
+print(items)
+# ALTERNATIVE COMMANDS
+capitals.keys()# Returns all the key NOT the values
 for key in capitals.keys():
     print(key, end = " ")
 print()                                         
-capitals.values() # Gets all the values NOT the keys
+capitals.values() # Returns all the values NOT the keys
 for value in capitals.values():
     print(value, end = " ")
+print()
+capitals.items()# Returns all the key:value pairs
+for item in capitals.items():
+    print(item)
+
+

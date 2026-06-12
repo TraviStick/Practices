@@ -7,5 +7,5 @@ num_of_guests = int(input('>'))
 if num_of_guests:
     print('Be sure to have enough room for all your guests.')   
 print('Done')
-print(bool(name))
-print(bool(num_of_guests))
+print(bool(0))
+print(bool('a'))

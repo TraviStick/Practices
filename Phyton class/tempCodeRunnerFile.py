@@ -1,6 +1,5 @@
-num = int(input("Enter how tall the pyramid: "))
-
-for i in range(num):
-    spaces = num - i -1
-    stars = 2 * i + 1
-    print(" "*spaces + "*"*stars)
+for i in range(3,0,-1):
+        print(f'Hello, Joe. What is the password? (It is a fish.) {i} attempts left.')
+        password = input('>')
+        if password != 'swordfish' and i == 0:
+            continue

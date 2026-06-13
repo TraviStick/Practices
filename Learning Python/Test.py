@@ -9,3 +9,7 @@ if num_of_guests:
 print('Done')
 print(bool(0))
 print(bool('a'))
+
+
+for i in range(3,1,-1):
+    print(i)

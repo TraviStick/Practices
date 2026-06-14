@@ -1,3 +1,4 @@
+# The Collatz Sequence
 import time,sys
 def collatz(number):
     if number % 2 == 0:

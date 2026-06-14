@@ -1,15 +1,21 @@
-name = ''
-while not name:
-    print('Enter your name:')
-    name = input('>')
-print('How many guests will you have?')
-num_of_guests = int(input('>'))
-if num_of_guests:
-    print('Be sure to have enough room for all your guests.')   
-print('Done')
-print(bool(0))
-print(bool('a'))
+import random,time
+random_number = 0
 
-
-for i in range(3,1,-1):
-    print(i)
+def get_random_dice_roll():
+    # Returns a random integer from 1 to 6
+    return random_number
+def yo():
+    while True:
+        try: 
+            global random_number
+            random_number = random.randint(1, 6)
+            print(get_random_dice_roll())
+            time.sleep(.2)
+            print(get_random_dice_roll())
+            time.sleep(.2)
+            print(get_random_dice_roll())
+        except KeyboardInterrupt:
+            return 'fuh nah'
+yo()
+print(random_number)
+print(random_number)

@@ -39,15 +39,10 @@ loss = 0
 ties = 0
 while True: # main loop
     print(f'{wins} WINS, {loss} LOSSES, {ties} TIES')
-    while True: #loops the input
-        print('Enter your move: (r)ock (p)aper (s)cissors or (q)uit')
-        move = input(">")
-        if move == 'q':
-            sys.exit()
-        elif move == 'r' or move == 'p' or 's':
-            break #breaks this loop
-        else: # if the user doesn't enter neither
-            print("Please enter ([r][p][s][q])")            
+    print('Enter your move: (r)ock (p)aper (s)cissors or (q)uit')
+    move = input(">")
+    if move == 'q':
+        sys.exit()          
     if move == 'r':
         print('ROCK versus...', end = '')
         time.sleep(2)
@@ -57,6 +52,11 @@ while True: # main loop
     elif move == 's':
         print('SCISSORS versus...', end = '')
         time.sleep(2)
+    else: # if the user doesn't enter neither
+        time.sleep(1)
+        print("Please enter ([r][p][s][q])")
+        time.sleep(2)
+        continue
     random_number = random.randint(1,3)
     if random_number == 1:
         computer_move = 'r'

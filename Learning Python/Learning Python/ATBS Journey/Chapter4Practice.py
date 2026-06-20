@@ -11,14 +11,16 @@ def digital_sum(number):
     time.sleep(1)
     return solve
 
+try:
+    user_input = int(input('Enter a number: ')) # user input
 
-user_input = int(input('Enter a number: ')) # user input
+    if len(str(user_input)) <= 1: # only executes if initial input == 1 digit
+        user_input = digital_sum(user_input)
 
-if len(str(user_input)) <= 1: # only executes if initial input == 1 digit
-    user_input = digital_sum(user_input)
-
-while len(str(user_input)) > 1: # loop
-    user_input = digital_sum(user_input)
-else: # only executes if remaining input == 1
-    sys.exit()
+    while len(str(user_input)) > 1: # loop
+        user_input = digital_sum(user_input)
+    else: # only executes if remaining input == 1
+        sys.exit()
+except Exception:
+    print('sums wrong vro')
 

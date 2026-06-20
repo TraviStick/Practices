@@ -1,24 +1,15 @@
-def box_print(symbol, width, height):
-    if len(symbol) != 1:
-        raise Exception('Symbol must be a single character string.')
-    if width <= 2:
-        raise Exception('Width must be greater than 2.')
-    if height <= 2:
-        raise Exception('Height must be greater than 2.')
+import logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s -  %(levelname)s -  %(message)s')
+logging.debug('Start of program')
 
-    print(symbol * width)
-    for i in range(height - 2):
-        print(symbol + (' ' * (width - 2)) + symbol)
-    print(symbol * width)
+def factorial(n):
+    logging.debug('Start of factorial(' + str(n) + ')')
+    total = 1
+    for i in range(1,n + 1):
+        total *= i
+        logging.debug('i is ' + str(i) + ', total is ' + str(total))
+    logging.debug('End of factorial(' + str(n) + ')')
+    return total
 
-try:
-    box_print('*', 3, 3)
-    box_print('Os', 20, 5)
-    box_print('x', 6, 10)
-    box_print('Z', 10, 6)
-except Exception as err:
-    print('An exception happened: ' + str(err))
-try:
-    box_print('Z', 10, 6)
-except Exception as err:
-    print('An exception happened: ' + str(err))
+print(factorial(5))
+logging.debug('End of program')

@@ -5,7 +5,7 @@ while True:
     name = input()
     if name == '':
         break
-    cat_names = cat_names + [name]  # List concatenation
+    cat_names += [name]  # List concatenation
 print('The cat names are:')
-for name in cat_names:
-    print('  ' + name)
+for i in range(len(cat_names)):
+    print(f'{i + 1}. {cat_names[i]}')

@@ -1,8 +1,5 @@
-spam = ['cat', 'bat', 'rat', 'elephant']
-hotdog = [1,2,3,4]
-spamdog = spam * hotdog
-print(spamdog)
-hi = 'hi'
-hello = 12
-hihello= hi + hello
-print(hihello)
+spam = []
+if len(spam) == 0 and spam[0] == None:
+    print('A cat is the first item.')
+else:
+    print('The first item is not a cat.')

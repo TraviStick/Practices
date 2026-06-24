@@ -1,9 +1,9 @@
 name = input("Enter Full Name: ")
-#len() - Returns a number(Int) based from the length of the string from the input
+#len() - Returns a number(Int) from the length of the string from the input
 result = len(name) 
 print(f"length of the string is {result}")
 
-#.find() | .rfind() - Returns an Int based from the first and last occurrence from the input
+#.find() | .rfind() - Returns an Int from the first and last occurrence from the input
 result = name.find(" ") + 1
 print(f"first occurrence was in {result}")
 result = name.rfind(" ") + 1

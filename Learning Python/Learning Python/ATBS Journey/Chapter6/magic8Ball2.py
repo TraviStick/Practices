@@ -1,6 +1,6 @@
 import random
-def message(messages):
-    messages = ['It is certain',
+def message():
+    text = ['It is certain',
         'It is decidedly so',
         'Yes definitely',
         'Reply hazy try again',
@@ -9,12 +9,12 @@ def message(messages):
         'My reply is no',
         'Outlook not so good',
         'Very doubtful']
-    randomizee = random.choice(messages)
-    return randomizee
-while True:
+    return random.choice(text)
+while True: 
     print('Ask a yes or no question:')
     myInput = input('>')
-    print(message(myInput))
-    if message(myInput) == 'Very doubtful':
+    result = message()
+    print(result)
+    if result == 'Very doubtful':
         print('Thats unlucky')
         break

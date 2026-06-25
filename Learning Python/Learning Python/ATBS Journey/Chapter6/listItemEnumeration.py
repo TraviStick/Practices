@@ -14,10 +14,8 @@ for i in range(len(cat_names)):
 # Using enumerate() instead
 
 dog_names = []
-count = 0
 while True:
-    count += 1
-    print(f'Enter the name of dog {count} (Or enter nothing to stop.):')
+    print(f'Enter the name of dog {len(dog_names)+1} (Or enter nothing to stop.):')
     name = input()
     if name == '':
         break

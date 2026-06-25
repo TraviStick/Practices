@@ -16,5 +16,5 @@ while True:
     result = message()
     print(result)
     if result == 'Very doubtful':
-        print('Thats unlucky')
+        print('Zamn bro...')
         break

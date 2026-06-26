@@ -1,6 +1,6 @@
 import random, sys, time
 
-WIDTH = 20  # The number of columns
+WIDTH = 70  # The number of columns
 
 try:
     # For each column, when the counter is 0, no stream is shown.
@@ -10,11 +10,11 @@ try:
     while True:
         # Loop over each column:
         for i in range(WIDTH):
-            if random.random() < 0.02:
+            if random.random() < 0.02: #2% chance for a column to do the following
                 # Restart a stream counter on this column.
                 # The stream length is between 4 and 14 characters long.
-                columns[i] = random.randint(4, 14)
-
+                columns[i] = random.randint(4, 14) # spawn the length of the column, random between 4 - 14  
+            
             # Print a character in this column:
             if columns[i] == 0:
                 # Change this ' '' to '.' to see the empty spaces:
@@ -27,3 +27,4 @@ try:
         time.sleep(0.1)  # Each row pauses for one tenth of a second.
 except KeyboardInterrupt:
     sys.exit()  # When Ctrl-C is pressed, end the program.
+

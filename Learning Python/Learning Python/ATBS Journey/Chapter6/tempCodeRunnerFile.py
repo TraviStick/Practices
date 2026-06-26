@@ -1,3 +1,1 @@
-cat = ['fat', 'gray', 'loud']
-size, color, disposition = cat
-print(color)
+print(0.1 + 0.3)

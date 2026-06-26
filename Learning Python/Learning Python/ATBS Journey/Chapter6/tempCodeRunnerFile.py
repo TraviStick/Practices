@@ -1,1 +1,2 @@
-print(0.1 + 0.3)
+spams = [True,'apples', 1, 1.2]
+print(spams[1])

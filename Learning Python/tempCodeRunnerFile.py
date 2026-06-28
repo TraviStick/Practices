@@ -1,1 +1,3 @@
-'I am bringing ' + str(picnic_items.get('eggs', 0)) + ' eggs.'
+split = input('> ').split()
+print(type(split))
+print(split)

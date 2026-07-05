@@ -1,15 +1,13 @@
-from collections import defaultdict
+disDict = {'yo' : 1, 'cuh' : 2}
+disList = ['yo', 'cuh']
 
-message = 'It was a bright cold day in April, and the clocks were striking thirteen.'
-count = {}
 
-for i in message:
-    count.setdefault(i,[]) 
-    count[i].append('see')
-    
 
-print(count)
+for k,v in disDict.items():
+    for e in disList:
+        if e == k:
+            disDict[k]+=1
+            print(e, k)
 
-split = input('> ').split()
-print(type(split))
-print(split)
+
+print(disDict)

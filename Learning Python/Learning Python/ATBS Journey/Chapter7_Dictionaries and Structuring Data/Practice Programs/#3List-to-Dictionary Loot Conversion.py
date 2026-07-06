@@ -1,4 +1,4 @@
-def display_inventory(inventory):
+def display_inventory(inventory):# shows the inventory
     print("Inventory:")
     item_total = 0
     for k, v in inventory.items():
@@ -6,7 +6,7 @@ def display_inventory(inventory):
         item_total = item_total + v
     print("Total number of items: " + str(item_total))
 
-def add_to_inventory(inventory, added_items):
+def add_to_inventory(inventory, added_items): # add loots to the inventory
     for e in added_items:
         if e not in inventory.keys():
             inventory[e] = 1

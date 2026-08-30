@@ -19,20 +19,12 @@ function hasSharedBirthday(n) {
     return false;
 }
 
-// function sa trials or tests
 function simulate(people, trials) {
-    // tracking sa trials na naay mga mag kapareha na birthday
     let sharedCount = 0;
     for (let i = 0; i < trials; i++) {
-        // gina +1 niya kung ang people kay naay mag kapareha na birthday
         if (hasSharedBirthday(people)) sharedCount++;
     }
     console.log(`Probability of shared birthday in group of ${people}: ${(sharedCount / trials * 100).toFixed(2)}%`);
 }
 
-simulate(23, 10000);
-
-
-// kaning ubos na mga linya kay e delete rani, kung gusto ka mag check kung mugana ang random kay kani ang e execute
-const trsy = Math.random() * 366;
-console.log(`Math.random(): ${Math.random()}Math.random() * 366) ${trsy}: | Math.floor(Math.random() * 366) :${Math.floor(trsy)} `)
+simulate(2, 1);

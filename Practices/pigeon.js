@@ -32,7 +32,3 @@ function simulate(people, trials) {
 
 simulate(23, 10000);
 
-
-// kaning ubos na mga linya kay e delete rani, kung gusto ka mag check kung mugana ang random kay kani ang e execute
-const trsy = Math.random() * 366;
-console.log(`Math.random(): ${Math.random()}Math.random() * 366) ${trsy}: | Math.floor(Math.random() * 366) :${Math.floor(trsy)} `)
